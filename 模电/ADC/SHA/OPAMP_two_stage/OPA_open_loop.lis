@@ -1,0 +1,521 @@
+ ****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+  Copyright (c) 1986 - 2022 by Synopsys, Inc. All Rights Reserved.              
+  This software and the associated documentation are proprietary
+  to Synopsys, Inc. This software may only be used in accordance
+  with the terms and conditions of a written license agreement with
+  Synopsys, Inc. All other use, reproduction, or distribution of
+  this software is strictly prohibited.
+  Input File: OPA_open_loop.sp                                                  
+  Command line options: C:\synopsys\Hspice_K-2015.06-3\WIN64\hspice.exe -i OPA_open_loop.sp -o C:\Users\DELL\Desktop\HSP\6_23\OPA_open_loop.lis
+  lic:  
+  lic: FLEXlm: v11.2.1 
+  lic: USER:   DELL                 HOSTNAME: SZX-l2h4 
+  lic: HOSTID: "2c8db1dbb46e"       PID:      9444 
+  lic: Using FLEXlm license file: 
+  lic: 27010@SZX-l2h4 
+  lic: Checkout 1 hspice 
+  lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029 
+  lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4 
+  lic:   
+ Init: read install configuration file: C:\synopsys\Hspice_K-2015.06-3\meta.cfg
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ opa_open_loop
+
+ ****** circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 x1.                             opamp              1.00 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ opa_open_loop
+
+ ****** mos   model parameters tnom=  25.000 temp=  25.000 ******
+ ***************************************************************************
+ *** common model parameters  model name:   1:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   1:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+  
+      
+ **info** set option symb=1 internally to help for convergence.
+ *****************************************************************
+ ******  option summary
+ ******
+ runlvl  = 5         bypass  = 2         
+  Opening plot unit= 79
+ file=C:\Users\DELL\Desktop\HSP\6_23\OPA_open_loop.pa0
+
+
+
+
+
+ ****     small-signal transfer characteristics
+
+        vvip       input resistance at vvip      output resistance at v(3)        v(3)/vvip     
+
+      -5.0000m           1.000e+20                     360.8640                     5.5068 
+      -4.9000m           1.000e+20                     366.4597                     5.6747 
+      -4.8000m           1.000e+20                     372.2447                     5.8508 
+      -4.7000m           1.000e+20                     378.2294                     6.0355 
+      -4.6000m           1.000e+20                     384.4250                     6.2294 
+      -4.5000m           1.000e+20                     390.8435                     6.4332 
+      -4.4000m           1.000e+20                     397.4978                     6.6475 
+      -4.3000m           1.000e+20                     404.4020                     6.8732 
+      -4.2000m           1.000e+20                     411.5713                     7.1111 
+      -4.1000m           1.000e+20                     419.0224                     7.3621 
+      -4.0000m           1.000e+20                     426.7733                     7.6272 
+      -3.9000m           1.000e+20                     434.8437                     7.9077 
+      -3.8000m           1.000e+20                     443.2551                     8.2046 
+      -3.7000m           1.000e+20                     452.0314                     8.5195 
+      -3.6000m           1.000e+20                     461.1984                     8.8538 
+      -3.5000m           1.000e+20                     470.7849                     9.2093 
+      -3.4000m           1.000e+20                     480.8228                     9.5879 
+      -3.3000m           1.000e+20                     491.3470                     9.9917 
+      -3.2000m           1.000e+20                     502.3970                    10.4232 
+      -3.1000m           1.000e+20                     514.0165                    10.8852 
+      -3.0000m           1.000e+20                     526.2545                    11.3806 
+      -2.9000m           1.000e+20                     539.1663                    11.9131 
+      -2.8000m           1.000e+20                     552.8144                    12.4867 
+      -2.7000m           1.000e+20                     567.2696                    13.1059 
+      -2.6000m           1.000e+20                     582.6128                    13.7763 
+      -2.5000m           1.000e+20                     598.9368                    14.5039 
+      -2.4000m           1.000e+20                     616.3488                    15.2960 
+      -2.3000m           1.000e+20                     634.9729                    16.1611 
+      -2.2000m           1.000e+20                     654.9547                    17.1092 
+      -2.1000m           1.000e+20                     676.4651                    18.1522 
+      -2.0000m           1.000e+20                     699.7077                    19.3046 
+      -1.9000m           1.000e+20                     724.9262                    20.5837 
+      -1.8000m           1.000e+20                     752.4157                    22.0108 
+      -1.7000m           1.000e+20                     782.5378                    23.6123 
+      -1.6000m           1.000e+20                     815.7412                    25.4211 
+      -1.5000m           1.000e+20                     852.5907                    27.4795 
+      -1.4000m           1.000e+20                     893.8096                    29.8417 
+      -1.3000m           1.000e+20                     940.3418                    32.5796 
+      -1.2000m           1.000e+20                     993.4476                    35.7899 
+      -1.1000m           1.000e+20                       1.0549k                   39.6068 
+      -1.0000m           1.000e+20                       1.1270k                   44.2220 
+    -900.0000u           1.000e+20                       1.2135k                   49.9209 
+    -800.0000u           1.000e+20                       1.3200k                   57.1498 
+    -700.0000u           1.000e+20                       1.4556k                   66.6537 
+    -600.0000u           1.000e+20                       1.6371k                   79.7897 
+    -500.0000u           1.000e+20                       1.8987k                   99.3664 
+    -400.0000u           1.000e+20                       2.3263k                  132.4990 
+    -300.0000u           1.000e+20                       3.2411k                  206.0661 
+    -200.0000u           1.000e+20                      10.7482k                  836.9350 
+    -100.0000u           1.000e+20                     118.2709k                    9.9752k
+    -8.674e-19           1.000e+20                     122.8752k                   10.3389k
+     100.0000u           1.000e+20                     127.6428k                   10.6944k
+     200.0000u           1.000e+20                     132.5687k                   11.0367k
+     300.0000u           1.000e+20                       7.5724k                  612.3246 
+     400.0000u           1.000e+20                       4.7271k                  364.6780 
+     500.0000u           1.000e+20                       3.7639k                  276.1963 
+     600.0000u           1.000e+20                       3.2444k                  225.7744 
+     700.0000u           1.000e+20                       2.9108k                  191.4658 
+     800.0000u           1.000e+20                       2.6758k                  165.7775 
+     900.0000u           1.000e+20                       2.5004k                  145.3206 
+       1.0000m           1.000e+20                       2.3644k                  128.3222 
+       1.1000m           1.000e+20                       2.2561k                  113.7458 
+       1.2000m           1.000e+20                       2.1681k                  100.9374 
+       1.3000m           1.000e+20                       2.0958k                   89.4600 
+       1.4000m           1.000e+20                       2.0358k                   79.0076 
+       1.5000m           1.000e+20                       1.9858k                   69.3579 
+       1.6000m           1.000e+20                       1.9442k                   60.3436 
+       1.7000m           1.000e+20                       1.9095k                   51.8352 
+       1.8000m           1.000e+20                       1.8810k                   43.7297 
+       1.9000m           1.000e+20                       1.8579k                   35.9430 
+       2.0000m           1.000e+20                       1.8396k                   28.4044 
+       2.1000m           1.000e+20                       1.8259k                   21.0531 
+       2.2000m           1.000e+20                       1.8163k                   13.8351 
+       2.3000m           1.000e+20                       1.8107k                    6.7013 
+       2.4000m           1.000e+20                       1.8090k                    0.     
+       2.5000m           1.000e+20                       1.8090k                    0.     
+       2.6000m           1.000e+20                       1.8090k                    0.     
+       2.7000m           1.000e+20                       1.8090k                    0.     
+       2.8000m           1.000e+20                       1.8090k                    0.     
+       2.9000m           1.000e+20                       1.8090k                    0.     
+       3.0000m           1.000e+20                       1.8090k                    0.     
+       3.1000m           1.000e+20                       1.8090k                    0.     
+       3.2000m           1.000e+20                       1.8090k                    0.     
+       3.3000m           1.000e+20                       1.8090k                    0.     
+       3.4000m           1.000e+20                       1.8090k                    0.     
+       3.5000m           1.000e+20                       1.8090k                    0.     
+       3.6000m           1.000e+20                       1.8090k                    0.     
+       3.7000m           1.000e+20                       1.8090k                    0.     
+       3.8000m           1.000e+20                       1.8090k                    0.     
+       3.9000m           1.000e+20                       1.8090k                    0.     
+       4.0000m           1.000e+20                       1.8090k                    0.     
+       4.1000m           1.000e+20                       1.8090k                    0.     
+       4.2000m           1.000e+20                       1.8090k                    0.     
+       4.3000m           1.000e+20                       1.8090k                    0.     
+       4.4000m           1.000e+20                       1.8090k                    0.     
+       4.5000m           1.000e+20                       1.8090k                    0.     
+       4.6000m           1.000e+20                       1.8090k                    0.     
+       4.7000m           1.000e+20                       1.8090k                    0.     
+       4.8000m           1.000e+20                       1.8090k                    0.     
+       4.9000m           1.000e+20                       1.8090k                    0.     
+       5.0000m           1.000e+20                       1.8090k                    0.     
+  
+ **info** dc convergence successful at Newton-Raphson method 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ opa_open_loop
+
+ ****** operating point information tnom=  25.000 temp=  27.000 ******
+ ****** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:2       =   0.      0:3       =-392.8541m
+ +0:4       =   2.5000  0:5       =  -2.5000  1:3       = 995.2790m
+ +1:4       =  -1.6086  1:5       =  -1.6086  1:7       =   1.4836 
+
+
+ **** voltage sources
+
+ subckt                                              
+ element  0:vvip     0:vdd      0:vss      0:vvin    
+  volts      0.         2.5000     2.5000     0.     
+  current    0.      -161.7035u -161.7035u    0.     
+  power      0.       404.2588u  404.2588u    0.     
+
+     total voltage source power dissipation=  808.5177u       watts
+
+
+
+ **** current sources
+
+ subckt   x1        
+ element  1:ibias   
+  volts      3.9836 
+  current   30.0000u
+  power   -119.5082u
+
+
+     total current source power dissipation=-119.5082u       watts
+
+
+ **** mosfets
+
+
+ subckt   x1         x1         x1         x1         x1         x1        
+ element  1:m1       1:m2       1:m3       1:m4       1:m5       1:m6      
+ model    1:p08      1:p08      1:n08      1:n08      1:p08      1:n08     
+ region     Saturati   Saturati   Saturati   Saturati   Saturati   Saturati
+  id       -15.3485u  -15.3485u   15.3485u   15.3485u  -30.6971u  101.0065u
+  ibs        0.         0.         0.         0.         0.         0.     
+  ibd       35.5005f   35.5005f  -12.1536f  -12.1536f   20.5151f  -28.7285f
+  vgs     -995.2790m -995.2790m  891.4312m  891.4312m   -1.0164   891.4312m
+  vds       -2.6038    -2.6038   891.4312m  891.4312m   -1.5047     2.1071 
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -697.1376m -697.1376m  697.4274m  697.4274m -697.1376m  697.4274m
+  vdsat   -298.1414m -298.1414m  194.0038m  194.0038m -319.2574m  194.0038m
+  vod     -298.1414m -298.1414m  194.0038m  194.0038m -319.2574m  194.0038m
+  beta     345.3441u  345.3441u  815.5979u  815.5979u  602.3445u    5.3673m
+  gam eff  570.0000m  570.0000m  400.0000m  400.0000m  570.0000m  400.0000m
+  gm       102.9614u  102.9614u  158.2291u  158.2291u  192.3029u    1.0413m
+  gds      679.0228n  679.0228n  592.8035n  592.8035n    1.4275u    3.7262u
+  gmb       32.8728u   32.8728u   37.9282u   37.9282u   61.3971u  249.5999u
+  cdtot     20.3197f   20.3197f   91.3346f   91.3346f   15.2370f  562.1765f
+  cgtot     13.1791f   13.1791f   15.2217f   15.2217f   23.5311f   92.2678f
+  cstot     47.6703f   47.6703f  141.2751f  141.2751f   40.4852f    1.1088p
+  cbtot     56.6093f   56.6093f  219.3472f  219.3472f   34.3044f    1.5839p
+  cgs       10.9099f   10.9099f   12.6822f   12.6822f   20.0015f   79.7167f
+  cgd        1.3699f    1.3699f    1.5599f    1.5599f    2.4729f    9.9752f
+
+
+
+ subckt   x1         x1        
+ element  1:m7       1:m8      
+ model    1:p08      1:p08     
+ region     Saturati   Saturati
+  id      -101.0065u  -30.0000u
+  ibs        0.         0.     
+  ibd       39.4407f   13.8574f
+  vgs       -1.0164    -1.0164 
+  vds       -2.8929    -1.0164 
+  vbs        0.         0.     
+  vth     -697.1376m -697.1376m
+  vdsat   -319.2574m -319.2574m
+  vod     -319.2574m -319.2574m
+  beta       1.9820m  588.6665u
+  gam eff  570.0000m  570.0000m
+  gm       632.7589u  187.9361u
+  gds        4.4121u    1.4275u
+  gmb      202.0227u   60.0029u
+  cdtot     43.8337f   16.6448f
+  cgtot     71.4606f   23.5139f
+  cstot    135.2057f   40.4852f
+  cbtot    111.2655f   35.7293f
+  cgs       61.8229f   20.0015f
+  cgd        7.7944f    2.4557f
+
+
+
+
+
+
+
+ ****     small-signal transfer characteristics
+
+      v(3)/vvip                                =   10.3389k
+      input resistance at             vvip     =  1.000e+20
+      output resistance at v(3)                =  122.8752k
+
+
+
+ ******
+ opa_open_loop
+
+ ****** ac analysis tnom=  25.000 temp=  27.000 ******
+ x
+
+ freq         volt db    volt phase 
+             3          3           
+    1.00000    80.2895  -110.7547m  
+    1.25893    80.2895  -139.4318m  
+    1.58489    80.2894  -175.5340m  
+    1.99526    80.2894  -220.9838m  
+    2.51189    80.2894  -278.2014m  
+    3.16228    80.2893  -350.2332m  
+    3.98107    80.2892  -440.9142m  
+    5.01187    80.2891  -555.0717m  
+    6.30957    80.2888  -698.7811m  
+    7.94328    80.2885  -879.6878m  
+   10.00000    80.2879    -1.1074   
+   12.58925    80.2869    -1.3940   
+   15.84893    80.2854    -1.7548   
+   19.95262    80.2830    -2.2088   
+   25.11886    80.2793    -2.7799   
+   31.62278    80.2733    -3.4980   
+   39.81072    80.2638    -4.4006   
+   50.11872    80.2489    -5.5336   
+   63.09573    80.2254    -6.9538   
+   79.43282    80.1883    -8.7294   
+  100.00000    80.1302   -10.9406   
+  125.89254    80.0396   -13.6774   
+  158.48932    79.8999   -17.0333   
+  199.52623    79.6873   -21.0913   
+  251.18864    79.3702   -25.8995   
+  316.22777    78.9108   -31.4370   
+  398.10717    78.2696   -37.5810   
+  501.18723    77.4148   -44.0937   
+  630.95734    76.3320   -50.6537   
+  794.32823    75.0294   -56.9279   
+    1.00000k   73.5351   -62.6506   
+    1.25893k   71.8874   -67.6667   
+    1.58489k   70.1254   -71.9303   
+    1.99526k   68.2825   -75.4743   
+    2.51189k   66.3847   -78.3750   
+    3.16228k   64.4504   -80.7250   
+    3.98107k   62.4924   -82.6162   
+    5.01187k   60.5191   -84.1323   
+    6.30957k   58.5360   -85.3449   
+    7.94328k   56.5467   -86.3143   
+   10.00000k   54.5535   -87.0897   
+   12.58925k   52.5578   -87.7113   
+   15.84893k   50.5605   -88.2116   
+   19.95262k   48.5622   -88.6170   
+   25.11886k   46.5632   -88.9489   
+   31.62278k   44.5639   -89.2248   
+   39.81072k   42.5643   -89.4595   
+   50.11872k   40.5646   -89.6655   
+   63.09573k   38.5647   -89.8536   
+   79.43282k   36.5648   -90.0340   
+  100.00000k   34.5648   -90.2162   
+  125.89254k   32.5647   -90.4099   
+  158.48932k   30.5646   -90.6254   
+  199.52623k   28.5643   -90.8742   
+  251.18864k   26.5639   -91.1695   
+  316.22777k   24.5632   -91.5270   
+  398.10717k   22.5621   -91.9658   
+  501.18723k   20.5603   -92.5091   
+  630.95734k   18.5575   -93.1857   
+  794.32823k   16.5531   -94.0313   
+    1.00000x   14.5461   -95.0901   
+    1.25893x   12.5351   -96.4172   
+    1.58489x   10.5176   -98.0807   
+    1.99526x    8.4902  -100.1636   
+    2.51189x    6.4470  -102.7665   
+    3.16228x    4.3796  -106.0077   
+    3.98107x    2.2752  -110.0208   
+    5.01187x  115.5069m -114.9470   
+    6.30957x   -2.1245  -120.9180   
+    7.94328x   -4.4755  -128.0282   
+   10.00000x   -6.9709  -136.2999   
+   12.58925x   -9.6378  -145.6561   
+   15.84893x  -12.4863  -155.9234   
+   19.95262x  -15.4993  -166.8741   
+   25.11886x  -18.6309  -178.2854   
+   31.62278x  -21.8140   170.0284   
+   39.81072x  -24.9757   158.2325   
+   50.11872x  -28.0541   146.5163   
+   63.09573x  -31.0138   135.1188   
+   79.43282x  -33.8534   124.3156   
+  100.00000x  -36.6006   114.3887   
+  125.89254x  -39.2967   105.6143   
+  158.48932x  -41.9728    98.2649   
+  199.52623x  -44.6261    92.5685   
+  251.18864x  -47.2103    88.5727   
+  316.22777x  -49.6541    85.9746   
+  398.10717x  -51.9062    84.1088   
+  501.18723x  -53.9688    82.2050   
+  630.95734x  -55.8845    79.7009   
+  794.32823x  -57.6974    76.3405   
+    1.00000g  -59.4260    72.0744   
+y
+
+          ***** job concluded
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ opa_open_loop
+
+ ****** job statistics summary tnom=  25.000 temp=  27.000 ******
+
+  ******  HSPICE Threads Information  ******
+
+  Command Line Threads Count :     1
+  Available CPU Count        :    16
+  Actual Threads Count       :     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      10 # elements   =      15
+  # resistors   =       0 # capacitors =       2 # inductors   =       0
+  # mutual_inds =       0 # vccs       =       0 # vcvs        =       0
+  # cccs        =       0 # ccvs       =       0 # volt_srcs   =       4
+  # curr_srcs   =       1 # diodes     =       0 # bjts        =       0
+  # jfets       =       0 # mosfets    =       8 # U elements  =       0
+  # T elements  =       0 # W elements =       0 # B elements  =       0
+  # S elements  =       0 # P elements =       0 # va device   =       0
+  # vector_srcs =       0 # N elements =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.00           1           7
+  dc sweep           0.00         101         221
+  ac analysis        0.00          91          91
+  readin             0.01
+  errchk             0.00
+  setup              0.00
+  output             0.00
+
+
+           peak memory used         50.75 megabytes
+           total cpu time            0.02 seconds
+           total elapsed time        0.08 seconds
+           job started at     19:13:47 11/22/2022
+           job ended   at     19:13:47 11/22/2022
+
+
+  lic: Release hspice token(s) 
+ lic: total license checkout elapse time:        0.05(s)

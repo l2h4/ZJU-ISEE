@@ -1,0 +1,139 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2022/06/07 21:49:17
+// Design Name: 
+// Module Name: contralmove
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module contralmove(
+    input clk,
+    input enable,
+    input [2:0] speed_ctrl,
+    input rl1,rl2,
+    input red_ctrl,
+    output reg [1:0] en,
+    output reg [3:0] in
+    );
+    reg [40:0]count;
+    wire stop;
+    wire [7:0] ctrl;
+    wire finish;
+    red_receive rrc1(clk, enable, red_ctrl, ctrl,finish);
+    redlight_stop r1(rl1, rl2, clk, stop);
+    
+    reg [2:0] state,next_state;
+    reg [2:0] run_state;
+    
+    reg [1:0] speed = 0;
+    
+always@(posedge clk)
+    begin
+        if((!stop))begin
+            if(ctrl==8'b01010010 || ctrl==8'b00001000 || ctrl==8'b01011010) begin
+                state<=next_state;
+            end else begin
+                state<=0;
+            end
+        end else state<=next_state;
+        if(next_state==2)count<=0;else count<=count+1;
+    end
+    
+always@(*)
+    begin
+        case(state)
+        0:next_state=1;
+        1:next_state=2;
+        2:if(finish==1)next_state=(ctrl==8'b00011000)?3:(ctrl==8'b01010010)?4:(ctrl==8'b00001000)?6:(ctrl==8'b01011010)?5:0;else next_state=2;
+        3:if(count==10000000)next_state=0;else next_state=3;
+        4:if(count==10000000)next_state=0;else next_state=4;
+        5:if(count==10000000)next_state=0;else next_state=5;
+        6:if(count==10000000)next_state=0;else next_state=6;
+        default:next_state=0;
+        endcase
+    end
+    
+always@(posedge clk)
+   begin
+        case(next_state)
+        0:run_state<=0;
+        1:run_state<=0;
+        2:run_state<=0;
+        3:run_state<=1;
+        4:run_state<=2;
+        5:run_state<=3;
+        6:run_state<=4;
+        default:run_state<=0;
+        endcase
+   end
+   
+always@(*) 
+   begin
+        if( speed == 0 ) begin
+        case(run_state)
+            0:begin en=0;in=0;end
+            1:begin en=3;in=4'b1001;end
+            2:begin en=3;in=4'b0110;end
+            3:begin en=3;in=4'b0101;end
+            4:begin en=3;in=4'b1010;end
+            default:begin en=0;in=0;end
+        endcase end
+        else if( speed == 1 )   begin
+        if(count<5000000)   begin
+        case(run_state)
+            0:begin en=0;in=0;end
+            1:begin en=3;in=4'b1001;end
+            2:begin en=3;in=4'b0110;end
+            3:begin en=3;in=4'b0101;end
+            4:begin en=3;in=4'b1010;end
+            default:begin en=0;in=0;end
+        endcase end
+        else    en=0;
+        end
+        else if( speed == 2 )   begin
+        if(count<2500000)   begin
+        case(run_state)
+            0:begin en=0;in=0;end
+            1:begin en=3;in=4'b1001;end
+            2:begin en=3;in=4'b0110;end
+            3:begin en=3;in=4'b0101;end
+            4:begin en=3;in=4'b1010;end
+            default:begin en=0;in=0;end
+        endcase end
+        else    en=0;
+        end
+        
+        case(speed_ctrl)
+        3'b100:speed=0;
+        3'b010:speed=1;
+        3'b001:speed=2;
+        default:speed=0;
+        endcase       
+    end 
+    
+endmodule
+
+module redlight_stop(
+    input in1,in2, clk,
+    output reg out
+    );
+    
+    always@(posedge clk) begin
+        out<=in1 & in2;
+    end
+    
+endmodule

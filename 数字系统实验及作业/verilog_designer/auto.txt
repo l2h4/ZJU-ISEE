@@ -1,0 +1,139 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2022/06/07 15:22:32
+// Design Name: 
+// Module Name: automove
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+module automove(
+input clk,
+input enable,
+input redlight,
+input rl1, rl2, rl3, rl4,
+output reg[1:0]en,
+output reg[3:0]in
+    );
+    wire [7:0]data;
+    reg [7:0]olddata;
+    wire led;
+    wire red_stop;
+    reg [50:0]timecount;
+    wire [50:0]actiontime;
+    reg [4:0]count;
+    reg [4:0]outcount;
+    reg [159:0]action;
+    reg start;
+    reg oldstart;
+    reg [2:0]run_state;
+    reg [29:0] scount;
+    
+    red_receive red1(clk,enable,redlight,data,led);
+    redlight rr1(rl1, rl2, rl3, rl4, clk, red_stop);
+    
+    always@(posedge clk)
+    begin
+    oldstart<=start;
+    if(start==0)
+    begin
+    if(led==1)olddata<=data;
+    if(start==0&&oldstart==1)action<=0;
+    else if(led==1&&olddata!=data&&(data==8'b00011000||data==8'b01010010||data==8'b00001000||data==8'b01011010||data==8'b01000101||data==8'b01000110||data==8'b01000111))
+    begin
+    action[count*8+7]<=data[7];
+    action[count*8+6]<=data[6];
+    action[count*8+5]<=data[5];
+    action[count*8+4]<=data[4];
+    action[count*8+3]<=data[3];
+    action[count*8+2]<=data[2];
+    action[count*8+1]<=data[1];
+    action[count*8]<=data[0];
+    if(count<20)count<=count+1;
+    end
+    end
+    else begin count<=0;end
+    if(led==1&&olddata!=data&&data==8'b00011100)
+    begin
+    start<=1;
+    end
+    else if(outcount==20)start<=0;
+    if(start)
+    begin
+    if(red_stop) begin
+        run_state<=0;
+    end 
+    else begin
+        if(!action[outcount*8]&&!action[outcount*8+1]&&!action[outcount*8+2]&&action[outcount*8+3]&&action[outcount*8+4]&&!action[outcount*8+5]&&!action[outcount*8+6]&&!action[outcount*8+7])
+            run_state<=1;
+        else if(!action[outcount*8]&&action[outcount*8+1]&&!action[outcount*8+2]&&!action[outcount*8+3]&&action[outcount*8+4]&&!action[outcount*8+5]&&action[outcount*8+6]&&!action[outcount*8+7])
+            run_state<=2;
+        else if(!action[outcount*8]&&!action[outcount*8+1]&&!action[outcount*8+2]&&action[outcount*8+3]&&!action[outcount*8+4]&&!action[outcount*8+5]&&!action[outcount*8+6]&&!action[outcount*8+7])
+            run_state<=3;
+        else if(!action[outcount*8]&&action[outcount*8+1]&&!action[outcount*8+2]&&action[outcount*8+3]&&action[outcount*8+4]&&!action[outcount*8+5]&&action[outcount*8+6]&&!action[outcount*8+7])
+            run_state<=4;
+        else 
+            run_state<=0;
+        end
+    end
+    end
+    
+    always@(*)
+    begin
+    if(scount<7500000)  begin
+    case(run_state)
+        0:begin en=0;in=0;end
+        1:begin en=3;in=4'b1001;end
+        2:begin en=3;in=4'b0110;end
+        3:begin en=3;in=4'b1010;end
+        4:begin en=3;in=4'b0101;end
+        default:begin en=0;in=0;end
+    endcase 
+    end
+    else    begin
+    en=0;
+    in=0;
+    end
+    end
+    
+    assign actiontime=(action[outcount*8+8]&&!action[outcount*8+9]&&action[outcount*8+10]&&!action[outcount*8+11]&&!action[outcount*8+12]&&!action[outcount*8+13]&&action[outcount*8+14]&&!action[outcount*8+15])?100000000:(!action[outcount*8+8]&&action[outcount*8+9]&&action[outcount*8+10]&&!action[outcount*8+11]&&!action[outcount*8+12]&&!action[outcount*8+13]&&action[outcount*8+14]&&!action[outcount*8+15])?200000000:(action[outcount*8+8]&&action[outcount*8+9]&&action[outcount*8+10]&&!action[outcount*8+11]&&!action[outcount*8+12]&&!action[outcount*8+13]&&action[outcount*8+14]&&!action[outcount*8+15])?300000000:0;
+    
+    always@(posedge clk)
+    begin
+        if(start==0)begin
+            timecount<=0;
+            outcount<=0;
+        end
+        else if(start==1)begin
+            if(timecount==actiontime)
+            begin
+                timecount<=0;
+                if(outcount<=20) begin
+                    outcount<=outcount+2;
+                end
+            end
+        else begin
+            if(red_stop) timecount<=timecount;
+            else timecount<=timecount+1;
+        end
+        end
+    end
+    
+    always@(posedge clk)
+    begin
+    if(scount==10000000)   scount<=0;
+    else    scount<=scount+1;
+    end
+    
+endmodule

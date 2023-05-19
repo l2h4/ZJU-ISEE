@@ -1,0 +1,13 @@
+module redlight(
+    input in1, in2, in3, in4,clk,
+    output reg out
+    );
+    reg red_avoid, red_load;
+    
+    always@(posedge clk) begin
+        red_avoid <= !(in1 & in2);
+        red_load <= in3 | in4;
+        out <= red_avoid | red_load;
+    end
+    
+endmodule

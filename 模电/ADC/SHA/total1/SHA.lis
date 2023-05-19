@@ -1,0 +1,1437 @@
+ ****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+  Copyright (c) 1986 - 2023 by Synopsys, Inc. All Rights Reserved.              
+  This software and the associated documentation are proprietary
+  to Synopsys, Inc. This software may only be used in accordance
+  with the terms and conditions of a written license agreement with
+  Synopsys, Inc. All other use, reproduction, or distribution of
+  this software is strictly prohibited.
+  Input File: SHA.sp                                                            
+  Command line options: C:\synopsys\Hspice_K-2015.06-3\WIN64\hspice.exe -i SHA.sp -o D:\Desktop\ADC\SHA\total\SHA.lis
+  lic:  
+  lic: FLEXlm: v11.2.1 
+  lic: USER:   DELL                 HOSTNAME: SZX-l2h4 
+  lic: HOSTID: "2c8db1dbb46e"       PID:      21916 
+  lic: Using FLEXlm license file: 
+  lic: 27010@SZX-l2h4 
+  lic: Checkout 1 hspice 
+  lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029 
+  lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4 
+  lic:   
+ Init: read install configuration file: C:\synopsys\Hspice_K-2015.06-3\meta.cfg
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title sha
+
+ ****** circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 x1.                             opamp              1.00 
+        2 x2.                             switch             1.00 
+        3 x3.                             switch             1.00 
+        4 x4.                             switch             1.00 
+        5 x5.                             switch             1.00 
+        6 x6.                             switch             1.00 
+        7 x7.                             switch             1.00 
+        8 x8.                             switch             1.00 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title sha
+
+ ****** mos   model parameters tnom=  25.000 temp=  25.000 ******
+ ***************************************************************************
+ *** common model parameters  model name:   1:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   1:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   2:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   2:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   3:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   3:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   4:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   4:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   5:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   5:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   6:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   6:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   7:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   7:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   8:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   8:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+  **info** (SHA.sp:27) DC voltage reset to initial transient source value in source            0:vclk. new dc=  0.0000D+00
+  
+             
+ Warning:'No DC path nodes' occurs 2 times
+ No DC path from the following nodes,connected with gdcpath:
+ -----------------------
+ |Node      |Subckt    |
+ |----------+----------|
+ |1         |0         |
+ |2         |0         |
+ -----------------------
+              
+             
+ Warning:'1 connection nodes' occurs 7 times
+ Summary of 1 connection from the following nodes:
+ -----------------------
+ |Node      |Subckt    |
+ |----------+----------|
+ |x2.8      |switch    |
+ |x3.8      |switch    |
+ |x4.8      |switch    |
+ |x5.8      |switch    |
+ |x6.8      |switch    |
+ |x7.8      |switch    |
+ |x8.8      |switch    |
+ -----------------------
+              
+      
+ **info** set option symb=1 internally to help for convergence.
+ *****************************************************************
+ ******  option summary
+ ******
+ runlvl  = 5         bypass  = 2         
+  Opening plot unit= 79
+ file=D:\Desktop\ADC\SHA\total\SHA.pa0
+
+ **info** dc convergence successful at GMINDC ramping method 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title sha
+
+ ****** operating point information tnom=  25.000 temp=  27.000 ******
+ ****** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:2       =   0.      0:3       =   5.0000 
+ +0:4       =  -5.0000  0:5       = 179.1042m 0:6       = 146.7020m
+ +0:9       = 129.5235m 0:10      = 114.8302m 0:11      =   0.     
+ +0:12      =   0.      0:13      =   0.      0:14      =   0.     
+ +0:15      =   0.      0:16      =   3.0000  1:3       =   4.1372 
+ +1:4       =   4.1372  1:5       =-873.6098m 1:9       =  -3.9449 
+ +2:1       =   2.8334  2:4       =   1.0554  2:5       =   2.8334 
+ +2:6       = 428.5490m 2:8       =   0.      2:9       =   1.9817 
+ +3:1       =   2.8334  3:4       =   1.0554  3:5       =   2.8334 
+ +3:6       = 428.5490m 3:8       =   0.      3:9       =   1.9817 
+ +4:1       =   2.8334  4:4       =   1.0554  4:5       =   2.8334 
+ +4:6       = 511.6038m 4:8       =   0.      4:9       =   1.9817 
+ +5:1       =   2.8334  5:4       =   1.0554  5:5       =   2.8334 
+ +5:6       = 502.2335m 5:8       =   0.      5:9       =   1.9817 
+ +6:1       =   2.8334  6:4       =   1.0554  6:5       =   2.8334 
+ +6:6       = 428.5490m 6:8       =   0.      6:9       =   1.9817 
+ +7:1       =   2.8334  7:4       =   1.0554  7:5       =   2.8334 
+ +7:6       = 428.5490m 7:8       =   0.      7:9       =   1.9817 
+ +8:1       =   2.8334  8:4       =   1.0554  8:5       =   2.8334 
+ +8:6       = 543.1204m 8:8       =   0.      8:9       =   1.9817 
+
+
+ **** voltage sources
+
+ subckt                                                                    
+ element  0:vclk     0:vclkf    0:vcm      0:vd       0:vdd      0:vin     
+  volts      0.         0.         0.         3.0000     5.0000     0.     
+  current    0.         0.        -2.1418  -5.287e+21 -220.2785m   38.4351m
+  power      0.         0.         0.       1.586e+22    1.1014     0.     
+
+ subckt                        
+ element  0:vip      0:vss     
+  volts      0.         5.0000 
+  current   36.0347m -8.635e+22
+  power      0.       4.317e+23
+
+     total voltage source power dissipation=  4.476e+23       watts
+
+
+
+ **** current sources
+
+ subckt   x1        
+ element  1:ibia    
+  volts      8.9449 
+  current   30.0000u
+  power   -268.3469u
+
+
+     total current source power dissipation=-268.3469u       watts
+
+
+ **** mosfets
+
+
+ subckt   x1         x1         x1         x1         x1         x1        
+ element  1:m1       1:m2       1:m3       1:m4       1:m5       1:m6      
+ model    1:n08      1:n08      1:p08      1:p08      1:n08      1:p08     
+ region     Saturati   Saturati   Saturati   Saturati   Saturati   Saturati
+  id        16.7681u   16.7681u  -16.7682u  -16.7682u   33.5363u -165.0145u
+  ibs        0.         0.         0.         0.         0.         0.     
+  ibd      -68.3165f  -68.3165f   11.7634f   11.7634f  -56.2586f   66.1691f
+  vgs      873.6098m  873.6098m -862.8092m -862.8092m    1.0551  -862.8092m
+  vds        5.0108     5.0108  -862.8092m -862.8092m    4.1264    -4.8533 
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      697.4274m  697.4274m -697.1376m -697.1376m  697.4274m -697.1376m
+  vdsat    176.1825m  176.1825m -165.6716m -165.6716m  357.6747m -165.6716m
+  vod      176.1825m  176.1825m -165.6716m -165.6716m  357.6747m -165.6716m
+  beta       1.0804m    1.0804m    1.2219m    1.2219m  524.2865u   12.0242m
+  gam eff  400.0000m  400.0000m  570.0000m  570.0000m  400.0000m  570.0000m
+  gm       190.3497u  190.3497u  202.4264u  202.4264u  187.5240u    1.9921m
+  gds      558.7369n  558.7369n  803.7341n  803.7341n    1.1514u    6.6395u
+  gmb       45.6276u   45.6276u   64.6292u   64.6292u   44.9503u  636.0130u
+  cdtot      1.8876f    1.8876f    5.1234f    5.1234f  932.5452a   44.7477f
+  cgtot     17.4357f   17.4357f   49.0627f   49.0627f    8.9549f  402.7835f
+  cstot     14.4939f   14.4939f   41.8214f   41.8214f    7.2470f  345.4809f
+  cbtot      1.0541f    1.0541f    2.1178f    2.1178f  775.3894a   12.5550f
+  cgs       14.4939f   14.4939f   41.8214f   41.8214f    7.2470f  345.4809f
+  cgd        1.8876f    1.8876f    5.1234f    5.1234f  932.5452a   44.7477f
+
+
+
+ subckt   x1         x1         x1         x1         x2         x2        
+ element  1:m7       1:m8       1:m9       1:m10      2:m1       2:m2      
+ model    1:n08      1:n08      1:n08      1:p08      2:n08      2:p08     
+ region     Saturati   Saturati   Saturati   Saturati     Linear     Linear
+  id       147.5221u   30.0000u  147.6807u -164.7994u   21.6608m   -8.8712p
+  ibs        0.         0.         0.         0.         0.         0.     
+  ibd      -70.1693f  -14.3851f  -70.6111f   65.7274f   -1.7659f  2.469e-23
+  vgs        1.0551     1.0551     1.0551  -862.8092m    2.8334    -1.7779 
+  vds        5.1467     1.0551     5.1791    -4.8209   129.5235m   -1.8109n
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      697.4274m  697.4274m  697.4274m -697.1376m  697.4274m -697.1376m
+  vdsat    357.6747m  357.6747m  357.6747m -165.6716m  129.5235m   -1.8109n
+  vod      357.6747m  357.6747m  357.6747m -165.6716m    2.1360    -1.0808 
+  beta       2.3063m  469.0021u    2.3088m   12.0085m   80.7429m    4.5325m
+  gam eff  400.0000m  400.0000m  400.0000m  570.0000m  400.0000m  570.0000m
+  gm       824.8956u  167.7502u  825.7822u    1.9895m   10.4581m    8.2081p
+  gds        4.8935u    1.1514u    4.8935u    6.6395u  162.8672m    4.8987m
+  gmb      197.7309u   40.2104u  197.9434u  635.1838u    2.5069m    2.6206p
+  cdtot      4.0185f  893.4356a    4.0203f   44.7280f  991.4125f  126.2679f
+  cgtot     35.9114f    8.9158f   35.9131f  402.7639f    2.0221p  254.1544f
+  cstot     30.7996f    7.2470f   30.7996f  345.4809f    1.0269p  126.2679f
+  cbtot      1.0932f  775.3894a    1.0932f   12.5550f    3.7354f    1.6186f
+  cgs       30.7996f    7.2470f   30.7996f  345.4809f    1.0269p  126.2679f
+  cgd        4.0185f  893.4356a    4.0203f   44.7280f  991.4125f  126.2679f
+
+
+
+ subckt   x2         x2         x2         x2         x2         x2        
+ element  2:m3       2:m4       2:m5       2:m6       2:m8       2:ma      
+ model    2:n08      2:n08      2:p08      2:n08      2:n08      2:n08     
+ region       Linear     Cutoff     Cutoff     Cutoff   Saturati     Cutoff
+  id       -16.7743m    0.         0.         0.         5.1476p    0.     
+  ibs       -5.8428f    0.        -8.5437p    0.       -27.0186f   -5.8428f
+  ibd        0.       -27.0186f    0.        -5.8428f  -38.6299f  -14.3898f
+  vgs        2.4048     0.      -166.6167m    0.         1.0183  -428.5490m
+  vds     -428.5490m    1.9817  -166.6167m  428.5490m  851.6521m  626.9009m
+  vbs     -428.5490m    0.      -166.6167m    0.        -1.9817  -428.5490m
+  vth      697.4274m  697.4274m -643.9414m  697.4274m    1.0183   787.8918m
+  vdsat    428.5490m    0.         0.         0.        15.7445u    0.     
+  vod        1.7074  -697.4274m  477.3247m -697.4274m   15.7445u   -1.2164 
+  beta      20.3687m   40.1634m    9.0650m   10.0127m   41.5316m    1.0125m
+  gam eff  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m  400.0000m
+  gm         8.7290m    0.         0.         0.       653.8923n    0.     
+  gds       35.4373m    0.         0.         0.       199.1203f    0.     
+  gmb        2.0924m    0.         0.         0.        79.9171n    0.     
+  cdtot    266.5732f   78.6028f   39.1638f   19.5834f   79.5079f    1.9803f
+  cgtot    502.9939f  452.9871f  236.8916f  113.4260f  819.7343f   11.9114f
+  cstot    234.9808f   94.3814f   50.6013f   23.5293f  646.7922f    2.2117f
+  cbtot      1.4399f  280.0030f  147.1266f   70.3133f   93.4342f    7.7194f
+  cgs      234.9808f   94.3814f   50.6013f   23.5293f  646.7922f    2.2117f
+  cgd      266.5732f   78.6028f   39.1638f   19.5834f   79.5079f    1.9803f
+
+
+
+ subckt   x2         x2         x3         x3         x3         x3        
+ element  2:mb       2:mc       3:m1       3:m2       3:m3       3:m4      
+ model    2:p08      2:n08      3:n08      3:p08      3:n08      3:n08     
+ region       Linear     Linear     Linear     Linear     Linear     Cutoff
+  id        -7.1952k   16.7743m   19.2604m   -8.8712p  -16.7743m    0.     
+  ibs     -7.554e+20   -5.8428f    0.         0.        -5.8428f    0.     
+  ibd       -7.1952k  -14.3898f   -1.5656f  2.469e-23    0.       -27.0186f
+  vgs       -3.0000     2.4048     2.8334    -1.7779     2.4048     0.     
+  vds       -1.9446   626.9009m  114.8302m   -1.8109n -428.5490m    1.9817 
+  vbs       -3.0000  -428.5490m    0.         0.      -428.5490m    0.     
+  vth     -188.3250m  787.8918m  697.4274m -697.1376m  697.4274m  697.4274m
+  vdsat     -1.9446   626.9009m  114.8302m   -1.8109n  428.5490m    0.     
+  vod       -2.8117     1.6169     2.1360    -1.0808     1.7074  -697.4274m
+  beta       2.0116k   20.5276m   80.6957m    4.5325m   20.3687m   40.1634m
+  gam eff  570.0000m  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m
+  gm         3.9117k   12.8688m    9.2663m    8.2081p    8.7290m    0.     
+  gds        2.0722k   20.9777m  163.8631m    4.8987m   35.4373m    0.     
+  gmb        0.         2.4269m    2.2212m    2.6206p    2.0924m    0.     
+  cdtot     31.8483n  213.4955f  993.5448f  126.2679f  266.5732f   78.6028f
+  cgtot     94.7204n  496.6249f    2.0222p  254.1544f  502.9939f  452.9871f
+  cstot     62.2627n  281.6279f    1.0249p  126.2679f  234.9808f   94.3814f
+  cbtot    609.4090p    1.5015f    3.7354f    1.6186f    1.4399f  280.0030f
+  cgs       62.2627n  281.6279f    1.0249p  126.2679f  234.9808f   94.3814f
+  cgd       31.8483n  213.4955f  993.5448f  126.2679f  266.5732f   78.6028f
+
+
+
+ subckt   x3         x3         x3         x3         x3         x3        
+ element  3:m5       3:m6       3:m8       3:ma       3:mb       3:mc      
+ model    3:p08      3:n08      3:n08      3:n08      3:p08      3:n08     
+ region       Cutoff     Cutoff   Saturati     Cutoff     Linear     Linear
+  id         0.         0.         5.1476p    0.        -7.1952k   16.7743m
+  ibs       -8.5437p    0.       -27.0186f   -5.8428f -7.554e+20   -5.8428f
+  ibd        0.        -5.8428f  -38.6299f  -14.3898f   -7.1952k  -14.3898f
+  vgs     -166.6167m    0.         1.0183  -428.5490m   -3.0000     2.4048 
+  vds     -166.6167m  428.5490m  851.6521m  626.9009m   -1.9446   626.9009m
+  vbs     -166.6167m    0.        -1.9817  -428.5490m   -3.0000  -428.5490m
+  vth     -643.9414m  697.4274m    1.0183   787.8918m -188.3250m  787.8918m
+  vdsat      0.         0.        15.7445u    0.        -1.9446   626.9009m
+  vod      477.3247m -697.4274m   15.7445u   -1.2164    -2.8117     1.6169 
+  beta       9.0650m   10.0127m   41.5316m    1.0125m    2.0116k   20.5276m
+  gam eff  570.0000m  400.0000m  400.0000m  400.0000m  570.0000m  400.0000m
+  gm         0.         0.       653.8923n    0.         3.9117k   12.8688m
+  gds        0.         0.       199.1203f    0.         2.0722k   20.9777m
+  gmb        0.         0.        79.9171n    0.         0.         2.4269m
+  cdtot     39.1638f   19.5834f   79.5079f    1.9803f   31.8483n  213.4955f
+  cgtot    236.8916f  113.4260f  819.7343f   11.9114f   94.7204n  496.6249f
+  cstot     50.6013f   23.5293f  646.7922f    2.2117f   62.2627n  281.6279f
+  cbtot    147.1266f   70.3133f   93.4342f    7.7194f  609.4090p    1.5015f
+  cgs       50.6013f   23.5293f  646.7922f    2.2117f   62.2627n  281.6279f
+  cgd       39.1638f   19.5834f   79.5079f    1.9803f   31.8483n  213.4955f
+
+
+
+ subckt   x4         x4         x4         x4         x4         x4        
+ element  4:m1       4:m2       4:m3       4:m4       4:m5       4:m6      
+ model    4:n08      4:p08      4:n08      4:n08      4:p08      4:n08     
+ region       Linear     Linear     Linear     Cutoff     Cutoff     Cutoff
+  id         7.7892m   -8.8712p  -13.8715m    0.         0.         0.     
+  ibs       -1.7659f    0.        -6.9751f    0.        -8.5437p    0.     
+  ibd       -2.4419f  2.469e-23   -1.7659f  -27.0186f    0.        -6.9751f
+  vgs        2.7039    -1.7779     2.3218     0.      -166.6167m    0.     
+  vds       49.5807m   -1.8109n -382.0803m    1.9817  -166.6167m  511.6038m
+  vbs     -129.5235m    0.      -511.6038m    0.      -166.6167m    0.     
+  vth      727.1511m -697.1376m  727.1511m  697.4274m -643.9414m  697.4274m
+  vdsat     49.5807m   -1.8109n  382.0803m    0.         0.         0.     
+  vod        1.9767    -1.0808     1.5946  -697.4274m  477.3247m -697.4274m
+  beta      80.4861m    4.5325m   20.3315m   40.1634m    9.0650m   10.0127m
+  gam eff  400.0000m  570.0000m  400.0000m  400.0000m  570.0000m  400.0000m
+  gm         3.9906m    8.2081p    7.7683m    0.         0.         0.     
+  gds      155.4179m    4.8987m   32.9677m    0.         0.         0.     
+  gmb      878.3270u    2.6206p    1.7098m    0.         0.         0.     
+  cdtot      1.0022p  126.2679f  266.0030f   78.6028f   39.1638f   19.5840f
+  cgtot      2.0226p  254.1544f  503.1394f  452.9871f  236.8916f  113.4266f
+  cstot      1.0166p  126.2679f  235.6909f   94.3814f   50.6013f   23.5293f
+  cbtot      3.7580f    1.6186f    1.4455f  280.0030f  147.1266f   70.3133f
+  cgs        1.0166p  126.2679f  235.6909f   94.3814f   50.6013f   23.5293f
+  cgd        1.0022p  126.2679f  266.0030f   78.6028f   39.1638f   19.5840f
+
+
+
+ subckt   x4         x4         x4         x4         x5         x5        
+ element  4:m8       4:ma       4:mb       4:mc       5:m1       5:m2      
+ model    4:n08      4:n08      4:p08      4:n08      5:n08      5:p08     
+ region     Saturati     Cutoff     Linear     Linear     Linear     Linear
+  id         5.1476p    0.        -7.1952k   13.8715m    5.0723m   -8.8712p
+  ibs      -27.0186f   -6.9751f -7.554e+20   -6.9751f   -1.5656f    0.     
+  ibd      -38.6299f  -14.3898f   -7.1952k  -14.3898f   -2.0001f  2.469e-23
+  vgs        1.0183  -511.6038m   -3.0000     2.3218     2.7186    -1.7779 
+  vds      851.6521m  543.8461m   -1.9446   543.8461m   31.8718m   -1.8109n
+  vbs       -1.9817  -511.6038m   -3.0000  -511.6038m -114.8302m    0.     
+  vth        1.0183   803.2758m -188.3250m  803.2758m  723.9025m -697.1376m
+  vdsat     15.7445u    0.        -1.9446   543.8461m   31.8718m   -1.8109n
+  vod       15.7445u   -1.3149    -2.8117     1.5185     1.9947    -1.0808 
+  beta      41.5316m    1.0125m    2.0116k   20.4611m   80.4292m    4.5325m
+  gam eff  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m  570.0000m
+  gm       653.8923n    0.         3.9117k   11.1277m    2.5634m    8.2081p
+  gds      199.1203f    0.         2.0722k   20.4856m  158.0673m    4.8987m
+  gmb       79.9171n    0.         0.         2.0251m  569.3008u    2.6206p
+  cdtot     79.5079f    1.9802f   31.8483n  217.3851f    1.0049p  126.2679f
+  cgtot    819.7343f   11.8943f   94.7204n  498.1027f    2.0226p  254.1544f
+  cstot    646.7922f    2.1946f   62.2627n  279.1894f    1.0140p  126.2679f
+  cbtot     93.4342f    7.7194f  609.4090p    1.5282f    3.7531f    1.6186f
+  cgs      646.7922f    2.1946f   62.2627n  279.1894f    1.0140p  126.2679f
+  cgd       79.5079f    1.9802f   31.8483n  217.3851f    1.0049p  126.2679f
+
+
+
+ subckt   x5         x5         x5         x5         x5         x5        
+ element  5:m3       5:m4       5:m5       5:m6       5:m8       5:ma      
+ model    5:n08      5:n08      5:p08      5:n08      5:n08      5:n08     
+ region       Linear     Cutoff     Cutoff     Cutoff   Saturati     Cutoff
+  id       -14.1881m    0.         0.         0.         5.1476p    0.     
+  ibs       -6.8474f    0.        -8.5437p    0.       -27.0186f   -6.8474f
+  ibd       -1.5656f  -27.0186f    0.        -6.8474f  -38.6299f  -14.3898f
+  vgs        2.3311     0.      -166.6167m    0.         1.0183  -502.2335m
+  vds     -387.4032m    1.9817  -166.6167m  502.2335m  851.6521m  553.2165m
+  vbs     -502.2335m    0.      -166.6167m    0.        -1.9817  -502.2335m
+  vth      723.9025m  697.4274m -643.9414m  697.4274m    1.0183   801.5672m
+  vdsat    387.4032m    0.         0.         0.        15.7445u    0.     
+  vod        1.6072  -697.4274m  477.3247m -697.4274m   15.7445u   -1.3038 
+  beta      20.3358m   40.1634m    9.0650m   10.0127m   41.5316m    1.0125m
+  gam eff  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m  400.0000m
+  gm         7.8781m    0.         0.         0.       653.8923n    0.     
+  gds       33.2435m    0.         0.         0.       199.1203f    0.     
+  gmb        1.7496m    0.         0.         0.        79.9171n    0.     
+  cdtot    266.0751f   78.6028f   39.1638f   19.5840f   79.5079f    1.9802f
+  cgtot    503.1208f  452.9871f  236.8916f  113.4266f  819.7343f   11.8961f
+  cstot    235.6014f   94.3814f   50.6013f   23.5293f  646.7922f    2.1964f
+  cbtot      1.4443f  280.0030f  147.1266f   70.3133f   93.4342f    7.7194f
+  cgs      235.6014f   94.3814f   50.6013f   23.5293f  646.7922f    2.1964f
+  cgd      266.0751f   78.6028f   39.1638f   19.5840f   79.5079f    1.9802f
+
+
+
+ subckt   x5         x5         x6         x6         x6         x6        
+ element  5:mb       5:mc       6:m1       6:m2       6:m3       6:m4      
+ model    5:p08      5:n08      6:n08      6:p08      6:n08      6:n08     
+ region       Linear     Linear     Linear     Linear     Linear     Cutoff
+  id        -7.1952k   14.1881m   -2.3952    -8.8712p  -16.7743m    0.     
+  ibs     -7.554e+20   -6.8474f    0.         0.        -5.8428f    0.     
+  ibd       -7.1952k  -14.3898f  7.554e+20  2.469e-23    0.       -27.0186f
+  vgs       -3.0000     2.3311     2.8334    -1.7779     2.4048     0.     
+  vds       -1.9446   553.2165m   -5.0000    -1.8109n -428.5490m    1.9817 
+  vbs       -3.0000  -502.2335m    0.         0.      -428.5490m    0.     
+  vth     -188.3250m  801.5672m  363.6826m -697.1376m  697.4274m  697.4274m
+  vdsat     -1.9446   553.2165m    5.0000    -1.8109n  428.5490m    0.     
+  vod       -2.8117     1.5296     2.4697    -1.0808     1.7074  -697.4274m
+  beta       2.0116k   20.4686m   96.3921m    4.5325m   20.3687m   40.1634m
+  gam eff  570.0000m  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m
+  gm         3.9117k   11.3236m  481.9605m    8.2081p    8.7290m    0.     
+  gds        2.0722k   20.5401m  317.8996m    4.8987m   35.4373m    0.     
+  gmb        0.         2.0688m    0.         2.6206p    2.0924m    0.     
+  cdtot     31.8483n  216.9314f    1.2234p  126.2679f  266.5732f   78.6028f
+  cgtot     94.7204n  497.9361f    1.8803p  254.1544f  502.9939f  452.9871f
+  cstot     62.2627n  279.4798f  651.6996f  126.2679f  234.9808f   94.3814f
+  cbtot    609.4090p    1.5249f    5.2270f    1.6186f    1.4399f  280.0030f
+  cgs       62.2627n  279.4798f  651.6996f  126.2679f  234.9808f   94.3814f
+  cgd       31.8483n  216.9314f    1.2234p  126.2679f  266.5732f   78.6028f
+
+
+
+ subckt   x6         x6         x6         x6         x6         x6        
+ element  6:m5       6:m6       6:m8       6:ma       6:mb       6:mc      
+ model    6:p08      6:n08      6:n08      6:n08      6:p08      6:n08     
+ region       Cutoff     Cutoff   Saturati     Cutoff     Linear     Linear
+  id         0.         0.         5.1476p    0.        -7.1952k   16.7743m
+  ibs       -8.5437p    0.       -27.0186f   -5.8428f -7.554e+20   -5.8428f
+  ibd        0.        -5.8428f  -38.6299f  -14.3898f   -7.1952k  -14.3898f
+  vgs     -166.6167m    0.         1.0183  -428.5490m   -3.0000     2.4048 
+  vds     -166.6167m  428.5490m  851.6521m  626.9009m   -1.9446   626.9009m
+  vbs     -166.6167m    0.        -1.9817  -428.5490m   -3.0000  -428.5490m
+  vth     -643.9414m  697.4274m    1.0183   787.8918m -188.3250m  787.8918m
+  vdsat      0.         0.        15.7445u    0.        -1.9446   626.9009m
+  vod      477.3247m -697.4274m   15.7445u   -1.2164    -2.8117     1.6169 
+  beta       9.0650m   10.0127m   41.5316m    1.0125m    2.0116k   20.5276m
+  gam eff  570.0000m  400.0000m  400.0000m  400.0000m  570.0000m  400.0000m
+  gm         0.         0.       653.8923n    0.         3.9117k   12.8688m
+  gds        0.         0.       199.1203f    0.         2.0722k   20.9777m
+  gmb        0.         0.        79.9171n    0.         0.         2.4269m
+  cdtot     39.1638f   19.5834f   79.5079f    1.9803f   31.8483n  213.4955f
+  cgtot    236.8916f  113.4260f  819.7343f   11.9114f   94.7204n  496.6249f
+  cstot     50.6013f   23.5293f  646.7922f    2.2117f   62.2627n  281.6279f
+  cbtot    147.1266f   70.3133f   93.4342f    7.7194f  609.4090p    1.5015f
+  cgs       50.6013f   23.5293f  646.7922f    2.2117f   62.2627n  281.6279f
+  cgd       39.1638f   19.5834f   79.5079f    1.9803f   31.8483n  213.4955f
+
+
+
+ subckt   x7         x7         x7         x7         x7         x7        
+ element  7:m1       7:m2       7:m3       7:m4       7:m5       7:m6      
+ model    7:n08      7:p08      7:n08      7:n08      7:p08      7:n08     
+ region     Saturati     Linear     Linear     Cutoff     Cutoff     Cutoff
+  id       219.8852m   -8.8712p  -16.7743m    0.         0.         0.     
+  ibs        0.         0.        -5.8428f    0.        -8.5437p    0.     
+  ibd      -68.1692f  2.469e-23    0.       -27.0186f    0.        -5.8428f
+  vgs        2.8334    -1.7779     2.4048     0.      -166.6167m    0.     
+  vds        5.0000    -1.8109n -428.5490m    1.9817  -166.6167m  428.5490m
+  vbs        0.         0.      -428.5490m    0.      -166.6167m    0.     
+  vth      697.4274m -697.1376m  697.4274m  697.4274m -643.9414m  697.4274m
+  vdsat      2.1360    -1.8109n  428.5490m    0.         0.         0.     
+  vod        2.1360    -1.0808     1.7074  -697.4274m  477.3247m -697.4274m
+  beta      96.3921m    4.5325m   20.3687m   40.1634m    9.0650m   10.0127m
+  gam eff  400.0000m  570.0000m  400.0000m  400.0000m  570.0000m  400.0000m
+  gm       205.8893m    8.2081p    8.7290m    0.         0.         0.     
+  gds        7.3295m    4.8987m   35.4373m    0.         0.         0.     
+  gmb       49.3525m    2.6206p    2.0924m    0.         0.         0.     
+  cdtot    168.4450f  126.2679f  266.5732f   78.6028f   39.1638f   19.5834f
+  cgtot      1.4658p  254.1544f  502.9939f  452.9871f  236.8916f  113.4260f
+  cstot      1.2936p  126.2679f  234.9808f   94.3814f   50.6013f   23.5293f
+  cbtot      3.7354f    1.6186f    1.4399f  280.0030f  147.1266f   70.3133f
+  cgs        1.2936p  126.2679f  234.9808f   94.3814f   50.6013f   23.5293f
+  cgd      168.4450f  126.2679f  266.5732f   78.6028f   39.1638f   19.5834f
+
+
+
+ subckt   x7         x7         x7         x7         x8         x8        
+ element  7:m8       7:ma       7:mb       7:mc       8:m1       8:m2      
+ model    7:n08      7:n08      7:p08      7:n08      8:n08      8:p08     
+ region     Saturati     Cutoff     Linear     Linear     Linear     Linear
+  id         5.1476p    0.        -7.1952k   16.7743m   -5.0548m   -8.8712p
+  ibs      -27.0186f   -5.8428f -7.554e+20   -5.8428f   -2.4419f    0.     
+  ibd      -38.6299f  -14.3898f   -7.1952k  -14.3898f   -2.0001f  2.469e-23
+  vgs        1.0183  -428.5490m   -3.0000     2.4048     2.6543    -1.7779 
+  vds      851.6521m  626.9009m   -1.9446   626.9009m  -32.4022m   -1.8109n
+  vbs       -1.9817  -428.5490m   -3.0000  -428.5490m -179.1042m    0.     
+  vth        1.0183   787.8918m -188.3250m  787.8918m  730.9126m -697.1376m
+  vdsat     15.7445u    0.        -1.9446   626.9009m   32.4022m   -1.8109n
+  vod       15.7445u   -1.2164    -2.8117     1.6169     1.9234    -1.0808 
+  beta      41.5316m    1.0125m    2.0116k   20.5276m   80.4309m    4.5325m
+  gam eff  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m  570.0000m
+  gm       653.8923n    0.         3.9117k   12.8688m    2.6061m    8.2081p
+  gds      199.1203f    0.         2.0722k   20.9777m  154.9000m    4.8987m
+  gmb       79.9171n    0.         0.         2.4269m  567.7398u    2.6206p
+  cdtot     79.5079f    1.9803f   31.8483n  213.4955f    1.0142p  126.2679f
+  cgtot    819.7343f   11.9114f   94.7204n  496.6249f    2.0226p  254.1544f
+  cstot    646.7922f    2.2117f   62.2627n  281.6279f    1.0047p  126.2679f
+  cbtot     93.4342f    7.7194f  609.4090p    1.5015f    3.7644f    1.6186f
+  cgs      646.7922f    2.2117f   62.2627n  281.6279f    1.0047p  126.2679f
+  cgd       79.5079f    1.9803f   31.8483n  213.4955f    1.0142p  126.2679f
+
+
+
+ subckt   x8         x8         x8         x8         x8         x8        
+ element  8:m3       8:m4       8:m5       8:m6       8:m8       8:ma      
+ model    8:n08      8:n08      8:p08      8:n08      8:n08      8:n08     
+ region       Linear     Cutoff     Cutoff     Cutoff   Saturati     Cutoff
+  id       -12.8269m    0.         0.         0.         5.1476p    0.     
+  ibs       -7.4048f    0.        -8.5437p    0.       -27.0186f   -7.4048f
+  ibd       -2.4419f  -27.0186f    0.        -7.4048f  -38.6299f  -14.3898f
+  vgs        2.2903     0.      -166.6167m    0.         1.0183  -543.1204m
+  vds     -364.0162m    1.9817  -166.6167m  543.1204m  851.6521m  512.3295m
+  vbs     -543.1204m    0.      -166.6167m    0.        -1.9817  -543.1204m
+  vth      737.9048m  697.4274m -643.9414m  697.4274m    1.0183   808.9744m
+  vdsat    364.0162m    0.         0.         0.        15.7445u    0.     
+  vod        1.5524  -697.4274m  477.3247m -697.4274m   15.7445u   -1.3521 
+  beta      20.3170m   40.1634m    9.0650m   10.0127m   41.5316m    1.0125m
+  gam eff  400.0000m  400.0000m  570.0000m  400.0000m  400.0000m  400.0000m
+  gm         7.3957m    0.         0.         0.       653.8923n    0.     
+  gds       32.0450m    0.         0.         0.       199.1203f    0.     
+  gmb        1.5810m    0.         0.         0.        79.9171n    0.     
+  cdtot    265.7442f   78.6028f   39.1638f   19.5843f   79.5079f    1.9802f
+  cgtot    503.2059f  452.9871f  236.8916f  113.4269f  819.7343f   11.8884f
+  cstot    236.0110f   94.3814f   50.6013f   23.5293f  646.7922f    2.1888f
+  cbtot      1.4507f  280.0030f  147.1266f   70.3133f   93.4342f    7.7194f
+  cgs      236.0110f   94.3814f   50.6013f   23.5293f  646.7922f    2.1888f
+  cgd      265.7442f   78.6028f   39.1638f   19.5843f   79.5079f    1.9802f
+
+
+
+ subckt   x8         x8        
+ element  8:mb       8:mc      
+ model    8:p08      8:n08     
+ region       Linear     Linear
+  id        -7.1952k   12.8269m
+  ibs     -7.554e+20   -7.4048f
+  ibd       -7.1952k  -14.3898f
+  vgs       -3.0000     2.2903 
+  vds       -1.9446   512.3295m
+  vbs       -3.0000  -543.1204m
+  vth     -188.3250m  808.9744m
+  vdsat     -1.9446   512.3295m
+  vod       -2.8117     1.4813 
+  beta       2.0116k   20.4358m
+  gam eff  570.0000m  400.0000m
+  gm         3.9117k   10.4699m
+  gds        2.0722k   20.3042m
+  gmb        0.         1.8810m
+  cdtot     31.8483n  218.9397f
+  cgtot     94.7204n  498.6616f
+  cstot     62.2627n  278.1821f
+  cbtot    609.4090p    1.5399f
+  cgs       62.2627n  278.1821f
+  cgd       31.8483n  218.9397f
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title sha
+
+ ****** job statistics summary tnom=  25.000 temp=  27.000 ******
+
+  ******  HSPICE Threads Information  ******
+
+  Command Line Threads Count :     1
+  Available CPU Count        :    16
+  Actual Threads Count       :     1
+
+
+  ****** Statistics of Ignored Elements ******
+  Capacitors      :       7
+
+  ******  Circuit Statistics  ******
+  # nodes       =      61 # elements   =     102
+  # resistors   =       0 # capacitors =      13 # inductors   =       0
+  # mutual_inds =       0 # vccs       =       0 # vcvs        =       0
+  # cccs        =       0 # ccvs       =       0 # volt_srcs   =       8
+  # curr_srcs   =       1 # diodes     =       0 # bjts        =       0
+  # jfets       =       0 # mosfets    =      80 # U elements  =       0
+  # T elements  =       0 # W elements =       0 # B elements  =       0
+  # S elements  =       0 # P elements =       0 # va device   =       0
+  # vector_srcs =       0 # N elements =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1         159
+  transient          0.13     1000001        7065        1888 rev=       274
+  readin             0.04
+  errchk             0.03
+  setup              0.00
+  output             0.00
+
+
+           peak memory used         50.69 megabytes
+           total cpu time            0.21 seconds
+           total elapsed time        0.28 seconds
+           job started at     17:31:54 01/07/2023
+           job ended   at     17:31:54 01/07/2023
+
+
+  lic: Release hspice token(s) 
+ lic: total license checkout elapse time:        0.05(s)

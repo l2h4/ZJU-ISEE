@@ -1,0 +1,19 @@
+.title switch_test
+.include 'switch.cdl'
+x1 2 3 7 10 12 SWITCH
+* 2 vin
+* 3 vout
+* 7 vclk
+* 10 VDD
+* 12 vclkf
+VDD 10 0 3
+vclk 7 0 PULSE (0 3 0 0.1ns 0.1ns 10ms 20ms)
+vin 2 0 sin (0 0.5 0.5 0 0 0 )
+vclkf 12 0 PULSE (0 3 10ms 0.1ns 0.1ns 10ms 20ms)
+
+.tran 1u 2
+.probe tran v(2) v(3) v(7) v(10) v(12)
+
+.temp 75
+.option post accurate probe
+.end

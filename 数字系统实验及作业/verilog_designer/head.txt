@@ -1,0 +1,53 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2022/06/08 13:25:05
+// Design Name: 
+// Module Name: head_ctrl
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module head_ctrl(input clk,[2:0] sel,
+                output reg out
+    );
+    
+    reg [19:0] count=0;
+    
+    always@(posedge clk)
+    begin
+    if(count==2000000)  count<=0;
+    else count<=count+1;
+    end
+    
+    always@(*)
+    begin
+    case(sel)
+    3'b001:begin
+    if(count>=0&&count<150000)  out=1;
+    else    out=0;
+    end
+    3'b010:begin
+    if(count>=0&&count<200000)  out=1;
+    else    out=0;
+    end
+    3'b100:begin
+    if(count>=0&&count<250000)  out=1;
+    else    out=0;
+    end
+    default:out=0;
+    endcase
+    end
+endmodule

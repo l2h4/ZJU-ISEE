@@ -1,0 +1,21 @@
+* "simulator" "HSPICE" 
+* "version" "K-2015.06-3 win64"
+* "format" "HSP"
+* "rundate" "23:57:42 11/27/2022 "
+* "netlist" "OPA_AC.sp "
+* "runtitle" ".title opa_ac"
+* time =    0.            
+* temperature =   27.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ 1 =   1.8000        
++ 2 =   1.2822        
++ 3 = 900.0000m       
++ 4 = 900.0000m       
++ 5 = 500.0000m       
++ 6 =   0.            
++ x1.2 =   1.2822        
++ x1.6 = 401.4679m       
+***   END: Saved Operating Point ***                     

@@ -1,0 +1,299 @@
+ ****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+  Copyright (c) 1986 - 2023 by Synopsys, Inc. All Rights Reserved.              
+  This software and the associated documentation are proprietary
+  to Synopsys, Inc. This software may only be used in accordance
+  with the terms and conditions of a written license agreement with
+  Synopsys, Inc. All other use, reproduction, or distribution of
+  this software is strictly prohibited.
+  Input File: OPA_CMRR.sp                                                       
+  Command line options: C:\synopsys\Hspice_K-2015.06-3\WIN64\hspice.exe -i OPA_CMRR.sp -o D:\Desktop\ADC\SHA\OPAMP_miller\OPA_CMRR.lis
+  lic:  
+  lic: FLEXlm: v11.2.1 
+  lic: USER:   DELL                 HOSTNAME: SZX-l2h4 
+  lic: HOSTID: "2c8db1dbb46e"       PID:      2936 
+  lic: Using FLEXlm license file: 
+  lic: 27010@SZX-l2h4 
+  lic: Checkout 1 hspice 
+  lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029 
+  lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4 
+  lic:   
+ Init: read install configuration file: C:\synopsys\Hspice_K-2015.06-3\meta.cfg
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+
+ **warning**  runlvl smaller than 5, reset to 5 when accurate turned on
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title opa_cmrr
+
+ ****** circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 x1.                             opamp              1.00 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title opa_cmrr
+
+ ****** mos   model parameters tnom=  25.000 temp=  25.000 ******
+ ***************************************************************************
+ *** common model parameters  model name:   1:n08      model type:nmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  16.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto= 700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 700.00m volts      gamma= 400.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 2.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 770.00u f/m**2      cjsw= 380.00p f/m    
+   cjgate= 380.00p f/m           mj= 500.00m             mjsw= 380.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  40.00m /v            kp= 110.00u a/v**2 
+ ***************************************************************************
+ *** common model parameters  model name:   1:p08      model type:pmos   ***
+ ***************************************************************************
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** geometry parameters ***
+       ld=  14.00n meters      lmlt=   1.00                wd=   0.    meters 
+     wmlt=   1.00                xl=   0.    meters        xw=   0.    meters 
+     lref=   0.    meters      wref=   0.    meters      lref=   0.    meters 
+     wref=   0.    meters     xlref=   0.    meters     xwref=   0.    meters 
+     lmin=   0.    meters      wmin=   0.    meters      lmax=   0.    meters 
+     wmax=   0.    meters 
+
+   2*** threshold voltage parameters ***
+      vto=-700.00m volts        nss=   0.    1/cm**2      tpg=   1.00         
+      phi= 800.00m volts      gamma= 570.00m v**0.5      bulk=  gnd           
+    ngate=   0.    cm**3       nsub= 5.9e+16 1/cm**3   delvto=   0.    volts  
+
+   3*** gate overlap capacitance parameters ***
+     cgbo= 700.00p f/meter     cgdo= 220.00p f/meter     cgso= 220.00p f/meter
+     meto=   0.    meters 
+
+   4*** gate capacitance parameters ***
+    capop=   2.00               cf1=   0.    volts        cf2= 100.00m volts  
+      cf3=   1.00  volts        cf4=  50.00               cf5= 666.67m        
+      cf6= 500.00               xqc= 500.00m              tox=  14.00n meters 
+      cox=   2.47m f/m**2 
+
+   5*** diffusion parasitic parameters ***
+      acm=   0.                  is=  10.00f amps          js=   0.    a/m**2 
+      jsw=   0.    amp/m        nds=   1.00               cbd=   0.    farad  
+      cbs=   0.    farad         cj= 560.00u f/m**2      cjsw= 350.00p f/m    
+   cjgate= 350.00p f/m           mj= 500.00m             mjsw= 350.00m        
+       pb= 800.00m volts        php= 800.00m volts         tt=   0.    secs   
+     hdif=   0.    meters      ldif=   0.    meters        rd=   0.    ohms   
+       rs=   0.    ohms         rsh=   0.    ohms/sq       fc=   0.           
+    alpha=   0.                 vcr=   0.    volts      iirat=   0.           
+      rdc=   0.    ohms         rsc=   0.    ohms           n=   1.00         
+     vnds=  -1.00  volts  
+
+   6*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                  eg=   1.11  ev     
+     gap1= 702.00u ev/deg      gap2=   1.11k deg          xti=   0.           
+      bex=  -1.50               tcv=   0.    v/deg k      trd=   0.    /deg   
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+
+   7*** noise parameters ***
+       kf=   0.                  af=   1.00              nlev=   2.00         
+   gdsnoi=   1.00         
+
+   ***  level  1  model parameters  ***
+
+   lambda=  50.00m /v            kp=  50.00u a/v**2 
+  
+      
+ **info** set option symb=1 internally to help for convergence.
+ *****************************************************************
+ ******  option summary
+ ******
+ runlvl  = 5         bypass  = 2         
+  Opening plot unit= 79
+ file=D:\Desktop\ADC\SHA\OPAMP_miller\OPA_CMRR.pa0
+
+ **info** dc convergence successful at Newton-Raphson method 
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title opa_cmrr
+
+ ****** operating point information tnom=  25.000 temp=  27.000 ******
+ ****** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:2       =-133.7044u 0:3       =   5.0000 
+ +0:4       =  -5.0000  0:5       =   1.5911  0:6       =-133.7044u
+ +1:3       =   4.0699  1:4       =   4.0831  1:5       =-945.6013m
+ +1:9       =  -3.7982 
+
+
+ **** voltage sources
+
+ subckt                                              
+ element  0:vcm1     0:vcm2     0:vdd      0:vss     
+  volts      0.         0.         5.0000     5.0000 
+  current    0.         0.      -725.9443u -725.9443u
+  power      0.         0.         3.6297m    3.6297m
+
+     total voltage source power dissipation=    7.2594m       watts
+
+
+
+ **** current sources
+
+ subckt   x1        
+ element  1:ibia    
+  volts      8.7982 
+  current   60.0000u
+  power   -527.8898u
+
+
+     total current source power dissipation=-527.8898u       watts
+
+
+ **** mosfets
+
+
+ subckt   x1         x1         x1         x1         x1         x1        
+ element  1:m1       1:m2       1:m3       1:m4       1:m5       1:m6      
+ model    1:n08      1:n08      1:p08      1:p08      1:n08      1:p08     
+ region     Saturati   Saturati   Saturati   Saturati   Saturati   Saturati
+  id        33.2766u   33.2555u  -33.2766u  -33.2555u   66.5321u -291.9629u
+  ibs        0.         0.         0.         0.         0.         0.     
+  ibd      -68.3799f  -68.5611f   12.6815f   12.5003f  -55.2770f   68.1711f
+  vgs      945.6013m  945.4676m -930.1480m -930.1480m    1.2018  -916.8587m
+  vds        5.0155     5.0287  -930.1480m -916.8587m    4.0544    -5.0001 
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      697.4274m  697.4274m -697.1376m -697.1376m  697.4274m -697.1376m
+  vdsat    248.1739m  248.0402m -233.0104m -233.0104m  504.4101m -219.7211m
+  vod      248.1739m  248.0402m -233.0104m -233.0104m  504.4101m -219.7211m
+  beta       1.0806m    1.0811m    1.2258m    1.2250m  522.9906u   12.0952m
+  gam eff  400.0000m  400.0000m  570.0000m  570.0000m  400.0000m  570.0000m
+  gm       268.1718u  268.1460u  285.6235u  285.4421u  263.8017u    2.6576m
+  gds        1.1086u    1.1075u    1.5899u    1.5899u    2.2899u   11.6785u
+  gmb       64.2819u   64.2757u   91.1918u   91.1339u   63.2344u  848.4923u
+  cdtot      1.8877f    1.8881f    5.1284f    5.1274f  931.6285a   44.8369f
+  cgtot     17.3347f   17.3352f   48.6850f   48.6840f    8.9266f  400.1954f
+  cstot     14.4939f   14.4939f   41.8214f   41.8214f    7.2470f  345.4809f
+  cbtot    953.0374a  953.1748a    1.7353f    1.7353f  748.0269a    9.8776f
+  cgs       14.4939f   14.4939f   41.8214f   41.8214f    7.2470f  345.4809f
+  cgd        1.8877f    1.8881f    5.1284f    5.1274f  931.6285a   44.8369f
+
+
+
+ subckt   x1         x1         x1         x1        
+ element  1:m7       1:m8       1:m9       1:m10     
+ model    1:n08      1:n08      1:n08      1:p08     
+ region     Saturati   Saturati   Saturati   Saturati
+  id       291.9629u   60.0000u  307.4492u -307.4492u
+  ibs        0.         0.         0.         0.     
+  ibd      -68.1674f  -16.3857f  -89.8623f   46.4762f
+  vgs        1.2018     1.2018     1.2018  -930.1480m
+  vds        4.9999     1.2018     6.5911    -3.4089 
+  vbs        0.         0.         0.         0.     
+  vth      697.4274m  697.4274m  697.4274m -697.1376m
+  vdsat    504.4101m  504.4101m  504.4101m -233.0104m
+  vod      504.4101m  504.4101m  504.4101m -233.0104m
+  beta       2.2950m  471.6434u    2.4168m   11.3254m
+  gam eff  400.0000m  400.0000m  400.0000m  570.0000m
+  gm         1.1576m  237.9017u    1.2190m    2.6389m
+  gds        9.7321u    2.2899u    9.7321u   13.1339u
+  gmb      277.4914u   57.0260u  292.2101u  842.5389u
+  cdtot      4.0106f  895.3041a    4.0967f   43.8704f
+  cgtot     35.7871f    8.8903f   35.8732f  398.7458f
+  cstot     30.7996f    7.2470f   30.7996f  345.4809f
+  cbtot    976.9142a  748.0269a  976.9142a    9.3946f
+  cgs       30.7996f    7.2470f   30.7996f  345.4809f
+  cgd        4.0106f  895.3041a    4.0967f   43.8704f
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+ ******  
+ .title opa_cmrr
+
+ ****** job statistics summary tnom=  25.000 temp=  27.000 ******
+
+  ******  HSPICE Threads Information  ******
+
+  Command Line Threads Count :     1
+  Available CPU Count        :    16
+  Actual Threads Count       :     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      11 # elements   =      19
+  # resistors   =       0 # capacitors =       4 # inductors   =       0
+  # mutual_inds =       0 # vccs       =       0 # vcvs        =       0
+  # cccs        =       0 # ccvs       =       0 # volt_srcs   =       4
+  # curr_srcs   =       1 # diodes     =       0 # bjts        =       0
+  # jfets       =       0 # mosfets    =      10 # U elements  =       0
+  # T elements  =       0 # W elements =       0 # B elements  =       0
+  # S elements  =       0 # P elements =       0 # va device   =       0
+  # vector_srcs =       0 # N elements =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.00           1           6
+  ac analysis        0.00          91          91
+  readin             0.01
+  errchk             0.00
+  setup              0.00
+  output             0.00
+
+
+           peak memory used         50.72 megabytes
+           total cpu time            0.02 seconds
+           total elapsed time        0.07 seconds
+           job started at     11:49:17 01/07/2023
+           job ended   at     11:49:17 01/07/2023
+
+
+  lic: Release hspice token(s) 
+ lic: total license checkout elapse time:        0.05(s)

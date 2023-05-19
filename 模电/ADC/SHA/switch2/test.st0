@@ -1,0 +1,57 @@
+****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******
+ Input File: test.sp
+ lic:
+ lic: FLEXlm: v11.2.1
+ lic: USER:   DELL                 HOSTNAME: SZX-l2h4
+ lic: HOSTID: "2c8db1dbb46e"       PID:      10172
+ lic: Using FLEXlm license file:
+ lic: 27010@SZX-l2h4
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029
+ lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4
+ lic:
+ init: begin read circuit files,  cpu clock=  4.10E-02
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\XILINX\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\SIGNET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PCI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\LIN_TECH\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\DI0\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\COMLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BURR_BRM\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BJT\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option runlvl
+       option post
+       option accurate
+       option probe
+ init: end read circuit files,  cpu clock=  4.30E-02 peak memory=        47 mb
+ init: begin check errors,  cpu clock=  4.30E-02
+ init: end check errors,  cpu clock=  4.40E-02 peak memory=        50 mb
+ init: begin setup matrix, pivot=     0 cpu clock=  4.40E-02
+       establish matrix -- done,  cpu clock=  4.40E-02 peak memory=        50 mb
+       re-order matrix -- done,  cpu clock=  4.40E-02 peak memory=        50 mb
+ init: end setup matrix,  cpu clock=  4.50E-02 peak memory=        50 mb
+ dcop: begin dcop,  cpu clock=  4.50E-02
+ dcop: end dcop,  cpu clock=  4.60E-02 peak memory=        50 mb  tot_iter=      14
+ output: D:\Desktop\ADC\SHA\switch2\test.tr0
+ sweep: tran tran0    begin, stop_t=  1.00E+00 #sweeps=**** cpu clock=  4.60E-02
+ tran: time= 1.0000E-01 tot_iter=    2664 conv_iter=     869 cpu clock= 5.90E-02
+ tran: time= 2.0000E-01 tot_iter=    5516 conv_iter=    1803 cpu clock= 7.20E-02
+ tran: time= 3.0000E-01 tot_iter=    8214 conv_iter=    2701 cpu clock= 8.40E-02
+ tran: time= 4.0000E-01 tot_iter=   10850 conv_iter=    3574 cpu clock= 9.50E-02
+ tran: time= 5.0000E-01 tot_iter=   13604 conv_iter=    4480 cpu clock= 1.08E-01
+ tran: time= 6.0000E-01 tot_iter=   16287 conv_iter=    5375 cpu clock= 1.20E-01
+ tran: time= 7.0000E-01 tot_iter=   18829 conv_iter=    6225 cpu clock= 1.31E-01
+ tran: time= 8.0000E-01 tot_iter=   21600 conv_iter=    7132 cpu clock= 1.43E-01
+ tran: time= 9.0000E-01 tot_iter=   24307 conv_iter=    8036 cpu clock= 1.56E-01
+ tran: time= 1.0000E+00 tot_iter=   27210 conv_iter=    8971 cpu clock= 1.68E-01
+ sweep: tran tran0    end,  cpu clock=  1.69E-01 peak memory=        50 mb
+>info:         ***** hspice job concluded
+ lic: Release hspice token(s)

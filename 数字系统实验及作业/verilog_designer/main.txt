@@ -1,0 +1,71 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2022/06/07 21:55:54
+// Design Name: 
+// Module Name: main
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module main(
+    input clk, red_ctrl, enable,
+    input rl1, rl2, rl3, rl4,
+    input [2:0] speed_ctrl,
+    output head_out,
+    output reg [1:0] en,
+    output reg [3:0] in
+    );
+    
+    reg do_auto, do_ctrl;
+    wire [1:0] en_auto, en_ctrl;
+    wire [3:0] in_auto, in_ctrl;
+    reg [2:0] head_order=3'b100;
+    wire head_enable=1;
+    wire [7:0] data;
+    wire led;
+    
+    red_receive rr0(clk, head_enable, red_ctrl, data, led);
+    automove auto(clk, do_auto, red_ctrl, rl1, rl2, rl3, rl4, en_auto, in_auto);
+    contralmove ctrl(clk, do_ctrl, speed_ctrl, rl1, rl2, red_ctrl, en_ctrl, in_ctrl);
+    head_ctrl head(clk,head_order,head_out);
+    
+    always@(posedge clk) begin
+        if(enable==0) begin
+            do_auto<=0;
+            do_ctrl<=1;
+            en<=en_ctrl;
+            in<=in_ctrl;
+        end else begin
+            do_auto<=1;
+            do_ctrl<=0;
+            en<=en_auto;
+            in<=in_auto;
+        end
+    end
+    
+    always@(*) begin
+        case(data)
+            8'b00011001: head_order=3'b010;
+            8'b00010110: head_order=3'b100;
+            8'b00001101: head_order=3'b001;
+            8'b00011000: head_order=3'b010;
+            8'b00001000: head_order=3'b100;
+            8'b01011010: head_order=3'b001;
+            default: head_order=3'b010;
+        endcase
+    end
+    
+endmodule

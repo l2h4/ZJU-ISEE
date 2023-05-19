@@ -1,0 +1,58 @@
+****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******
+ Input File: SHA.sp
+ lic:
+ lic: FLEXlm: v11.2.1
+ lic: USER:   DELL                 HOSTNAME: SZX-l2h4
+ lic: HOSTID: "2c8db1dbb46e"       PID:      12004
+ lic: Using FLEXlm license file:
+ lic: 27010@SZX-l2h4
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029
+ lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4
+ lic:
+ init: begin read circuit files,  cpu clock=  4.00E-02
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\XILINX\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\SIGNET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PCI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\LIN_TECH\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\DI0\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\COMLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BURR_BRM\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BJT\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option runlvl
+       option post
+       option accurate
+       option probe
+ init: end read circuit files,  cpu clock=  4.10E-02 peak memory=        48 mb
+ init: begin check errors,  cpu clock=  4.10E-02
+ **warning**  No DC path to ground from node        0:                1
+ init: end check errors,  cpu clock=  4.40E-02 peak memory=        50 mb
+ init: begin setup matrix, pivot=     0 cpu clock=  4.40E-02
+       establish matrix -- done,  cpu clock=  4.40E-02 peak memory=        50 mb
+       re-order matrix -- done,  cpu clock=  4.40E-02 peak memory=        50 mb
+ init: end setup matrix,  cpu clock=  4.50E-02 peak memory=        50 mb
+ dcop: begin dcop,  cpu clock=  4.50E-02
+ dcop: end dcop,  cpu clock=  5.00E-02 peak memory=        51 mb  tot_iter=     139
+ output: D:\Desktop\ADC\SHA\total2\SHA.tr0
+ sweep: tran tran0    begin, stop_t=  1.00E+00 #sweeps=**** cpu clock=  5.00E-02
+ tran: time= 1.0000E-01 tot_iter=     952 conv_iter=     240 cpu clock= 7.00E-02
+ tran: time= 2.0000E-01 tot_iter=    2421 conv_iter=     623 cpu clock= 1.01E-01
+ tran: time= 3.0000E-01 tot_iter=    2969 conv_iter=     768 cpu clock= 1.13E-01
+ tran: time= 4.0000E-01 tot_iter=    4440 conv_iter=    1148 cpu clock= 1.45E-01
+ tran: time= 5.0000E-01 tot_iter=    5029 conv_iter=    1303 cpu clock= 1.58E-01
+ tran: time= 6.0000E-01 tot_iter=    6537 conv_iter=    1693 cpu clock= 1.89E-01
+ tran: time= 7.0000E-01 tot_iter=    7065 conv_iter=    1836 cpu clock= 2.01E-01
+ tran: time= 8.0000E-01 tot_iter=    8478 conv_iter=    2217 cpu clock= 2.30E-01
+ tran: time= 9.0000E-01 tot_iter=    8989 conv_iter=    2356 cpu clock= 2.42E-01
+ tran: time= 1.0000E+00 tot_iter=   10474 conv_iter=    2763 cpu clock= 2.73E-01
+ sweep: tran tran0    end,  cpu clock=  2.73E-01 peak memory=        51 mb
+>info:         ***** hspice job concluded
+ lic: Release hspice token(s)

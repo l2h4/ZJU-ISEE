@@ -1,0 +1,31 @@
+* "simulator" "HSPICE" 
+* "version" "K-2015.06-3 win64"
+* "format" "HSP"
+* "rundate" "23:07:00 01/05/2023 "
+* "netlist" "OPA_OP.sp "
+* "runtitle" ".title opa_open_loop"
+* time =    0.            
+* temperature =   27.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ 1 =   2.5000        
++ 2 =  -2.5000        
++ 3 =   0.            
++ 4 =   0.            
++ 5 =   1.6868        
++ 6 =   1.6868        
++ x1.3 =   2.0291        
++ x1.4 =   2.0291        
++ x1.5 =   1.2155        
++ x1.7 =  -1.0582        
++ x1.8 =  -1.8928        
++ x1.9 =  -1.8928        
++ x1.10 =  -1.5585        
++ x1.12 =   1.5655        
++ x1.13 = 927.8835m       
++ x1.16 =   2.1487        
++ x1.17 =   2.1351        
++ x1.18 =  -1.9999        
+***   END: Saved Operating Point ***                     

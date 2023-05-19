@@ -1,0 +1,23 @@
+* "simulator" "HSPICE" 
+* "version" "K-2015.06-3 win64"
+* "format" "HSP"
+* "rundate" "22:42:58 01/07/2023 "
+* "netlist" "test.sp "
+* "runtitle" ".title switch_test"
+* time =    0.            
+* temperature =   75.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ 1 =   3.0000        
++ 3 =   0.            
++ 4 =   0.            
++ 5 =   0.            
++ 6 =   0.            
++ x1.n1 =   2.5202        
++ x1.n2 =   3.0000        
++ x1.n3 = 381.1768m       
++ x1.n4 =   2.0275        
++ x1.n5 =   3.0000        
+***   END: Saved Operating Point ***                     

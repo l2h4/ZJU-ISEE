@@ -1,0 +1,18 @@
+* "simulator" "HSPICE" 
+* "version" "K-2015.06-3 win64"
+* "format" "HSP"
+* "rundate" "01:19:41 11/15/2022 "
+* "netlist" "CS_amp_DC.sp "
+* "runtitle" "cs_amp_dc"
+* time =    0.            
+* temperature =   27.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ gnda =   0.            
++ vbias =   1.2000        
++ vdda =   1.8000        
++ vin = 500.0000m       
++ vout =   1.1553        
+***   END: Saved Operating Point ***                     

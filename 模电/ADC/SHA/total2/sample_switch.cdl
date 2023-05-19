@@ -1,0 +1,27 @@
+.SUBCKT bootstrap vin out clk vdd clkb
+
+MN1 n3 clkb 0 0 n08 W=20u L=200n m=1
+MP2 n2 n4 vdd vdd p08 W=20u L=200n m=1
+MP4 n1 clk vdd vdd p08 W=20u L=200n m=1
+MN4 n1 clk n3 0 n08 W=20u L=200n m=1
+MP1 n4 n1 n2 vdd p08 W=20u L=200n m=1
+MN3 n1 n4 n3 0 n08 W=20u L=200n m=1
+MN5 n4 vdd n5 0 n08 W=20u L=200n m=1
+MN0 n4 clkb n3 0 n08 W=20u L=200n m=1
+MN7 vin n4 n3 0 n08 W=20u L=200n m=1
+MP3 vin clkb n3 vdd p08 W=20u L=200n m=1
+MP5 vdd clkb n5 vdd p08 W=20u L=200n m=1
+MN6 n5 clkb 0 0 n08 W=20u L=200n m=1
+MNS out n4 vin 0 n08 W=20u L=200n m=1
+MNSd out 0 vin 0 n08 W=20u L=200n m=1
+Cb n2 n3 200f
+
+
+.MODEL n08 NMOS VTO = 0.70 KP = 110U GAMMA = 0.4  LAMBDA = 0.04 
++ PHI = 0.7 MJ = 0.5 MJSW = 0.38 CGBO = 700P CGSO = 220P CGDO = 220P 
++ CJ = 770U CJSW = 380P LD = 0.016U TOX = 14N
+.MODEL p08 PMOS VTO = -0.70 KP = 50U GAMMA = 0.57 LAMBDA = 0.05 
++ PHI = 0.8 MJ = 0.5 MJSW = 0.35 CGBO = 700P CGSO = 220P CGDO = 220P 
++ CJ = 560U CJSW = 350P LD = 0.014U TOX = 14N
+
+.ENDS

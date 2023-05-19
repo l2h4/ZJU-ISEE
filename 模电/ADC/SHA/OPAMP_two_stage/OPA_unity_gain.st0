@@ -1,0 +1,60 @@
+****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******
+ Input File: OPA_unity_gain.sp
+ lic:
+ lic: FLEXlm: v11.2.1
+ lic: USER:   DELL                 HOSTNAME: SZX-l2h4
+ lic: HOSTID: "2c8db1dbb46e"       PID:      21488
+ lic: Using FLEXlm license file:
+ lic: 27010@SZX-l2h4
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029
+ lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4
+ lic:
+ init: begin read circuit files,  cpu clock=  6.90E-02
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\XILINX\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\SIGNET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PCI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\LIN_TECH\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\DI0\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\COMLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BURR_BRM\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BJT\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option runlvl
+       option post
+       option accurate
+       option probe
+ init: end read circuit files,  cpu clock=  7.20E-02 peak memory=        47 mb
+ init: begin check errors,  cpu clock=  7.20E-02
+ init: end check errors,  cpu clock=  7.60E-02 peak memory=        50 mb
+ init: begin setup matrix, pivot=     0 cpu clock=  7.60E-02
+       establish matrix -- done,  cpu clock=  7.60E-02 peak memory=        50 mb
+       re-order matrix -- done,  cpu clock=  7.60E-02 peak memory=        50 mb
+ init: end setup matrix,  cpu clock=  7.70E-02 peak memory=        50 mb
+ output: C:\Users\DELL\Desktop\HSP\6_23\OPA_unity_gain.sw0
+ sweep: dc dc0    begin, #sweeps=  51 cpu clock=  7.70E-02
+ sweep: dc dc0    end,  cpu clock=  7.80E-02 peak memory=        50 mb
+ dcop: begin dcop,  cpu clock=  7.80E-02
+ dcop: end dcop,  cpu clock=  7.90E-02 peak memory=        50 mb  tot_iter=       6
+ output: C:\Users\DELL\Desktop\HSP\6_23\OPA_unity_gain.tr0
+ sweep: tran tran0    begin, stop_t=  1.00E-05 #sweeps= 201 cpu clock=  8.00E-02
+ tran: time= 1.0084E-06 tot_iter=     187 conv_iter=      66 cpu clock= 8.30E-02
+ tran: time= 2.0000E-06 tot_iter=     196 conv_iter=      69 cpu clock= 8.30E-02
+ tran: time= 3.1314E-06 tot_iter=     437 conv_iter=     152 cpu clock= 8.40E-02
+ tran: time= 4.0000E-06 tot_iter=     441 conv_iter=     154 cpu clock= 8.40E-02
+ tran: time= 5.1428E-06 tot_iter=     616 conv_iter=     219 cpu clock= 8.50E-02
+ tran: time= 6.0000E-06 tot_iter=     620 conv_iter=     221 cpu clock= 8.50E-02
+ tran: time= 7.0745E-06 tot_iter=     688 conv_iter=     251 cpu clock= 8.50E-02
+ tran: time= 8.0000E-06 tot_iter=     692 conv_iter=     253 cpu clock= 8.50E-02
+ tran: time= 9.4747E-06 tot_iter=     760 conv_iter=     283 cpu clock= 8.50E-02
+ tran: time= 1.0000E-05 tot_iter=     762 conv_iter=     284 cpu clock= 8.60E-02
+ sweep: tran tran0    end,  cpu clock=  8.60E-02 peak memory=        50 mb
+>info:         ***** hspice job concluded
+ lic: Release hspice token(s)

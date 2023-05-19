@@ -1,0 +1,25 @@
+ ****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******                        
+  Copyright (c) 1986 - 2022 by Synopsys, Inc. All Rights Reserved.              
+  This software and the associated documentation are proprietary
+  to Synopsys, Inc. This software may only be used in accordance
+  with the terms and conditions of a written license agreement with
+  Synopsys, Inc. All other use, reproduction, or distribution of
+  this software is strictly prohibited.
+  Input File: CS_amp_DC.sp                                                      
+  Command line options: C:\synopsys\Hspice_K-2015.06-3\WIN64\hspice.exe -i CS_amp_DC.sp -o C:\Users\DELL\Desktop\chap6.4.2\CS_amp_DC.lis
+  lic:  
+  lic: FLEXlm: v11.2.1 
+  lic: USER:   DELL                 HOSTNAME: SZX-l2h4 
+  lic: HOSTID: "2c8db1dbb46e"       PID:      11596 
+  lic: Using FLEXlm license file: 
+  lic: 27010@SZX-l2h4 
+  lic: Checkout 1 hspice 
+  lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029 
+  lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4 
+  lic:   
+ Init: read install configuration file: C:\synopsys\Hspice_K-2015.06-3\meta.cfg
+ **error** (CS_amp_DC.sp:30) unable to open file "..\models\ms018.lib" .Either file doesn't exists or path is wrong. Please enter the correct file location. 
+
+               ***** job aborted
+  lic: Release hspice token(s) 
+ lic: total license checkout elapse time:        0.05(s)

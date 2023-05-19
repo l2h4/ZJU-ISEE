@@ -1,0 +1,3 @@
+[1218/162308.841:INFO:CONSOLE(1)] "Uncaught ReferenceError: AddData_ReF is not defined", source:  (1)
+[1218/162308.941:INFO:CONSOLE(14)] "[object Object]", source: file:///C:/Users/DELL/AppData/Local/TTKN/HOME/js/FavorateGroupOperator.js (14)
+[1218/162308.945:INFO:CONSOLE(54)] "[object Object]", source: file:///C:/Users/DELL/AppData/Local/TTKN/HOME/js/collectfileOperator.js (54)

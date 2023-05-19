@@ -1,0 +1,15 @@
+.SUBCKT OPAMP 1 3 4 5 7 8
+* 1 VDD
+* 3 vout
+* 4 vip
+* 5 vin
+* 7 Vb
+* 8 VGOUND
+
+M1 2 5 6 6 n18 W=3u L=1u M=1
+M2 3 4 6 6 n18 W=3u L=1u M=1
+M3 2 2 1 1 p18 W=14u L=1u M=1
+M4 3 2 1 1 p18 W=14u L=1u M=1
+M5 6 7 8 8 n18 W=6u L=1u M=1
+
+.ENDS

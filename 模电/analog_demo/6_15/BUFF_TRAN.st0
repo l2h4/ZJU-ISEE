@@ -1,0 +1,57 @@
+****** HSPICE -- K-2015.06-3 win64 (Aug  6 2015) ******
+ Input File: BUFF_TRAN.sp
+ lic:
+ lic: FLEXlm: v11.2.1
+ lic: USER:   DELL                 HOSTNAME: SZX-l2h4
+ lic: HOSTID: "2c8db1dbb46e"       PID:      6476
+ lic: Using FLEXlm license file:
+ lic: 27010@SZX-l2h4
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 30-dec-2030/2029.2029
+ lic: 1(in_use)/99(total) FLOATING license(s) on SERVER 27010@SZX-l2h4
+ lic:
+ init: begin read circuit files,  cpu clock=  6.00E-02
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\XILINX\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\TI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\SIGNET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PCI\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\LIN_TECH\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\PET\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\DI0\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\COMLINE\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BURR_BRM\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\BJT\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\behave\
+       option search = C:\synopsys\Hspice_K-2015.06-3\parts\AD\
+       option runlvl
+       option post
+       option accurate
+       option probe
+ init: end read circuit files,  cpu clock=  6.20E-02 peak memory=        48 mb
+ init: begin check errors,  cpu clock=  6.20E-02
+ init: end check errors,  cpu clock=  6.40E-02 peak memory=        51 mb
+ init: begin setup matrix, pivot=     0 cpu clock=  6.40E-02
+       establish matrix -- done,  cpu clock=  6.40E-02 peak memory=        51 mb
+       re-order matrix -- done,  cpu clock=  6.40E-02 peak memory=        51 mb
+ init: end setup matrix,  cpu clock=  6.40E-02 peak memory=        51 mb
+ dcop: begin dcop,  cpu clock=  6.40E-02
+ dcop: end dcop,  cpu clock=  6.50E-02 peak memory=        51 mb  tot_iter=       6
+ output: C:\Users\DELL\Desktop\HSP\6_15\BUFF_TRAN.tr0
+ sweep: tran tran0    begin, stop_t=  5.00E-03 #sweeps=5001 cpu clock=  6.50E-02
+ tran: time= 5.0000E-04 tot_iter=      28 conv_iter=      14 cpu clock= 6.50E-02
+ tran: time= 1.0000E-03 tot_iter=      48 conv_iter=      24 cpu clock= 6.50E-02
+ tran: time= 1.5000E-03 tot_iter=      68 conv_iter=      34 cpu clock= 6.50E-02
+ tran: time= 2.0000E-03 tot_iter=      88 conv_iter=      44 cpu clock= 6.60E-02
+ tran: time= 2.5000E-03 tot_iter=     108 conv_iter=      54 cpu clock= 6.60E-02
+ tran: time= 3.0000E-03 tot_iter=     128 conv_iter=      64 cpu clock= 6.60E-02
+ tran: time= 3.5000E-03 tot_iter=     148 conv_iter=      74 cpu clock= 6.60E-02
+ tran: time= 4.0000E-03 tot_iter=     168 conv_iter=      84 cpu clock= 6.60E-02
+ tran: time= 4.5000E-03 tot_iter=     188 conv_iter=      94 cpu clock= 6.60E-02
+ tran: time= 5.0000E-03 tot_iter=     208 conv_iter=     104 cpu clock= 6.60E-02
+ sweep: tran tran0    end,  cpu clock=  6.60E-02 peak memory=        51 mb
+>info:         ***** hspice job concluded
+ lic: Release hspice token(s)
