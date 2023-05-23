@@ -1,0 +1,31 @@
+# Project: 3210105209
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = 3210105209.o dynamicarray.o
+LINKOBJ  = 3210105209.o dynamicarray.o
+LIBS     = -L"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib" -L"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3 -g3
+INCS     = -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = 3210105209.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+3210105209.o: 3210105209.c
+	$(CC) -c 3210105209.c -o 3210105209.o $(CFLAGS)
+
+dynamicarray.o: dynamicarray.c
+	$(CC) -c dynamicarray.c -o dynamicarray.o $(CFLAGS)

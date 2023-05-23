@@ -1,0 +1,52 @@
+# Project: GUI
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = ./output/main.o ./output/exceptio.o ./output/genlib.o ./output/graphics.o ./output/linkedlist.o ./output/random.o ./output/simpio.o ./output/strlib.o ./output/imgui.o
+LINKOBJ  = ./output/main.o ./output/exceptio.o ./output/genlib.o ./output/graphics.o ./output/linkedlist.o ./output/random.o ./output/simpio.o ./output/strlib.o ./output/imgui.o
+LIBS     = -L"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib" -L"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3 -mwindows
+INCS     = -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"./libgraphics" -I"./simpleGUI"
+CXXINCS  = -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"E:/mode/2021_10_04/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"./libgraphics" -I"./simpleGUI"
+BIN      = output/GUI.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+./output/main.o: main.c
+	$(CC) -c main.c -o ./output/main.o $(CFLAGS)
+
+./output/exceptio.o: libgraphics/exceptio.c
+	$(CC) -c libgraphics/exceptio.c -o ./output/exceptio.o $(CFLAGS)
+
+./output/genlib.o: libgraphics/genlib.c
+	$(CC) -c libgraphics/genlib.c -o ./output/genlib.o $(CFLAGS)
+
+./output/graphics.o: libgraphics/graphics.c
+	$(CC) -c libgraphics/graphics.c -o ./output/graphics.o $(CFLAGS)
+
+./output/linkedlist.o: libgraphics/linkedlist.c
+	$(CC) -c libgraphics/linkedlist.c -o ./output/linkedlist.o $(CFLAGS)
+
+./output/random.o: libgraphics/random.c
+	$(CC) -c libgraphics/random.c -o ./output/random.o $(CFLAGS)
+
+./output/simpio.o: libgraphics/simpio.c
+	$(CC) -c libgraphics/simpio.c -o ./output/simpio.o $(CFLAGS)
+
+./output/strlib.o: libgraphics/strlib.c
+	$(CC) -c libgraphics/strlib.c -o ./output/strlib.o $(CFLAGS)
+
+./output/imgui.o: simpleGUI/imgui.c
+	$(CC) -c simpleGUI/imgui.c -o ./output/imgui.o $(CFLAGS)
