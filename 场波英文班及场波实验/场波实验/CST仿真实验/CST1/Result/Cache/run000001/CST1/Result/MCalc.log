@@ -1,0 +1,946 @@
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2023 Apr 13 (Thu): 23:47:33
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+=========================================================================================================================
+matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+=========================================================================================================================
+
+========================================================================
+Processing CAD model (for field results)
+	[Improved internal geometry representation]
+	[Accuracy improvement for long shapes in inhomogeneous mesh regions]
+Version 2018.0 (build 20171026)
+PBA version 20171026
+2023 Apr 13 (Thu): 23:47:34
+========================================================================
+
+===========================================
+Finished CAD processing (for field results)
+===========================================
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2023 Apr 13 (Thu): 23:47:35
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2023 Apr 13 (Thu): 23:47:35
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+=========================================================================================================================
+matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+=========================================================================================================================
+
+===============================
+Port preparation
+Version 2018.0 (build 20171026)
+PBA version 20171026
+2023 Apr 13 (Thu): 23:47:35
+===============================
+
+==========================
+Finished port preparation.
+==========================
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2023 Apr 13 (Thu): 23:47:35
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2023 Apr 13 (Thu): 23:47:36
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+==============================
+Mesher selection: manual: FPBA
+==============================
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2023 Apr 13 (Thu): 23:47:36
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+=========================================================================================================================
+matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+=========================================================================================================================
+
+===============================
+Matrix computation (PBA)
+Version 2018.0 (build 20171026)
+PBA version 20171026
+2023 Apr 13 (Thu): 23:47:36
+===============================
+
+----------------------------------------------
+Used point accuracy enhancement value: 75.00%.
+----------------------------------------------
+
+Shapes are ordered to support shape wise matrix storage
+==================================================================================================
+== CST Matrix Calculation Priority Log                                                          ==
+==================================================================================================
+ 
+Priorities are sorted in ascending order beginning with the lowest priority
+ 
+Priority:   1, shape   1: air_0:brick__1_1, material: [background]
+Priority:   3, shape   2: component1:solid1__1_0, material: PEC
+ 
+==================================================================================================
+ 
+------------------------------------------------------------------------------
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+settings for port mode calculation
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PBA fill limit is applied in inverse mode.
+PBA fill limit is applied on faces filled with at least 99.00% metal material.
+--------------------------------------------------------------
+detailed accuracy settings:
+--------------------------------------------------------------
+augmented fill limit:       true
+augmented fill limit value: 99.00
+automatic fill limit:       true
+early fill limit:           true
+inverse fill limit:         true
+model complexity:           0.00
+legacy 2015:                false
+fixed point accuracy:       false
+minimum point accuracy:     0
+mesh step inheritance:      false
+accuracy mode:              
+------------------------------------------------------------------------------
+
+=================================
+Finished matrix computation (PBA)
+=================================
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2023 Apr 13 (Thu): 23:47:37
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2023 Apr 13 (Thu): 23:47:37
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+--------------------------------
+# of staircase filled cells: 0
+# of staircase filled areas: 0
+# of staircase filled edges: 0
+# of faces above fill limit: 0
+# of edges with FPBA topology: 0
+--------------------------------
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+2023 Apr 13 (Thu): 23:49:11
+<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+======================
+Mesher selection: FPBA
+======================
+
+=========================================================================================================================
+matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+=========================================================================================================================
+
+========================================================================
+Processing CAD model
+	[Improved internal geometry representation]
+	[Accuracy improvement for long shapes in inhomogeneous mesh regions]
+Version 2018.0 (build 20171026)
+PBA version 20171026
+2023 Apr 13 (Thu): 23:49:12
+========================================================================
+
+---------------------------------------------
+Used point accuracy enhancement value: 0.00%.
+---------------------------------------------
+
+=============================================================================
+Mesh statistics:
+-----------------------------------------------------------------------------
+Minimum edge length (x): 0.5 @ mesh line 63 (x)
+Maximum edge length (x): 1.57 @ mesh line 51 (x)
+Minimum face area (x): 0.0432 @ mesh lines 38 | 16 (y | z)
+Maximum face area (x): 2.38 @ mesh lines 32 | 10 (y | z)
+Minimum edge length (y): 0.5 @ mesh line 38 (y)
+Maximum edge length (y): 1.55 @ mesh line 32 (y)
+Minimum face area (y): 0.0432 @ mesh lines 16 | 63 (z | x)
+Maximum face area (y): 2.42 @ mesh lines 10 | 51 (z | x)
+Minimum edge length (z): 0.0864 @ mesh line 16 (z)
+Maximum edge length (z): 1.54 @ mesh line 10 (z)
+Minimum face area (z): 0.25 @ mesh lines 63 | 38 (x | y)
+Maximum face area (z): 2.43 @ mesh lines 51 | 32 (x | y)
+Maximum mesh face aspect ratio (x): 17.9 : 1.0  @ mesh lines 32 | 16 (y | z)
+Maximum mesh face aspect ratio (y): 18.2 : 1.0  @ mesh lines 16 | 51 (z | x)
+Maximum mesh face aspect ratio (z): 3.15 : 1.0  @ mesh lines 51 | 38 (x | y)
+=============================================================================
+
+============================================================================
+Available resources to store TST cells: 2146568887 (234659.24% of mesh size)
+============================================================================
+
+=======================
+Finished CAD processing
+=======================
+
+------------------------------------------------------------
+Parallelization Info
+------------------------------------------------------------
+Number of concurrent threads: 8
+Number of node domains: 16
+Number of mesh cells: 885625
+------------------------------------------------------------
+Node order
+7, 1, 4, 5, 6, 10, 8, 14, 12, 11, 9, 15, 13, 3, 2, 0
+------------------------------------------------------------
+
+------------------------------------
+Mesh: # of points excl. TSTs: 914760
+      # of points incl. TSTs: 914760
+------------------------------------
+
+1xN000:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:21
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN000:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN000:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:21
+         ===============================
+
+1xN000:  Shapes are ordered to support shape wise matrix storage
+1xN000:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN000:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN000:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:23
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN001:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN001:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN001:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN001:  Shapes are ordered to support shape wise matrix storage
+1xN001:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN001:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN001:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:15
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN002:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:20
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN002:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN002:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:20
+         ===============================
+
+1xN002:  Shapes are ordered to support shape wise matrix storage
+1xN002:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN002:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN002:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:24
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN003:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:20
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN003:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN003:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:20
+         ===============================
+
+1xN003:  Shapes are ordered to support shape wise matrix storage
+1xN003:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN003:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN003:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:23
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN004:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN004:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN004:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN004:  Shapes are ordered to support shape wise matrix storage
+1xN004:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN004:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN004:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:19
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN005:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN005:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN005:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN005:  Shapes are ordered to support shape wise matrix storage
+1xN005:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN005:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN005:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:21
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN006:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN006:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN006:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN006:  Shapes are ordered to support shape wise matrix storage
+1xN006:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN006:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN006:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:17
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN007:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN007:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN007:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN007:  Shapes are ordered to support shape wise matrix storage
+1xN007:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN007:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN007:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:16
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN008:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN008:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN008:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN008:  Shapes are ordered to support shape wise matrix storage
+1xN008:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN008:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN008:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:20
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN009:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:17
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN009:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN009:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:17
+         ===============================
+
+1xN009:  Shapes are ordered to support shape wise matrix storage
+1xN009:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN009:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN009:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:23
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN010:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN010:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN010:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN010:  Shapes are ordered to support shape wise matrix storage
+1xN010:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN010:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN010:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:19
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN011:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:17
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN011:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN011:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:17
+         ===============================
+
+1xN011:  Shapes are ordered to support shape wise matrix storage
+1xN011:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN011:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN011:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:22
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN012:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:16
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN012:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN012:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:16
+         ===============================
+
+1xN012:  Shapes are ordered to support shape wise matrix storage
+1xN012:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN012:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN012:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:22
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN013:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:19
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN013:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN013:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:19
+         ===============================
+
+1xN013:  Shapes are ordered to support shape wise matrix storage
+1xN013:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN013:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN013:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:24
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN014:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:13
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN014:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN014:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:13
+         ===============================
+
+1xN014:  Shapes are ordered to support shape wise matrix storage
+1xN014:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN014:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN014:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:18
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+1xN015:  <<<<<<<<<<<<<<<<<<<<<<<<<<<
+         2023 Apr 13 (Thu): 23:49:19
+         <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+1xN015:  =========================================================================================================================
+
+         matrixcalc: Thread pinning failed with error: error in initialization of cpu core iterator, invalid socket id provided, 1
+         =========================================================================================================================
+
+1xN015:  ===============================
+         Matrix computation (PBA)
+         Version 2018.0 (build 20171026)
+         PBA version 20171026
+         2023 Apr 13 (Thu): 23:49:19
+         ===============================
+
+1xN015:  Shapes are ordered to support shape wise matrix storage
+1xN015:  ------------------------------------------------------------------------------
+         PBA fill limit is applied in inverse mode.
+         PBA fill limit is applied on faces filled with at least 85.56% metal material.
+         --------------------------------------------------------------
+         detailed accuracy settings:
+         --------------------------------------------------------------
+         augmented fill limit:       true
+         augmented fill limit value: 85.56
+         automatic fill limit:       true
+         early fill limit:           true
+         inverse fill limit:         true
+         model complexity:           0.00
+         legacy 2015:                false
+         fixed point accuracy:       false
+         minimum point accuracy:     0
+         mesh step inheritance:      false
+         accuracy mode:
+         ------------------------------------------------------------------------------
+
+1xN015:  =================================
+         Finished matrix computation (PBA)
+         =================================
+
+1xN015:  >>>>>>>>>>>>>>>>>>>>>>>>>>>
+         2023 Apr 13 (Thu): 23:49:24
+         >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+2023 Apr 13 (Thu): 23:49:26
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+--------------------------------
+# of staircase filled cells: 0
+# of staircase filled areas: 0
+# of staircase filled edges: 0
+# of faces above fill limit: 0
+# of edges with FPBA topology: 0
+--------------------------------
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CST3DFieldViewInfoText creator="" version="20140203">
+  <Title data="Port1 e1" type="Port mode TE"/>
+  <TextItem name="Type">
+    <Text visible="false" label="Type" data="E-Field" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Component">
+    <Text visible="true" label="Component" data="$ifxOpenSGContourViewer@plot@component$" condition="$ifxOpenSGGlyphViewer@activate$=0 AND $ifxOpenSGGlyphViewer_PortMode@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane0@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane1@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane2@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane3@activate$=0 AND $ifxCSTStreamer@activate$=0" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Frequency">
+    <Text visible="true" label="Frequency" data="10.3" condition="" numberFormat="g" numberPrecision="7"/>
+  </TextItem>
+  <TextItem name="Phase">
+    <Text visible="true" label="Phase" data="$ifxNavigationModule@phase@current$" scaling="1" condition="$ifxOpenSGContourViewer@plot@attribute$=Wave" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Average">
+    <Text visible="true" label="Plot Attribute" data="Average" condition="$ifxOpenSGGlyphViewer@activate$=0 AND $ifxOpenSGGlyphViewer_PortMode@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane0@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane1@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane2@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane3@activate$=0 AND $ifxCSTStreamer@activate$=0 AND $ifxOpenSGContourViewer@plot@attribute$=Average" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Maximum">
+    <Text visible="true" label="Plot Attribute" data="Maximum" condition="$ifxOpenSGGlyphViewer@activate$=0 AND $ifxOpenSGGlyphViewer_PortMode@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane0@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane1@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane2@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane3@activate$=0 AND $ifxCSTStreamer@activate$=0 AND $ifxOpenSGContourViewer@plot@attribute$=Amplitude" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="RMS">
+    <Text visible="true" label="Plot Attribute" data="RMS" condition="$ifxOpenSGGlyphViewer@activate$=0 AND $ifxOpenSGGlyphViewer_PortMode@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane0@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane1@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane2@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane3@activate$=0 AND $ifxCSTStreamer@activate$=0 AND $ifxOpenSGContourViewer@plot@attribute$=RMS" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Phase_Plot">
+    <Text visible="true" label="Plot Attribute" data="Phase" condition="$ifxOpenSGGlyphViewer@activate$=0 AND $ifxOpenSGGlyphViewer_PortMode@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane0@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane1@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane2@activate$=0 AND $ifxOpenSGGlyphViewer_Cutplane3@activate$=0 AND $ifxCSTStreamer@activate$=0 AND $ifxOpenSGContourViewer@plot@attribute$=Phase" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Type">
+    <Text visible="true" label="Mode type" data="TE" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Wave Imp">
+    <Text visible="true" label="Wave Imp. [Ohm]" data="504.7730102539" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Beta">
+    <Text visible="true" label="Beta [1/m]" data="161.1130981445" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Fcutoff">
+    <Text visible="true" label="Fcutoff [GHz]" data="6.852812767029" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="Accuracy">
+    <Text visible="true" label="Accuracy" data="3.949907900758e-10" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="MaxPortMode">
+    <Text visible="true" label="Maximum" data="$ifxOpenSGContourViewer_PortMode@maxValue$" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+  <TextItem name="MaxPosPortMode">
+    <Text visible="false" label="Max. position" data="$ifxOpenSGContourViewer_PortMode@maxValuePos$" condition="" numberFormat="g" numberPrecision="4"/>
+  </TextItem>
+</CST3DFieldViewInfoText>
