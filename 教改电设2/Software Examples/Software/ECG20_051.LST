@@ -1,0 +1,714 @@
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ECG20_051
+OBJECT MODULE PLACED IN ECG20_051.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe ECG20_051.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF ECG20_051.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
+   1          /////////////////////////////////////
+   2          //  Generated Initialization File  //
+   3          /////////////////////////////////////
+   4          /*****************************************************************
+   5          版本日志：
+   6          V05:
+   7          1、实现SPI配置，实现SPI的连续输出；V051
+   8          
+   9          V04:
+  10          1、P1.1输入的电压经过ADC后，以115200bps速率通过Uart0发送；
+  11          2、ADC以Vcc为参考电压，通过AD0BUSY启动
+  12          
+  13          V03:
+  14          1、串行通信，速率：115200bps；8bit数据，1停止位，无奇偶校验；
+  15          2、每0.5秒钟发送一次数据；
+  16          3、编写发送字符串函数和发送数据函数；V031
+  17          
+  18          V02:
+  19          1、取键值
+  20          2、Key1-4，分别控制Led1-4；
+  21          
+  22          V01：
+  23          1、设置定时器中断
+  24          2、利用定时器实现流水灯
+  25          
+  26          V00：
+  27          1、输入输出的设置
+  28          2、流水灯程序
+  29          */
+  30          
+  31          #include "compiler_defs.h"
+  32          #include "C8051F340_defs.h"
+  33          #include <stdio.h>                              //标准输入输出库
+  34          //#include "nRF905.h"
+  35          
+  36          //变量类型标识的宏定义
+  37          #define Uchar unsigned char
+  38          #define Uint unsigned int
+  39          #define uchar unsigned char
+  40          #define uint unsigned int
+  41          #define ulong unsigned long
+  42          
+  43          #define SYSCLK       12000000          // SYSCLK frequency in Hz
+  44          #define XFCN    6               //3             //5
+  45          
+  46          #define SPI_CLOCK          250000      // Maximum SPI clock
+  47          #define  SPI_WRITE         0x04        // Send a byte from the Master to the
+  48                                                 // Slave
+  49          #define  SPI_READ          0x08        // Send a byte from the Slave to the
+  50                                                 // Master
+  51          #define  SPI_WRITE_BUFFER  0x10        // Send a series of bytes from the
+  52                                                 // Master to the Slave
+  53          #define  SPI_READ_BUFFER   0x20        // Send a series of bytes from the Slave
+  54                                                 // to the Master
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 2   
+
+  55          #define  ERROR_OCCURRED    0x40        // Indicator for the Slave to tell the
+  56                                                 // Master an error occurred
+  57          
+  58          #define MAX_BUFFER_SIZE 10
+  59          
+  60          #define LED1_ON P4 |= 0x10
+  61          #define LED2_ON P4 |= 0x20
+  62          #define LED3_ON P4 |= 0x40
+  63          #define LED4_ON P4 |= 0x80
+  64          
+  65          #define LED1_OFF P4 &= ~0x10
+  66          #define LED2_OFF P4 &= ~0x20
+  67          #define LED3_OFF P4 &= ~0x40
+  68          #define LED4_OFF P4 &= ~0x80
+  69          
+  70          #define LED1_INVERT P4 ^= 0x10
+  71          #define LED2_INVERT P4 ^= 0x20
+  72          #define LED3_INVERT P4 ^= 0x40
+  73          #define LED4_INVERT P4 ^= 0x80
+  74          
+  75          //-----------------------------------------------------------------------------
+  76          // Global Variables
+  77          //-----------------------------------------------------------------------------
+  78          uchar SPI_Data = 0xA5;
+  79          uchar SPI_Data_Array[MAX_BUFFER_SIZE] = {0};
+  80          bit Error_Flag = 0;
+  81          uchar Command = 0x00;
+  82          
+  83          uint    Timer_Count;    //定时计数器
+  84          uchar   Timer_Count_2;  //定时计数器2
+  85          uchar   Led_State;              //LED显示状态
+  86          
+  87          uchar   Key_value;              //键值
+  88          
+  89          bit     Key1_press_flag;        //Key1按下标志
+  90          bit     Key2_press_flag;        //Key2按下标志
+  91          bit     Key3_press_flag;        //Key3按下标志
+  92          bit     Key4_press_flag;        //Key4按下标志
+  93          
+  94          bit     Key1_back;                      //按键的上一状态
+  95          bit     Key2_back;
+  96          bit     Key3_back;
+  97          bit     Key4_back;
+  98          
+  99          ulong   Temp;
+ 100          xdata uchar Uart_Send_Buff[32];
+ 101          uchar Uart_Send_Count;
+ 102          
+ 103          bdata uchar P4_IN;              //定义位可寻址变量
+ 104          
+ 105          //接口定义
+ 106          /*
+ 107          sbit    Led1 = P4^4;
+ 108          sbit    Led2 = P4^5;
+ 109          sbit    Led3 = P4^6;
+ 110          sbit    Led4 = P4^7;
+ 111          */
+ 112          
+ 113          sbit    Key1 = P4_IN^3;
+ 114          sbit    Key2 = P4_IN^2;
+ 115          sbit    Key3 = P4_IN^1;
+ 116          sbit    Key4 = P4_IN^0;
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 3   
+
+ 117          
+ 118          sbit    Ad_in  = P1^1;
+ 119          
+ 120          sbit    Tx_en = P2^2;
+ 121          sbit    Trx_ce = P2^3;
+ 122          sbit    Pwr_up = P2^4;
+ 123          sbit    CD_905 = P2^5;
+ 124          sbit    AM_905 = P2^6;
+ 125          sbit    DR_905 = P2^7;
+ 126          
+ 127          bit             timer_flag;
+ 128          
+ 129          
+ 130          //-----------------------------------------------------------------------------
+ 131          // PCA0_Init
+ 132          //-----------------------------------------------------------------------------
+ 133          // Return Value : None
+ 134          // Parameters   : None
+ 135          // This function disables the watchdog timer.
+ 136          //-----------------------------------------------------------------------------
+ 137          void PCA0_Init (void)
+ 138          {
+ 139   1         PCA0MD &= ~0x40;                    // Disable the Watchdog Timer
+ 140   1         PCA0MD = 0x00;
+ 141   1      }
+ 142          
+ 143          //-----------------------------------------------------------------------------
+ 144          // Port_Init
+ 145          //-----------------------------------------------------------------------------
+ 146          // Peripheral specific initialization functions,
+ 147          // Called from the Init_Device() function
+ 148          void Port_IO_Init()
+ 149          {
+ 150   1              P1MDIN    = 0xFC;
+ 151   1          P0MDOUT   = 0xD1;
+ 152   1          P1MDOUT   = 0xF8;
+ 153   1          P2MDOUT   = 0x1F;
+ 154   1          P3MDOUT   = 0xFF;
+ 155   1          P4MDOUT   = 0xF0;
+ 156   1          P0SKIP    = 0x0C;
+ 157   1          XBR0      = 0x03;
+ 158   1          XBR1      = 0x40;
+ 159   1      
+ 160   1              P4 &= 0x0f;
+ 161   1      }
+ 162          
+ 163          /*----------------------------
+ 164          Initial Uart
+ 165          ----------------------------*/
+ 166          void UartInit(void)             //115200bps@12MHz
+ 167          {
+ 168   1              CKCON |=0X08;           //T1使用系统时钟
+ 169   1      //      PCON &= 0x7F;           //波特率不倍速
+ 170   1              SCON0 = 0x10;           //8位数据，可变波特率
+ 171   1      //      AUXR |= 0x40;           //定时器1时钟为Fosc，即1T
+ 172   1      //      AUXR &= 0xFE;           //串口1选择定制器1位波特率发生器
+ 173   1              TMOD &= 0x0F;           //清定时器1模式位
+ 174   1              TMOD |= 0x20;           //设定定时器1为8位自动重装载方式
+ 175   1              TL1 = 0xCC;                     //设定定时器初值
+ 176   1              TH1 = 0xCC;                     //
+ 177   1              ET1 = 0;                        //禁止定时器1中断
+ 178   1              TR1 = 1;                        //启动定时器1
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 4   
+
+ 179   1              ES0 = 0;
+ 180   1      }
+ 181          
+ 182          //-----------------------------------------------------------------------------
+ 183          // ADC0_Init
+ 184          //-----------------------------------------------------------------------------
+ 185          //
+ 186          // Return Value:  None
+ 187          // Parameters:    None
+ 188          //
+ 189          // Configures ADC0 to make single-ended analog measurements on pin P1.1
+ 190          //  
+ 191          //-----------------------------------------------------------------------------
+ 192          
+ 193          void ADC0_Init (void)
+ 194          {
+ 195   1         ADC0CN = 0x00;                      // ADC0 disabled, normal tracking, 
+ 196   1                                             // conversion triggered on "ADC0BUSY" set
+ 197   1         REF0CN = 0x08;                      // disable on-chip VREF and buffer
+ 198   1         AMX0P = 0x13;                       // ADC0 positive input = P1.1
+ 199   1         AMX0N = 0x1F;                       // ADC0 negative input = GND
+ 200   1                                             // i.e., single ended mode
+ 201   1         ADC0CF = ((SYSCLK/3000000)-1)<<3;   // set SAR clock to 3MHz
+ 202   1         ADC0CF &= ~0x04;                    // right-justify results 
+ 203   1         EIE1 |= 0x08;                       // enable ADC0 conversion complete int.
+ 204   1         AD0EN = 1;                          // enable ADC0
+ 205   1      }
+ 206          
+ 207          
+ 208          //-----------------------------------------------------------------------------
+ 209          // Timer0_Init
+ 210          //-----------------------------------------------------------------------------
+ 211          // Return Value : None
+ 212          // Parameters   : None
+ 213          // T0设为16bit定时器，溢出时间1ms
+ 214          //
+ 215          //-----------------------------------------------------------------------------
+ 216          void Timer0_Init (void)
+ 217          {
+ 218   1      //   OSCICN = 0x83;                      // Set the internal oscillator to
+ 219   1                                             // 12 MHz
+ 220   1         //T0,模式设定
+ 221   1         TR0 = 0;        //停止计数
+ 222   1         ET0 = 1;        //允许中断
+ 223   1         PT0 = 1;        //高优先级中断
+ 224   1         TMOD = 0x01;    //#00000,0001,16位定时模式
+ 225   1         
+ 226   1         TH0 = 0;
+ 227   1         TL0 = 0;
+ 228   1         TR0 = 1;        //开始运行
+ 229   1      }
+ 230          
+ 231          //-----------------------------------------------------------------------------
+ 232          // SPI0_Init
+ 233          //-----------------------------------------------------------------------------
+ 234          // Return Value : None
+ 235          // Parameters   : None
+ 236          // Configures SPI0 to use 4-wire Single Master mode. The SPI timing is
+ 237          // configured for Mode 0,0 (data centered on first edge of clock phase and
+ 238          // SCK line low in idle state).
+ 239          //-----------------------------------------------------------------------------
+ 240          void SPI0_Init()
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 5   
+
+ 241          {
+ 242   1         SPI0CFG   = 0x40;                   // Enable the SPI as a Master
+ 243   1                                             // CKPHA = '0', CKPOL = '0'
+ 244   1         SPI0CN    = 0x0D;                   // 4-wire Single Master, SPI enabled
+ 245   1         // SPI clock frequency equation from the datasheet
+ 246   1         SPI0CKR   = (SYSCLK/(2*SPI_CLOCK))-1;
+ 247   1         ESPI0 = 1;                          // Enable SPI interrupts
+ 248   1      }
+ 249          
+ 250          //-----------------------------------------------------------------------------
+ 251          // System_Init
+ 252          //-----------------------------------------------------------------------------
+ 253          // Initialization function for device,
+ 254          // Call Init_Device() from your main program
+ 255          void Init_Device(void)
+ 256          {
+ 257   1              PCA0_Init();                    //disables the watchdog timer
+ 258   1              Port_IO_Init();
+ 259   1              OSCICN = (0x80 | 0x03); //设置内部时钟
+ 260   1              Timer0_Init();
+ 261   1              ADC0_Init();
+ 262   1              UartInit();                             //Uart0 初始化
+ 263   1              SPI0_Init();
+ 264   1      
+ 265   1          EA = 1;                                     //开启全局中断允许
+ 266   1      }
+ 267          
+ 268          
+ 269          /********************延时函数************************/
+ 270          //延时y ms
+ 271          void    Delay(uint y)
+ 272          {
+ 273   1              uint    x;
+ 274   1              while (y--)
+ 275   1              {
+ 276   2                      x = 862;
+ 277   2                      while (x--);
+ 278   2              }
+ 279   1      }
+ 280          
+ 281          
+ 282          /********************* 键盘扫描函数************************/
+ 283          void    Key_Scan()
+ 284          {
+ 285   1              P4_IN = P4;
+ 286   1              
+ 287   1              if (!Key1)                      //键扫描1，检测下降沿
+ 288   1              {
+ 289   2                      if(Key1_back)
+ 290   2                      {
+ 291   3                              Key1_press_flag = 1;
+ 292   3                      }
+ 293   2              }
+ 294   1      
+ 295   1              if (!Key2)                      //键扫描2
+ 296   1              {
+ 297   2                      if(Key2_back)
+ 298   2                      {
+ 299   3                              Key2_press_flag = 1;
+ 300   3                      }
+ 301   2              }
+ 302   1      
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 6   
+
+ 303   1              if (!Key3)                      //键扫描3
+ 304   1              {
+ 305   2                      if(Key3_back)
+ 306   2                      {
+ 307   3                              Key3_press_flag = 1;
+ 308   3                      }
+ 309   2              }
+ 310   1      
+ 311   1              if (!Key4)                      //键扫描4
+ 312   1              {
+ 313   2                      if(Key4_back)
+ 314   2                      {
+ 315   3                              Key4_press_flag = 1;
+ 316   3                      }
+ 317   2              }
+ 318   1      
+ 319   1              Key1_back = Key1;
+ 320   1              Key2_back = Key2;
+ 321   1              Key3_back = Key3;
+ 322   1              Key4_back = Key4;
+ 323   1      }
+ 324          
+ 325          /********************* Timer0中断函数************************/
+ 326          void timer0_int (void) interrupt 1
+ 327          {
+ 328   1              TH0 = 0xfc;
+ 329   1              TL0 = 0x18;                     //1ms定时中断
+ 330   1      
+ 331   1              Key_Scan();
+ 332   1      //      Run_treat();
+ 333   1      
+ 334   1              ++Timer_Count;
+ 335   1              if (Timer_Count > 500)
+ 336   1              {
+ 337   2                      Timer_Count = 0;
+ 338   2                      timer_flag = 1;
+ 339   2      //              LED1_INVERT;
+ 340   2              }
+ 341   1      
+ 342   1      }
+ 343          
+ 344          //-----------------------------------------------------------------------------
+ 345          // ADC0_ISR
+ 346          //-----------------------------------------------------------------------------
+ 347          // 
+ 348          // This ISR averages 2048 samples then prints the result to the terminal.  The 
+ 349          // ISR is called after each ADC conversion which is triggered by Timer2.
+ 350          //
+ 351          //-----------------------------------------------------------------------------
+ 352          void ADC0_ISR (void) interrupt 10
+ 353          {
+ 354   1         unsigned long result=0;
+ 355   1         unsigned long mV;           // Measured voltage in mV
+ 356   1      
+ 357   1         AD0INT = 0;                 // Clear ADC0 conv. complete flag
+ 358   1              result = ADC0;
+ 359   1              // The 10-bit ADC value is averaged across 2048 measurements.  
+ 360   1              // The measured voltage applied to P1.1 is then:
+ 361   1              //                           Vref (mV)
+ 362   1              //   measurement (mV) =   --------------- * result (bits) 
+ 363   1              //                       (2^10)-1 (bits)
+ 364   1              Temp =  result * 3300 / 1023;   
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 7   
+
+ 365   1              //   printf("P1.1 voltage: %ld mV\n",mV);
+ 366   1      }
+*** WARNING C280 IN LINE 355 OF ECG20_051.c: 'mV': unreferenced local variable
+ 367          
+ 368          
+ 369          //-----------------------------------------------------------------------------
+ 370          // SPI_ISR
+ 371          //-----------------------------------------------------------------------------
+ 372          //
+ 373          // Handles all error checks and single-byte writes.
+ 374          //
+ 375          // Note: SPI_WRITE_ARRAY is not handled by this ISR in order to take
+ 376          // advantage of double-buffering (checking the TXBMT flag) using polling.
+ 377          //
+ 378          //
+ 379          // Typical Write:
+ 380          //
+ 381          //              | 1st sent | 2nd sent | 3rd sent |   ...    | last sent |
+ 382          //              ---------------------------------------------------------
+ 383          //  Master NSSv | Command  |   Data1  |   Data2  |   ...    |   DataN   |  NSS^
+ 384          //  Slave       |   N/A    |    N/A   |    N/A   |   ...    |    N/A    |
+ 385          //
+ 386          // Typical Read:
+ 387          //
+ 388          //              | 1st sent | 2nd sent | 3rd sent |   ...    | last sent |
+ 389          //              ---------------------------------------------------------
+ 390          //  Master NSSv | Command  |   dummy  |   dummy  |   ...    |   dummy   |  NSS^
+ 391          //  Slave       |   N/A    |   Data1  |   Data2  |   ...    |   DataN   |
+ 392          //-----------------------------------------------------------------------------
+ 393          void SPI_ISR (void) interrupt 6
+ 394          {
+ 395   1         if (SPIF)
+ 396   1         {
+ 397   2                      SPIF = 0;
+ 398   2                NSSMD0 = 1;                      // Release the slave (not expecting
+ 399   2                                                                 // data back)
+ 400   2              }
+ 401   1      
+ 402   1      }
+ 403          
+ 404          /******************** 按键处理 **************************/
+ 405          void    Key_treat()
+ 406          {
+ 407   1              if (Key1_press_flag)
+ 408   1              {
+ 409   2                      LED1_INVERT;
+ 410   2                      Key1_press_flag = 0;
+ 411   2              }
+ 412   1      
+ 413   1              if (Key2_press_flag)
+ 414   1              {
+ 415   2                      LED2_INVERT;
+ 416   2                      Key2_press_flag = 0;
+ 417   2              }
+ 418   1      
+ 419   1              if (Key3_press_flag)
+ 420   1              {
+ 421   2                      LED3_INVERT;
+ 422   2                      Key3_press_flag = 0;
+ 423   2              }
+ 424   1      
+ 425   1              if (Key4_press_flag)
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 8   
+
+ 426   1              {
+ 427   2                      LED4_INVERT;
+ 428   2                      Key4_press_flag = 0;
+ 429   2              }
+ 430   1      
+ 431   1      }
+ 432          
+ 433          /*********************************************************/
+ 434          
+ 435          void SendUchar(char Data)
+ 436          {
+ 437   1              Uart_Send_Buff[0] = (Data / 10 % 10) +0x30;
+ 438   1              Uart_Send_Buff[1] = (Data %10) +0x30;
+ 439   1      //      Uart1_tx_len = 2;
+ 440   1              for (Uart_Send_Count=0;Uart_Send_Count<2;Uart_Send_Count++)
+ 441   1              {
+ 442   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 443   2              while(TI0 ==0){}
+ 444   2              TI0 = 0;
+ 445   2              }
+ 446   1      }
+ 447          
+ 448          
+ 449          void SendUint(uint Data)
+ 450          {
+ 451   1              Uart_Send_Buff[0] = (Data / 1000 % 10) +0x30;
+ 452   1              Uart_Send_Buff[1] = (Data / 100 % 10) +0x30;
+ 453   1              Uart_Send_Buff[2] = (Data / 10 % 10) +0x30;
+ 454   1              Uart_Send_Buff[3] = (Data %10) +0x30;
+ 455   1      //      Uart1_tx_len = 4;
+ 456   1              for (Uart_Send_Count=0;Uart_Send_Count<4;Uart_Send_Count++)
+ 457   1              {
+ 458   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 459   2              while(TI0 ==0){}
+ 460   2              TI0 = 0;
+ 461   2              }
+ 462   1      }
+ 463          
+ 464          /*----------------------------
+ 465          Send a string to UART
+ 466          Input: s (address of string)
+ 467          Output:None
+ 468          ----------------------------*/
+ 469          void SendString(char *s)
+ 470          {
+ 471   1              uchar   i=0;
+ 472   1              while (*s)
+ 473   1                      {
+ 474   2                      Uart_Send_Buff[i++] = *s++;
+ 475   2                      }
+ 476   1      //      Uart1_tx_len = i;
+ 477   1              for (Uart_Send_Count=0;Uart_Send_Count<i;Uart_Send_Count++)
+ 478   1              {
+ 479   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 480   2              while(TI0 ==0){}
+ 481   2              TI0 = 0;
+ 482   2              }
+ 483   1      }
+ 484          
+ 485          //-----------------------------------------------------------------------------
+ 486          // SPI_Byte_Write
+ 487          //-----------------------------------------------------------------------------
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 9   
+
+ 488          //
+ 489          // Return Value : None
+ 490          // Parameters   : None
+ 491          //
+ 492          // Note: SPI_Data must contain the data to be sent before calling this
+ 493          // function.
+ 494          //
+ 495          // Writes a single byte to the SPI Slave.  The slave does not respond to this
+ 496          // command, so the command consists of:
+ 497          //
+ 498          // Command = SPI_WRITE
+ 499          // Length = 1 byte of command, 1 byte of data
+ 500          //
+ 501          //-----------------------------------------------------------------------------
+ 502          void SPI_Byte_Write (void)
+ 503          {
+ 504   1         while (!NSSMD0);                    // Wait until the SPI is free, in case
+ 505   1                                             // it's already busy
+ 506   1      
+ 507   1         NSSMD0 = 0;
+ 508   1              SPI0DAT = SPI_Data;
+ 509   1      
+ 510   1      //   Command = SPI_WRITE;
+ 511   1      
+ 512   1      //   SPI0DAT = Command;
+ 513   1      
+ 514   1         // The rest of this command will be handled by the SPI ISR, which will
+ 515   1         // trigger when SPIF is set from sending the Command
+ 516   1      }
+ 517          
+ 518          //-----------------------------------------------------------------------------
+ 519          // SPI_Byte_Read
+ 520          //-----------------------------------------------------------------------------
+ 521          //
+ 522          // Return Value : None
+ 523          // Parameters   : None
+ 524          //
+ 525          // Note: SPI_Data will contain the data received after calling this function.
+ 526          //
+ 527          // Reads a single byte from the SPI Slave.  The command consists of:
+ 528          //
+ 529          // Command = SPI_READ
+ 530          // Length = 1 byte of command, 1 byte of data
+ 531          //
+ 532          //-----------------------------------------------------------------------------
+ 533          void SPI_Byte_Read (void)
+ 534          {
+ 535   1         while (!NSSMD0);                    // Wait until the SPI is free, in case
+ 536   1                                             // it's already busy
+ 537   1      
+ 538   1         NSSMD0 = 0;
+ 539   1      
+ 540   1         Command = SPI_READ;
+ 541   1      
+ 542   1         SPI0DAT = Command;
+ 543   1      
+ 544   1         // The rest of this command will be handled by the SPI ISR, which will
+ 545   1         // trigger when SPIF is set from sending the Command
+ 546   1      }
+ 547          
+ 548          //-----------------------------------------------------------------------------
+ 549          // SPI_Array_Write
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 10  
+
+ 550          //-----------------------------------------------------------------------------
+ 551          //
+ 552          // Return Value : None
+ 553          // Parameters   : None
+ 554          //
+ 555          // Note: SPI_Data_Array must contain the data to be sent before calling this
+ 556          // function.
+ 557          //
+ 558          // Writes an array of values of size MAX_BUFFER_SIZE to the SPI Slave.  The
+ 559          // command consists of:
+ 560          //
+ 561          // Command = SPI_WRITE_BUFFER
+ 562          // Length = 1 byte of command, MAX_BUFFER_SIZE bytes of data
+ 563          //
+ 564          // Note: Polled mode is used for this function in order to buffer the data
+ 565          // being sent using the TXBMT flag.
+ 566          //
+ 567          //-----------------------------------------------------------------------------
+ 568          void SPI_Array_Write (void)
+ 569          {
+ 570   1         unsigned char array_index;
+ 571   1      
+ 572   1         while (!NSSMD0);                    // Wait until the SPI is free, in case
+ 573   1                                             // it's already busy
+ 574   1      
+ 575   1         ESPI0 = 0;                          // Disable SPI interrupts
+ 576   1      
+ 577   1         NSSMD0 = 0;
+ 578   1      
+ 579   1         SPI0DAT = SPI_WRITE_BUFFER;         // Load the XMIT register
+ 580   1         while (TXBMT != 1)                  // Wait until the command is moved into
+ 581   1         {                                   // the XMIT buffer
+ 582   2         }
+ 583   1      
+ 584   1         for (array_index = 0; array_index < MAX_BUFFER_SIZE; array_index++)
+ 585   1         {
+ 586   2            SPI0DAT = SPI_Data_Array[array_index]; // Load the data into the buffer
+ 587   2            while (TXBMT != 1)               // Wait until the data is moved into
+ 588   2            {                                // the XMIT buffer
+ 589   3            }
+ 590   2         }
+ 591   1         SPIF = 0;
+ 592   1         while (SPIF != 1)                   // Wait until the last byte of the
+ 593   1         {                                   // data reaches the Slave
+ 594   2         }
+ 595   1         SPIF = 0;
+ 596   1      
+ 597   1         NSSMD0 = 1;                         // Diable the Slave
+ 598   1      
+ 599   1         ESPI0 = 1;                          // Re-enable SPI interrupts
+ 600   1      }
+ 601          
+ 602          //-----------------------------------------------------------------------------
+ 603          // SPI_Array_Read
+ 604          //-----------------------------------------------------------------------------
+ 605          //
+ 606          // Return Value : None
+ 607          // Parameters   : None
+ 608          //
+ 609          // Note: SPI_Data_Array will contain the data received after calling this
+ 610          // function.
+ 611          //
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 11  
+
+ 612          // Reads a single byte from the SPI Slave.  The command consists of:
+ 613          //
+ 614          // Command = SPI_READ_BUFFER
+ 615          // Length = 1 byte of command, MAX_BUFFER_SIZE bytes of data
+ 616          //
+ 617          //-----------------------------------------------------------------------------
+ 618          void SPI_Array_Read (void)
+ 619          {
+ 620   1         while (!NSSMD0);                    // Wait until the SPI is free, in case
+ 621   1                                             // it's already busy
+ 622   1      
+ 623   1         NSSMD0 = 0;
+ 624   1      
+ 625   1         Command = SPI_READ_BUFFER;
+ 626   1      
+ 627   1         SPI0DAT = Command;
+ 628   1      
+ 629   1         // The rest of this command will be handled by the SPI ISR, which will
+ 630   1         // trigger when SPIF is set from sending the Command
+ 631   1      }
+ 632          
+ 633          /********************主函数**************************/
+ 634          void main(void)
+ 635          {
+ 636   1              Init_Device();
+ 637   1      
+ 638   1              //测试SPI接口
+ 639   1              Pwr_up = 1;     //掉电模式，允许SPI编程
+ 640   1              Trx_ce = 0;
+ 641   1              Tx_en = 0;
+ 642   1              
+ 643   1              while(1)
+ 644   1              {
+ 645   2      
+ 646   2                      if (NSSMD0 == 1)
+ 647   2                              {
+ 648   3                              SPI_Data = 0x0f;
+ 649   3                              SPI_Byte_Write();
+ 650   3                              }
+ 651   2      
+ 652   2                      Key_treat();
+ 653   2                      if (timer_flag)
+ 654   2                              {
+ 655   3                              AD0BUSY = 1;
+ 656   3                              while(AD0BUSY) {}
+ 657   3                              SendString("Voltage:");
+ 658   3                              SendUint(Temp);
+ 659   3                              SendString("mV\n");
+ 660   3      //                      printf("P1.1 voltage: %ld mV\n",Temp);
+ 661   3                              timer_flag =0;
+ 662   3                              }
+ 663   2      
+ 664   2      
+ 665   2              }
+ 666   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    824    ----
+   CONSTANT SIZE    =     13    ----
+   XDATA SIZE       =     32    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.52.0.0   ECG20_051                                                         04/15/2019 22:40:37 PAGE 12  
+
+   DATA SIZE        =     23      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =     10    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

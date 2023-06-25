@@ -1,0 +1,832 @@
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE ECG20_056
+OBJECT MODULE PLACED IN ..\..\output_file\ECG20_056.obj
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE ECG20_056.c OMF2 BROWSE DEBUG OBJECT(..\..\output_file\ECG20_056.obj)
+
+line level    source
+
+   1          /*****************************************************************
+   2          版本日志：
+   3          V05:
+   4          1、实现SPI配置，实现SPI的连续输出（中断方式）；V051
+   5          2、改为查询方式，写入与读出共用一个函数；V052
+   6          3、对nRF905进行设置，并通过Uart输出其状态：V053
+   7          4、实现了射频信号的连续发送，可用于发射功率的测试，发射频率：433.0MHz；V054
+   8          5、实现了频率、功率的按键调整：K1：T/R；K2：Down；K3：Up；K4：Power；V055
+   9          6、用于通信测试，按K1切换收发模式，LED1点亮时为发送模式，串口能观察到数据收发情况；
+  10                  发送流程为：发送端发送数据包，接收端接收数据并校验，数据正确时返回数据包，
+  11                  发送端收到接收端返回的数据，并校验正确，才表示通信正常；                                                V056
+  12          
+  13          V04:
+  14          1、P1.1输入的电压经过ADC后，以115200bps速率通过Uart0发送；
+  15          2、ADC以Vcc为参考电压，通过AD0BUSY启动
+  16          
+  17          V03:
+  18          1、串行通信，速率：115200bps；8bit数据，1停止位，无奇偶校验；
+  19          2、每0.5秒钟发送一次数据；
+  20          3、编写发送字符串函数和发送数据函数；V031
+  21          
+  22          V02:
+  23          1、取键值
+  24          2、Key1-4，分别控制Led1-4；
+  25          
+  26          V01：
+  27          1、设置定时器中断
+  28          2、利用定时器实现流水灯
+  29          
+  30          V00：
+  31          1、输入输出的设置
+  32          2、流水灯程序
+  33          */
+  34          
+  35          #include "compiler_defs.h"
+  36          #include "C8051F340_defs.h"
+  37          #include <stdio.h>                              //标准输入输出库
+  38          #include "nRF905.h"
+  39          
+  40          //变量类型标识的宏定义
+  41          #define Uchar unsigned char
+  42          #define Uint unsigned int
+  43          #define uchar unsigned char
+  44          #define uint unsigned int
+  45          #define ulong unsigned long
+  46          
+  47          #define SYSCLK       12000000          // SYSCLK frequency in Hz
+  48          #define XFCN    6               //3             //5
+  49          
+  50          #define SPI_CLOCK          250000      // Maximum SPI clock
+  51          #define  SPI_WRITE         0x04        // Send a byte from the Master to the
+  52                                                 // Slave
+  53          #define  SPI_READ          0x08        // Send a byte from the Slave to the
+  54                                                 // Master
+  55          #define  SPI_WRITE_BUFFER  0x10        // Send a series of bytes from the
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 2   
+
+  56                                                 // Master to the Slave
+  57          #define  SPI_READ_BUFFER   0x20        // Send a series of bytes from the Slave
+  58                                                 // to the Master
+  59          #define  ERROR_OCCURRED    0x40        // Indicator for the Slave to tell the
+  60                                                 // Master an error occurred
+  61          #define MAX_BUFFER_SIZE 10
+  62          
+  63          //#define RF_CH                 220                                                             // RF射频通道 0~511     (工作频率 = 422.4MHz + RF_CH × 0.1MHz )
+  64          #define RF_DATA_WIDTH   32                                                              // RF数据宽度 1~32byte
+  65          
+  66          xdata uchar n95_RF_Addr[4]={0xBA,0xBB,0xBC,0xBD};               // TX,RX地址,可自行更改
+  67          xdata uchar n95_RX_Buff[RF_DATA_WIDTH]; //={1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,
+             -2};        // 接收数据缓冲区
+  68          xdata uchar n95_TX_Buff[RF_DATA_WIDTH]={1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2};       
+             -// 发送数据缓冲区
+  69          
+  70          xdata uchar     n95_rxtx = 0;                   // 工作模式 rx=0;tx=1;tx_rx=2;
+  71          xdata uchar     n95_band = 0;                   // 工作区间 0=433;1=915
+  72          xdata uint              n95_freq = 4320-4224;   // 工作频率 0~511 (默认433.0MHz)
+  73          xdata uchar     n95_pwr = 3;                    // 输出功率     0~3(10,6,-2,-10)
+  74          data uint       n95_total = 0;                  // 通讯总数统计 0~999
+  75          data uint       n95_back = 0;                   // 返回统计 0~999
+  76          
+  77          #define LED1_ON P4 |= 0x10
+  78          #define LED2_ON P4 |= 0x20
+  79          #define LED3_ON P4 |= 0x40
+  80          #define LED4_ON P4 |= 0x80
+  81          
+  82          #define LED1_OFF P4 &= ~0x10
+  83          #define LED2_OFF P4 &= ~0x20
+  84          #define LED3_OFF P4 &= ~0x40
+  85          #define LED4_OFF P4 &= ~0x80
+  86          
+  87          #define LED1_INVERT P4 ^= 0x10
+  88          #define LED2_INVERT P4 ^= 0x20
+  89          #define LED3_INVERT P4 ^= 0x40
+  90          #define LED4_INVERT P4 ^= 0x80
+  91          
+  92          //-----------------------------------------------------------------------------
+  93          // Global Variables
+  94          //-----------------------------------------------------------------------------
+  95          uchar SPI_Data = 0xA5;
+  96          uchar SPI_Data_Array[MAX_BUFFER_SIZE] = {0};
+  97          bit Error_Flag = 0;
+  98          uchar Command = 0x00;
+  99          
+ 100          uint    Timer_Count;    //定时计数器
+ 101          uchar   Timer_Count_2;  //定时计数器2
+ 102          uchar   Led_State;              //LED显示状态
+ 103          
+ 104          uchar   Key_value;              //键值
+ 105          
+ 106          bit     Key1_press_flag;        //Key1按下标志
+ 107          bit     Key2_press_flag;        //Key2按下标志
+ 108          bit     Key3_press_flag;        //Key3按下标志
+ 109          bit     Key4_press_flag;        //Key4按下标志
+ 110          
+ 111          bit     Key1_back;                      //按键的上一状态
+ 112          bit     Key2_back;
+ 113          bit     Key3_back;
+ 114          bit     Key4_back;
+ 115          
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 3   
+
+ 116          ulong   Temp;
+ 117          xdata uchar Uart_Send_Buff[32];
+ 118          uchar Uart_Send_Count;
+ 119          
+ 120          bdata uchar P4_IN;              //定义位可寻址变量
+ 121          
+ 122          //接口定义
+ 123          /*
+ 124          sbit    Led1 = P4^4;
+ 125          sbit    Led2 = P4^5;
+ 126          sbit    Led3 = P4^6;
+ 127          sbit    Led4 = P4^7;
+ 128          */
+ 129          
+ 130          sbit    Key1 = P4_IN^3;
+ 131          sbit    Key2 = P4_IN^2;
+ 132          sbit    Key3 = P4_IN^1;
+ 133          sbit    Key4 = P4_IN^0;
+ 134          
+ 135          sbit    Ad_in  = P1^1;
+ 136          
+ 137          sbit    Tx_en = P2^2;
+ 138          sbit    Trx_ce = P2^3;
+ 139          sbit    Pwr_up = P2^4;
+ 140          sbit    CD_905 = P2^5;
+ 141          sbit    AM_905 = P2^6;
+ 142          sbit    DR_905 = P2^7;
+ 143          
+ 144          bit             timer_flag;
+ 145          
+ 146          void n95_Init_Dev(uchar band,uint freq,uchar pwr);
+ 147          void UartSend_RF_Set(void);
+ 148          
+ 149          
+ 150          
+ 151          //-----------------------------------------------------------------------------
+ 152          // PCA0_Init
+ 153          //-----------------------------------------------------------------------------
+ 154          // Return Value : None
+ 155          // Parameters   : None
+ 156          // This function disables the watchdog timer.
+ 157          //-----------------------------------------------------------------------------
+ 158          void PCA0_Init (void)
+ 159          {
+ 160   1         PCA0MD &= ~0x40;                    // Disable the Watchdog Timer
+ 161   1         PCA0MD = 0x00;
+ 162   1      }
+ 163          
+ 164          //-----------------------------------------------------------------------------
+ 165          // Port_Init
+ 166          //-----------------------------------------------------------------------------
+ 167          // Peripheral specific initialization functions,
+ 168          // Called from the Init_Device() function
+ 169          void Port_IO_Init()
+ 170          {
+ 171   1              P1MDIN    = 0xFC;
+ 172   1          P0MDOUT   = 0xD1;
+ 173   1          P1MDOUT   = 0xF8;
+ 174   1          P2MDOUT   = 0x1F;
+ 175   1          P3MDOUT   = 0xFF;
+ 176   1          P4MDOUT   = 0xF0;
+ 177   1          P0SKIP    = 0x0C;
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 4   
+
+ 178   1          XBR0      = 0x03;
+ 179   1          XBR1      = 0x40;
+ 180   1      
+ 181   1              P4 &= 0x0f;
+ 182   1      }
+ 183          
+ 184          /*----------------------------
+ 185          Initial Uart
+ 186          ----------------------------*/
+ 187          void UartInit(void)             //115200bps@12MHz
+ 188          {
+ 189   1              CKCON |=0X08;           //T1使用系统时钟
+ 190   1      //      PCON &= 0x7F;           //波特率不倍速
+ 191   1              SCON0 = 0x10;           //8位数据，可变波特率
+ 192   1      //      AUXR |= 0x40;           //定时器1时钟为Fosc，即1T
+ 193   1      //      AUXR &= 0xFE;           //串口1选择定制器1位波特率发生器
+ 194   1              TMOD &= 0x0F;           //清定时器1模式位
+ 195   1              TMOD |= 0x20;           //设定定时器1为8位自动重装载方式
+ 196   1              TL1 = 0xCC;                     //设定定时器初值
+ 197   1              TH1 = 0xCC;                     //
+ 198   1              ET1 = 0;                        //禁止定时器1中断
+ 199   1              TR1 = 1;                        //启动定时器1
+ 200   1              ES0 = 0;
+ 201   1      }
+ 202          
+ 203          //-----------------------------------------------------------------------------
+ 204          // ADC0_Init
+ 205          //-----------------------------------------------------------------------------
+ 206          //
+ 207          // Return Value:  None
+ 208          // Parameters:    None
+ 209          //
+ 210          // Configures ADC0 to make single-ended analog measurements on pin P1.1
+ 211          //  
+ 212          //-----------------------------------------------------------------------------
+ 213          
+ 214          void ADC0_Init (void)
+ 215          {
+ 216   1         ADC0CN = 0x00;                      // ADC0 disabled, normal tracking, 
+ 217   1                                             // conversion triggered on "ADC0BUSY" set
+ 218   1         REF0CN = 0x08;                      // disable on-chip VREF and buffer
+ 219   1         AMX0P = 0x13;                       // ADC0 positive input = P1.1
+ 220   1         AMX0N = 0x1F;                       // ADC0 negative input = GND
+ 221   1                                             // i.e., single ended mode
+ 222   1         ADC0CF = ((SYSCLK/3000000)-1)<<3;   // set SAR clock to 3MHz
+ 223   1         ADC0CF &= ~0x04;                    // right-justify results 
+ 224   1         EIE1 |= 0x08;                       // enable ADC0 conversion complete int.
+ 225   1         AD0EN = 1;                          // enable ADC0
+ 226   1      }
+ 227          
+ 228          
+ 229          //-----------------------------------------------------------------------------
+ 230          // Timer0_Init
+ 231          //-----------------------------------------------------------------------------
+ 232          // Return Value : None
+ 233          // Parameters   : None
+ 234          // T0设为16bit定时器，溢出时间1ms
+ 235          //
+ 236          //-----------------------------------------------------------------------------
+ 237          void Timer0_Init (void)
+ 238          {
+ 239   1      //   OSCICN = 0x83;             // Set the internal oscillator to
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 5   
+
+ 240   1                                                      // 12 MHz
+ 241   1         //T0,模式设定
+ 242   1         TR0 = 0;                             //停止计数
+ 243   1         ET0 = 1;                             //允许中断
+ 244   1         PT0 = 1;                             //高优先级中断
+ 245   1         TMOD = 0x01;                 //#00000,0001,16位定时模式
+ 246   1         
+ 247   1         TH0 = 0;
+ 248   1         TL0 = 0;
+ 249   1         TR0 = 1;                             //开始运行
+ 250   1      }
+ 251          
+ 252          //-----------------------------------------------------------------------------
+ 253          // SPI0_Init
+ 254          //-----------------------------------------------------------------------------
+ 255          // Return Value : None
+ 256          // Parameters   : None
+ 257          // Configures SPI0 to use 4-wire Single Master mode. The SPI timing is
+ 258          // configured for Mode 0,0 (data centered on first edge of clock phase and
+ 259          // SCK line low in idle state).
+ 260          //-----------------------------------------------------------------------------
+ 261          void SPI0_Init()
+ 262          {
+ 263   1         SPI0CFG   = 0x40;                   // Enable the SPI as a Master
+ 264   1                                             // CKPHA = '0', CKPOL = '0'
+ 265   1         SPI0CN    = 0x0D;                   // 4-wire Single Master, SPI enabled
+ 266   1         // SPI clock frequency equation from the datasheet
+ 267   1         SPI0CKR   = (SYSCLK/(2*SPI_CLOCK))-1;
+ 268   1         ESPI0 = 0;                          // Disable SPI interrupts
+ 269   1      }                                                                               //采用查询方式？
+ 270          
+ 271          //-----------------------------------------------------------------------------
+ 272          // System_Init
+ 273          //-----------------------------------------------------------------------------
+ 274          // Initialization function for device,
+ 275          // Call Init_Device() from your main program
+ 276          void Init_Device(void)
+ 277          {
+ 278   1              PCA0_Init();                    //disables the watchdog timer
+ 279   1              Port_IO_Init();
+ 280   1              OSCICN = (0x80 | 0x03); //设置内部时钟
+ 281   1              Timer0_Init();
+ 282   1              ADC0_Init();
+ 283   1              UartInit();                             //Uart0 初始化
+ 284   1              SPI0_Init();
+ 285   1      
+ 286   1          EA = 1;                                     //开启全局中断允许
+ 287   1      }
+ 288          
+ 289          
+ 290          //-----------------------------------------------------------------------------
+ 291          /********************延时函数************************/
+ 292          //-----------------------------------------------------------------------------
+ 293          //延时y ms
+ 294          void    Delay(uint y)
+ 295          {
+ 296   1              uint    x;
+ 297   1              while (y--)
+ 298   1              {
+ 299   2                      x = 862;
+ 300   2                      while (x--);
+ 301   2              }
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 6   
+
+ 302   1      }
+ 303          
+ 304          
+ 305          //-----------------------------------------------------------------------------
+ 306          /********************* 键盘扫描函数************************/
+ 307          //-----------------------------------------------------------------------------
+ 308          void    Key_Scan()
+ 309          {
+ 310   1              P4_IN = P4;
+ 311   1              
+ 312   1              if (!Key1)                      //键扫描1，检测下降沿
+ 313   1              {
+ 314   2                      if(Key1_back)
+ 315   2                      {
+ 316   3                              Key1_press_flag = 1;
+ 317   3                      }
+ 318   2              }
+ 319   1      
+ 320   1              if (!Key2)                      //键扫描2
+ 321   1              {
+ 322   2                      if(Key2_back)
+ 323   2                      {
+ 324   3                              Key2_press_flag = 1;
+ 325   3                      }
+ 326   2              }
+ 327   1      
+ 328   1              if (!Key3)                      //键扫描3
+ 329   1              {
+ 330   2                      if(Key3_back)
+ 331   2                      {
+ 332   3                              Key3_press_flag = 1;
+ 333   3                      }
+ 334   2              }
+ 335   1      
+ 336   1              if (!Key4)                      //键扫描4
+ 337   1              {
+ 338   2                      if(Key4_back)
+ 339   2                      {
+ 340   3                              Key4_press_flag = 1;
+ 341   3                      }
+ 342   2              }
+ 343   1      
+ 344   1              Key1_back = Key1;
+ 345   1              Key2_back = Key2;
+ 346   1              Key3_back = Key3;
+ 347   1              Key4_back = Key4;
+ 348   1      }
+ 349          
+ 350          //-----------------------------------------------------------------------------
+ 351          /********************* Timer0中断函数************************/
+ 352          //-----------------------------------------------------------------------------
+ 353          void timer0_int (void) interrupt 1
+ 354          {
+ 355   1              TH0 = 0xfc;
+ 356   1              TL0 = 0x18;                     //1ms定时中断
+ 357   1      
+ 358   1              Key_Scan();
+ 359   1      //      Run_treat();
+ 360   1      
+ 361   1              ++Timer_Count;
+ 362   1              if (Timer_Count > 500)
+ 363   1              {
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 7   
+
+ 364   2                      Timer_Count = 0;
+ 365   2                      timer_flag = 1;
+ 366   2      //              LED1_INVERT;
+ 367   2              }
+ 368   1      
+ 369   1      }
+ 370          
+ 371          //-----------------------------------------------------------------------------
+ 372          // ADC0_ISR
+ 373          //-----------------------------------------------------------------------------
+ 374          // 
+ 375          // This ISR averages 2048 samples then prints the result to the terminal.  The 
+ 376          // ISR is called after each ADC conversion which is triggered by Timer2.
+ 377          //
+ 378          //-----------------------------------------------------------------------------
+ 379          void ADC0_ISR (void) interrupt 10
+ 380          {
+ 381   1         unsigned long result=0;
+ 382   1      //   unsigned long mV;           // Measured voltage in mV
+ 383   1      
+ 384   1         AD0INT = 0;                 // Clear ADC0 conv. complete flag
+ 385   1              result = ADC0;
+ 386   1              // The 10-bit ADC value is averaged across 2048 measurements.  
+ 387   1              // The measured voltage applied to P1.1 is then:
+ 388   1              //                           Vref (mV)
+ 389   1              //   measurement (mV) =   --------------- * result (bits) 
+ 390   1              //                       (2^10)-1 (bits)
+ 391   1              Temp =  result * 3300 / 1023;   
+ 392   1              //   printf("P1.1 voltage: %ld mV\n",mV);
+ 393   1      }
+ 394          
+ 395          
+ 396          //-----------------------------------------------------------------------------
+ 397          // SPI_ISR
+ 398          //-----------------------------------------------------------------------------
+ 399          //-----------------------------------------------------------------------------
+ 400          void SPI_ISR (void) interrupt 6
+ 401          {
+ 402   1         if (SPIF)
+ 403   1         {
+ 404   2      //    SPIF = 0;
+ 405   2      //        NSSMD0 = 1;                      // Release the slave (not expecting
+ 406   2      //                                                         // data back)
+ 407   2              }
+ 408   1      
+ 409   1      }
+ 410          
+ 411          //-----------------------------------------------------------------------------
+ 412          /******************** 按键处理 **************************/
+ 413          //-----------------------------------------------------------------------------
+ 414          void    Key_treat()
+ 415          {
+ 416   1              //收发模式控制，LED点亮时处于发送模式
+ 417   1              if (Key1_press_flag)
+ 418   1              {
+ 419   2                      Key1_press_flag = 0;
+ 420   2                      n95_rxtx++;
+ 421   2                      n95_rxtx &= 0x01;
+ 422   2                      if (n95_rxtx)
+ 423   2                              {
+ 424   3                              LED1_ON;
+ 425   3                              n95_total =0;           //清除计数器
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 8   
+
+ 426   3                              n95_back =0;
+ 427   3                              }
+ 428   2                      else
+ 429   2                              {
+ 430   3                              LED1_OFF;
+ 431   3                              }
+ 432   2                      n95_Init_Dev(n95_band, n95_freq, n95_pwr);
+ 433   2                      UartSend_RF_Set();
+ 434   2              }
+ 435   1      
+ 436   1              //频率递减
+ 437   1              if (Key2_press_flag)
+ 438   1              {
+ 439   2                      LED2_ON;
+ 440   2                      Delay(100);
+ 441   2                      LED2_OFF;
+ 442   2                      Key2_press_flag = 0;
+ 443   2                      if (n95_freq > 5) {n95_freq -= 5;} 
+ 444   2                      n95_Init_Dev(n95_band, n95_freq, n95_pwr);
+ 445   2                      UartSend_RF_Set();
+ 446   2              }
+ 447   1      
+ 448   1              //频率递增
+ 449   1              if (Key3_press_flag)
+ 450   1              {
+ 451   2                      LED3_ON;
+ 452   2                      Delay(100);
+ 453   2                      LED3_OFF;
+ 454   2                      Key3_press_flag = 0;
+ 455   2                      if (n95_freq < 505) {n95_freq += 5;} 
+ 456   2                      n95_Init_Dev(n95_band, n95_freq, n95_pwr);
+ 457   2                      UartSend_RF_Set();
+ 458   2              }
+ 459   1      
+ 460   1              //功率调整
+ 461   1              if (Key4_press_flag)
+ 462   1              {
+ 463   2                      LED4_ON;
+ 464   2                      Delay(100);
+ 465   2                      LED4_OFF;
+ 466   2                      Key4_press_flag = 0;
+ 467   2                      n95_pwr++;
+ 468   2                      n95_pwr &= 0x03;
+ 469   2                      n95_Init_Dev(n95_band, n95_freq, n95_pwr);
+ 470   2                      UartSend_RF_Set();
+ 471   2              }
+ 472   1      
+ 473   1      }
+ 474          
+ 475          //-----------------------------------------------------------------------------
+ 476          void SendUchar(char Data)
+ 477          {
+ 478   1              Uart_Send_Buff[0] = (Data / 10 % 10) +0x30;
+ 479   1              Uart_Send_Buff[1] = (Data %10) +0x30;
+ 480   1      //      Uart1_tx_len = 2;
+ 481   1              for (Uart_Send_Count=0;Uart_Send_Count<2;Uart_Send_Count++)
+ 482   1              {
+ 483   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 484   2              while(TI0 ==0){}
+ 485   2              TI0 = 0;
+ 486   2              }
+ 487   1      }
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 9   
+
+ 488          
+ 489          
+ 490          void SendUint(uint Data)
+ 491          {
+ 492   1              Uart_Send_Buff[0] = (Data / 1000 % 10) +0x30;
+ 493   1              Uart_Send_Buff[1] = (Data / 100 % 10) +0x30;
+ 494   1              Uart_Send_Buff[2] = (Data / 10 % 10) +0x30;
+ 495   1              Uart_Send_Buff[3] = (Data %10) +0x30;
+ 496   1      //      Uart1_tx_len = 4;
+ 497   1              for (Uart_Send_Count=0;Uart_Send_Count<4;Uart_Send_Count++)
+ 498   1              {
+ 499   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 500   2              while(TI0 ==0){}
+ 501   2              TI0 = 0;
+ 502   2              }
+ 503   1      }
+ 504          
+ 505          /*----------------------------
+ 506          Send a string to UART
+ 507          Input: s (address of string)
+ 508          Output:None
+ 509          ----------------------------*/
+ 510          void SendString(char *s)
+ 511          {
+ 512   1              uchar   i=0;
+ 513   1              while (*s)
+ 514   1                      {
+ 515   2                      Uart_Send_Buff[i++] = *s++;
+ 516   2                      }
+ 517   1      //      Uart1_tx_len = i;
+ 518   1              for (Uart_Send_Count=0;Uart_Send_Count<i;Uart_Send_Count++)
+ 519   1              {
+ 520   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 521   2              while(TI0 ==0){}
+ 522   2              TI0 = 0;
+ 523   2              }
+ 524   1      }
+ 525          
+ 526          //-----------------------------------------------------------------------------
+ 527          // SPI_Byte_Write_Read
+ 528          //-----------------------------------------------------------------------------
+ 529          // Return Value : SPI0DAT
+ 530          // Parameters   : Send_Byte
+ 531          //-----------------------------------------------------------------------------
+ 532          uchar SPI_Byte_Write_Read (uchar Send_Byte)
+ 533          {
+ 534   1              SPI0DAT = Send_Byte;            //发送1字节
+ 535   1              while(!SPIF);                           //等待发送结束
+ 536   1              SPIF = 0;
+ 537   1              return (SPI0DAT);                       //返回接收数据
+ 538   1      }
+ 539          
+ 540          //-----------------------------------------------------------------------------
+ 541          // 函数: n95_Init_IO()
+ 542          //-----------------------------------------------------------------------------
+ 543          // 描述: 初始化nRF905引脚状态
+ 544          // 参数: 无
+ 545          void n95_Init_IO(void)
+ 546          {
+ 547   1              nPin_CD = 1;                                    // CD    置高
+ 548   1              nPin_PWR_UP = 1;                                // PWR_UP置高,nRF905进入上电模式
+ 549   1              nPin_TRX_CE = 0;                                // TRX_CE置低,进入待机和SPI操作模式
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 10  
+
+ 550   1      //      nPin_SCK = 0;                           // SCK   置低
+ 551   1      }
+ 552          
+ 553          //-----------------------------------------------------------------------------
+ 554          // 函数: n1P_Init_Dev()
+ 555          //-----------------------------------------------------------------------------
+ 556          // 描述: 初始化nRF905,并将其转换为接收状态
+ 557          // 参数: 无
+ 558          void n95_Init_Dev(uchar band,uint freq,uchar pwr)
+ 559          {
+ 560   1              uchar i = 0;
+ 561   1              
+ 562   1              nPin_PWR_UP = 1;                                                                        // PWR_UP置高,nRF905进入上电模式        
+ 563   1              nPin_TRX_CE = 0;                                                                        // TRX_CE置低,进入待机和SPI操作模式
+ 564   1              nPin_CSN = 0;                                                                           // CSN置低,   进入SPI操作模式
+ 565   1              SPI_Byte_Write_Read(nCMD_W_CONFIG);                                     // 向nRF905发送"写配置寄存器命令"
+ 566   1              SPI_Byte_Write_Read(freq & 0xFF);                                       // RF通道bit7:0
+ 567   1              SPI_Byte_Write_Read(nRCD_AUTO_RETRAN_disanble           // 禁用自动重发 
+ 568   1                                        | nRCD_RX_RED_PWR_disanble                    // 禁用低功耗RX模式
+ 569   1                                        | (pwr<<2)                                                    // 输出功率为10dBm
+ 570   1                                        | (band<<1)                                                   // 工作频段设置
+ 571   1                                        | (freq>>8) );                                                // RF通道bit8
+ 572   1              SPI_Byte_Write_Read(nRCD_TX_AFW_4byte                           // TX地址宽度为4byte
+ 573   1                                        | nRCD_RX_AFW_4byte);                                 // RX地址宽度为4byte
+ 574   1              SPI_Byte_Write_Read(RF_DATA_WIDTH);                                     // RX数据宽度
+ 575   1              SPI_Byte_Write_Read(RF_DATA_WIDTH);                                     // TX数据宽度
+ 576   1      
+ 577   1              for(i=0; i<4; i++){
+ 578   2                      SPI_Byte_Write_Read(n95_RF_Addr[i]);                    // RX地址 byte0~3
+ 579   2              }
+ 580   1      
+ 581   1              SPI_Byte_Write_Read(nRCD_CRC_MODE_16crc                         // 16bitCRC
+ 582   1                                        | nRCD_CRC_EN_enable                                  // 启用CRC
+ 583   1                                        |     nRCD_XOF_16MHz                                          // 外部晶振频率为16MHz
+ 584   1                                        |     nRCD_UP_CLK_EN_disanble                         // 禁用外部时钟输出
+ 585   1                                        | nRCD_UP_CLK_FREQ_4MHz);                             // 时钟输出为4MHz
+ 586   1                                        
+ 587   1              nPin_CSN = 1;                                                                           // CSN置高,   退出SPI操作模式
+ 588   1              nPin_TX_EN = 0;                                                                         // TX_EN置低 ,进入接收模式
+ 589   1              nPin_TRX_CE = 1;                                                                        // TRX_CE置高,进入工作模式
+ 590   1      }
+ 591          
+ 592          //-----------------------------------------------------------------------------
+ 593          // 函数: UartSend_RF_Set()
+ 594          //-----------------------------------------------------------------------------
+ 595          // 描述: 将nRF905的工作频率,发射功率等信息进行显示
+ 596          void UartSend_RF_Set(void)
+ 597          {
+ 598   1              //0123456789012345
+ 599   1              //RF905 422.2MHz ?
+ 600   1              //R000      -10dBm
+ 601   1              
+ 602   1              uint freq=0;
+ 603   1              uchar pwr=0;
+ 604   1              
+ 605   1              SendString("RF905, Freq: ");
+ 606   1              freq = (4224 + n95_freq) * (1 + n95_band);
+ 607   1              SendUint(freq/10);
+ 608   1              SendString(".");
+ 609   1              SendUchar((freq%10)*10);
+ 610   1              SendString("MHz,");
+ 611   1      
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 11  
+
+ 612   1              if(n95_rxtx ==0){
+ 613   2                      SendString(" Mod: R ,");}
+ 614   1              else    {
+ 615   2                      SendString(" Mod: T ,");}
+ 616   1      
+ 617   1              // 发射功率转换
+ 618   1              switch(n95_pwr){
+ 619   2                      case 0:{        // -10
+ 620   3                              SendString("Power:-10dBm\n");
+ 621   3                      }break;
+ 622   2                      case 1:{        // -2
+ 623   3                              SendString("Power: -2dBm\n");
+ 624   3                      }break;
+ 625   2                      case 2:{        // 6
+ 626   3                              SendString("Power:  6dBm\n");
+ 627   3                      }break;
+ 628   2                      case 3:{        // 10
+ 629   3                              SendString("Power: 10dBm\n");
+ 630   3                      }break;
+ 631   2              }
+ 632   1      
+ 633   1      }
+ 634          
+ 635          //-----------------------------------------------------------------------------
+ 636          // 函数: n1P_Turn_TX()
+ 637          //-----------------------------------------------------------------------------
+ 638          // 描述: 通过nRF905发送数据,数据发送结束后返回接收模式
+ 639          // 参数: p 发送数据存放地址
+ 640          void n95_Sendout(uchar *p)
+ 641          {
+ 642   1              uchar i=0;
+ 643   1              nPin_PWR_UP = 1;                                                        // PWR_UP置高,nRF905进入上电模式
+ 644   1              nPin_TRX_CE = 0;                                                        // TRX_CE置低,进入待机和SPI操作模式
+ 645   1              nPin_TX_EN = 1;                                                         // TX_EN置高 ,进入发送模式
+ 646   1      
+ 647   1              nPin_CSN = 0;                                                           // CSN置低,   进入SPI操作模式
+ 648   1              SPI_Byte_Write_Read(nCMD_W_TX_ADDRESS);         // 向nRF905写入"写TX地址"指令
+ 649   1              for(i=0; i<4; i++){
+ 650   2                      SPI_Byte_Write_Read(n95_RF_Addr[i]);    // 写入TX地址 byte0~3,注意此处应与"nRCD_TX_AFW"的配置一致
+ 651   2              }
+ 652   1              nPin_CSN = 1;                                                           // CSN置高,   退出SPI操作模式
+ 653   1              Delay(1);
+ 654   1              nPin_CSN = 0;                                                           // CSN置低,   进入SPI操作模式
+ 655   1              SPI_Byte_Write_Read(nCMD_W_TX_PAYLOAD);         // 向nRF905写入"写TX数据"指令
+ 656   1              for(i=0; i<RF_DATA_WIDTH; i++){
+ 657   2                      SPI_Byte_Write_Read(p[i]);                              // 写入待发送数据
+ 658   2              }
+ 659   1              nPin_CSN = 1;                                                           // CSN置高,   退出SPI操作模式
+ 660   1      
+ 661   1              nPin_TRX_CE = 1;                                                        // TRX_CE置高,进入发送模式
+ 662   1              while(nPin_DR == 0);                                            // 等待DR置高,发送完成
+ 663   1              nPin_TX_EN = 0;                                                         // TX_EN置低 ,进入接收模式
+ 664   1      }
+ 665          
+ 666          //-----------------------------------------------------------------------------
+ 667          // 函数: n95_Check_DR()
+ 668          //-----------------------------------------------------------------------------
+ 669          // 描述: 检查nRF905是否接收到数据,如接收到数据将数据存入接收缓冲区,并返回成功标志
+ 670          // 参数: p              接收数据存放地址
+ 671          //               return 接收成功标志,为1时表明数据接收成功
+ 672          uchar n95_Check_DR(uchar *p)
+ 673          {       uchar i=0;
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 12  
+
+ 674   1      
+ 675   1              if(nPin_DR == 1){
+ 676   2                      nPin_TRX_CE = 0;                                                // TRX_CE置低,进入待机模式
+ 677   2                      nPin_CSN = 0;                                                   // CSN置低,   进入SPI操作模式
+ 678   2      
+ 679   2                      SPI_Byte_Write_Read(nCMD_R_RX_PAYLOAD); // 向nRF905写入"读取RXFIFO"指令
+ 680   2      
+ 681   2                      for(i=0; i<RF_DATA_WIDTH; i++){
+ 682   3                              p[i] =  SPI_Byte_Write_Read(0);         // 读取接收数据
+ 683   3                      }
+ 684   2      
+ 685   2                      nPin_CSN = 1;                                                   // CSN置高,   退出SPI操作模式
+ 686   2                      nPin_TRX_CE = 1;                                                // TRX_CE置高,进入工作模式
+ 687   2                      return(1);                                                              // 返回接收成功标志
+ 688   2              }
+ 689   1              
+ 690   1              else    {
+ 691   2                      return(0);                                                              // 返回未接收到数据标志
+ 692   2                      }
+ 693   1      }
+ 694          
+ 695          //-----------------------------------------------------------------------------
+ 696          // 函数: BUFF_Check()
+ 697          //-----------------------------------------------------------------------------
+ 698          uchar BUFF_Check(uchar *str1, uchar *str2, uchar len)
+ 699          {
+ 700   1          uchar ok=1,i=0;
+ 701   1          for(i=0;i<len;i++){
+ 702   2              if(str1[i]!=str2[i]){ok=0;}
+ 703   2          }
+ 704   1          return ok;
+ 705   1      }
+ 706          
+ 707          /********************主函数**************************/
+ 708          void main(void)
+ 709          {
+ 710   1              Init_Device();
+ 711   1              n95_Init_IO();
+ 712   1              n95_Init_Dev(n95_band, n95_freq, n95_pwr);
+ 713   1              UartSend_RF_Set();
+ 714   1      
+ 715   1              while(1)        {
+ 716   2                      Key_treat();
+ 717   2      
+ 718   2                      if (timer_flag) {
+ 719   3                              timer_flag =0;
+ 720   3                              AD0BUSY = 1;                                    //开始ADC转换
+ 721   3                              while(AD0BUSY) {}
+ 722   3      
+ 723   3                              //发送模式
+ 724   3                              if (n95_rxtx ==1)       {
+ 725   4                                      //LED3_ON;
+ 726   4                                      n95_TX_Buff[28] = (Temp / 1000 % 10) +0x30;
+ 727   4                                      n95_TX_Buff[29] = (Temp / 100 % 10) +0x30;
+ 728   4                                      n95_TX_Buff[30] = (Temp / 10 % 10) +0x30;
+ 729   4                                      n95_TX_Buff[31] = (Temp %10) +0x30;
+ 730   4      
+ 731   4                                      if(n95_total>999){n95_total=0;n95_back =0;}else{n95_total++;}   // 计数
+ 732   4                                      n95_Sendout(n95_TX_Buff);
+ 733   4                                      
+ 734   4                                      LED3_ON;
+ 735   4                                      Delay(100);
+C51 COMPILER V9.01   ECG20_056                                                             05/15/2023 15:33:28 PAGE 13  
+
+ 736   4                                      LED3_OFF;
+ 737   4                                      SendString("Trans:");
+ 738   4                                      SendUint(n95_total);
+ 739   4                                      SendString(",");
+ 740   4                                      //n95_rxtx = 2;
+ 741   4                              }
+ 742   3                      }
+ 743   2      
+ 744   2                      //接收模式
+ 745   2                      //if (n95_rxtx != 1)    {
+ 746   2                              if(n95_Check_DR(n95_RX_Buff)){                                                          // 检查接收
+ 747   3                              
+ 748   3                                      if(BUFF_Check(n95_TX_Buff,n95_RX_Buff,28)){                     // 检查缓存
+ 749   4                                              LED4_ON;
+ 750   4                                              Delay(100);
+ 751   4                                              LED4_OFF;
+ 752   4      
+ 753   4                                              if(n95_rxtx==0){                // rx模式下的接收->回发数据
+ 754   5                                                      if(n95_total>999){n95_total=0;}else{n95_total++;}       // 计数
+ 755   5                                                      n95_Sendout(n95_TX_Buff);                                                       // 回传
+ 756   5                                                      LED3_ON;
+ 757   5                                                      Delay(100);
+ 758   5                                                      LED3_OFF;
+ 759   5                                                      SendString("Receiv:");
+ 760   5                                                      SendUint(n95_total);
+ 761   5                                                      SendString("\n");
+ 762   5                                              }
+ 763   4                              
+ 764   4                                              if(n95_rxtx==1)                 // tx模式下的接收->清除Error条件
+ 765   4                                              {
+ 766   5                                                      n95_rxtx=1;
+ 767   5                                                      n95_back++;
+ 768   5                                                      LED4_ON;
+ 769   5                                                      Delay(100);
+ 770   5                                                      LED4_OFF;
+ 771   5                                                      SendString("Return:");
+ 772   5                                                      SendUint(n95_back);
+ 773   5                                                      SendString("\n");
+ 774   5                                              }
+ 775   4                                      }
+ 776   3                              }
+ 777   2              //      }
+ 778   2              }
+ 779   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1708    ----
+   CONSTANT SIZE    =    124    ----
+   XDATA SIZE       =    105    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     27      23
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =     10    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

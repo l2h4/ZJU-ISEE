@@ -1,0 +1,244 @@
+C51 COMPILER V9.52.0.0   ECG20_01                                                          04/04/2019 01:25:33 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ECG20_01
+OBJECT MODULE PLACED IN ECG20_01.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe ECG20_01.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          /////////////////////////////////////
+   2          //  Generated Initialization File  //
+   3          /////////////////////////////////////
+   4          /*****************************************************************
+   5          版本日志：
+   6          V01：
+   7          1、设置定时器中断
+   8          2、利用定时器实现流水灯
+   9          
+  10          V00：
+  11          1、输入输出的设置
+  12          2、流水灯程序
+  13          */
+  14          
+  15          #include "compiler_defs.h"
+  16          #include "C8051F340_defs.h"
+  17          
+  18          //变量类型标识的宏定义
+  19          #define Uchar unsigned char
+  20          #define Uint unsigned int
+  21          #define uchar unsigned char
+  22          #define uint unsigned int
+  23          
+  24          uint    Timer_Count;    //定时计数器
+  25          uchar   Timer_Count_2;  //定时计数器2
+  26          uchar   Led_State;              //LED显示状态
+  27          
+  28          
+  29          //接口定义
+  30          /*
+  31          sbit    Led1 = P4^4;
+  32          sbit    Led2 = P4^5;
+  33          sbit    Led3 = P4^6;
+  34          sbit    Led4 = P4^7;
+  35          
+  36          sbit    Key1 = P4^3;
+  37          sbit    Key2 = P4^4;
+  38          sbit    Key3 = P4^1;
+  39          sbit    Key3 = P4^0;
+  40          */
+  41          
+  42          #define XFCN    6               //3             //5
+  43          
+  44          #define LED1_ON P4 |= 0x10
+  45          #define LED2_ON P4 |= 0x20
+  46          #define LED3_ON P4 |= 0x40
+  47          #define LED4_ON P4 |= 0x80
+  48          
+  49          #define LED1_OFF P4 &= ~0x10
+  50          #define LED2_OFF P4 &= ~0x20
+  51          #define LED3_OFF P4 &= ~0x40
+  52          #define LED4_OFF P4 &= ~0x80
+  53          
+  54          #define LED1_INVERT P4 ^= 0x10
+  55          #define LED2_INVERT P4 ^= 0x20
+C51 COMPILER V9.52.0.0   ECG20_01                                                          04/04/2019 01:25:33 PAGE 2   
+
+  56          #define LED3_INVERT P4 ^= 0x40
+  57          #define LED4_INVERT P4 ^= 0x80
+  58          
+  59          sbit    Ad_in   = P1^0;
+  60          
+  61          bit             timer_flag;
+  62          
+  63          //-----------------------------------------------------------------------------
+  64          // Port_Init
+  65          //-----------------------------------------------------------------------------
+  66          // Peripheral specific initialization functions,
+  67          // Called from the Init_Device() function
+  68          void Port_IO_Init()
+  69          {
+  70   1          // P0.0  -  SCK  (SPI0), Push-Pull,  Digital
+  71   1          // P0.1  -  MISO (SPI0), Open-Drain, Digital
+  72   1          // P0.2  -  Skipped,     Open-Drain, Digital
+  73   1          // P0.3  -  Skipped,     Open-Drain, Digital
+  74   1          // P0.4  -  TX0 (UART0), Push-Pull,  Digital
+  75   1          // P0.5  -  RX0 (UART0), Open-Drain, Digital
+  76   1          // P0.6  -  MOSI (SPI0), Push-Pull,  Digital
+  77   1          // P0.7  -  NSS  (SPI0), Push-Pull,  Digital
+  78   1      
+  79   1          // P1.0  -  Unassigned,  Open-Drain, Analog
+  80   1          // P1.1  -  Unassigned,  Open-Drain, Digital
+  81   1          // P1.2  -  Unassigned,  Open-Drain, Digital
+  82   1          // P1.3  -  Unassigned,  Push-Pull,  Digital
+  83   1          // P1.4  -  Unassigned,  Push-Pull,  Digital
+  84   1          // P1.5  -  Unassigned,  Push-Pull,  Digital
+  85   1          // P1.6  -  Unassigned,  Push-Pull,  Digital
+  86   1          // P1.7  -  Unassigned,  Push-Pull,  Digital
+  87   1      
+  88   1          // P2.0  -  Unassigned,  Push-Pull,  Digital
+  89   1          // P2.1  -  Unassigned,  Push-Pull,  Digital
+  90   1          // P2.2  -  Unassigned,  Push-Pull,  Digital
+  91   1          // P2.3  -  Unassigned,  Push-Pull,  Digital
+  92   1          // P2.4  -  Unassigned,  Push-Pull,  Digital
+  93   1          // P2.5  -  Unassigned,  Open-Drain, Digital
+  94   1          // P2.6  -  Unassigned,  Open-Drain, Digital
+  95   1          // P2.7  -  Unassigned,  Open-Drain, Digital
+  96   1      
+  97   1          // P3.0  -  Unassigned,  Push-Pull,  Digital
+  98   1          // P3.1  -  Unassigned,  Push-Pull,  Digital
+  99   1          // P3.2  -  Unassigned,  Push-Pull,  Digital
+ 100   1          // P3.3  -  Unassigned,  Push-Pull,  Digital
+ 101   1          // P3.4  -  Unassigned,  Push-Pull,  Digital
+ 102   1          // P3.5  -  Unassigned,  Push-Pull,  Digital
+ 103   1          // P3.6  -  Unassigned,  Push-Pull,  Digital
+ 104   1          // P3.7  -  Unassigned,  Push-Pull,  Digital
+ 105   1      
+ 106   1          P1MDIN    = 0xFE;
+ 107   1          P0MDOUT   = 0xD1;
+ 108   1          P1MDOUT   = 0xF8;
+ 109   1          P2MDOUT   = 0x1F;
+ 110   1          P3MDOUT   = 0xFF;
+ 111   1          P4MDOUT   = 0xF0;
+ 112   1          P0SKIP    = 0x0C;
+ 113   1          XBR0      = 0x03;
+ 114   1          XBR1      = 0x40;
+ 115   1      }
+ 116          
+ 117          
+C51 COMPILER V9.52.0.0   ECG20_01                                                          04/04/2019 01:25:33 PAGE 3   
+
+ 118          //-----------------------------------------------------------------------------
+ 119          // System_Init
+ 120          //-----------------------------------------------------------------------------
+ 121          // Initialization function for device,
+ 122          // Call Init_Device() from your main program
+ 123          void Init_Device(void)
+ 124          {
+ 125   1          Port_IO_Init();
+ 126   1              OSCICN = (0x80 | 0x03);         //设置内部时钟
+ 127   1      
+ 128   1              //T0,模式设定
+ 129   1              TR0 = 0;                //停止计数
+ 130   1              ET0 = 1;                //允许中断
+ 131   1              PT0 = 1;                //高优先级中断
+ 132   1              TMOD = 0x01;    //#00000,0001,16位定时模式
+ 133   1      
+ 134   1              TH0 = 0;
+ 135   1              TL0 = 0;
+ 136   1              TR0 = 1;                //开始运行
+ 137   1      
+ 138   1          EA = 1;                     //开启全局中断允许
+ 139   1      }
+ 140          
+ 141          
+ 142          /********************延时函数************************/
+ 143          //延时y ms
+ 144          void    Delay(uint y)
+ 145          {
+ 146   1              uint    x;
+ 147   1              while (y--)
+ 148   1              {
+ 149   2                      x = 862;
+ 150   2                      while (x--);
+ 151   2              }
+ 152   1      }
+ 153          
+ 154          
+ 155          /********************* Timer0中断函数************************/
+ 156          void timer0_int (void) interrupt 1
+ 157          {
+ 158   1              TH0 = 0xfc;
+ 159   1              TL0 = 0x18;                     //1ms定时中断
+ 160   1      
+ 161   1      //      Key_Scan();
+ 162   1      //      Run_treat();
+ 163   1      
+ 164   1              ++Timer_Count;
+ 165   1              if (Timer_Count > 500)
+ 166   1              {
+ 167   2                      Timer_Count = 0;
+ 168   2                      timer_flag = 1;
+ 169   2      //              LED1_INVERT;
+ 170   2              }
+ 171   1      
+ 172   1      }
+ 173          
+ 174          
+ 175          /********************主函数**************************/
+ 176          void main(void)
+ 177          {
+ 178   1              PCA0MD &= ~0x40;                                // WDTE = 0 (clear watchdog timer
+ 179   1                                                                              // enable)
+C51 COMPILER V9.52.0.0   ECG20_01                                                          04/04/2019 01:25:33 PAGE 4   
+
+ 180   1              Init_Device();
+ 181   1      
+ 182   1              P4 &= 0x0f;
+ 183   1      
+ 184   1              while(1)
+ 185   1              {
+ 186   2      //              Delay(1000);
+ 187   2              if (timer_flag)
+ 188   2                      {
+ 189   3                      timer_flag = 0;
+ 190   3                      Led_State++;
+ 191   3                      Led_State &= 0x03;              //限定数值范围
+ 192   3                      P4 &= 0x0f;                             //熄灭所有灯
+ 193   3                      switch (Led_State)
+ 194   3                              {
+ 195   4                              case 0:
+ 196   4                                      LED1_ON;
+ 197   4                                      break;
+ 198   4                              case 1:
+ 199   4                                      LED2_ON;
+ 200   4                                      break;
+ 201   4                              case 2:
+ 202   4                                      LED3_ON;
+ 203   4                                      break;
+ 204   4                              case 3:
+ 205   4                                      LED4_ON;
+ 206   4                                      break;
+ 207   4                              default:
+ 208   4                                      break;
+ 209   4                              }
+ 210   3                      }
+ 211   2      //              LED1_INVERT;
+ 212   2                      
+ 213   2              }
+ 214   1      
+ 215   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    177    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

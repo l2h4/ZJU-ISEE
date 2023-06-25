@@ -1,0 +1,468 @@
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE ECG20_031
+OBJECT MODULE PLACED IN ECG20_031.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe ECG20_031.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF ECG20_031.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
+   1          /////////////////////////////////////
+   2          //  Generated Initialization File  //
+   3          /////////////////////////////////////
+   4          /*****************************************************************
+   5          版本日志：
+   6          V03:
+   7          1、串行通信，速率：115200bps；8bit数据，1停止位，无奇偶校验；
+   8          2、每0.5秒钟发送一次数据；
+   9          3、编写发送字符串函数和发送数据函数；V031
+  10          
+  11          V02:
+  12          1、取键值
+  13          2、Key1-4，分别控制Led1-4；
+  14          
+  15          V01：
+  16          1、设置定时器中断
+  17          2、利用定时器实现流水灯
+  18          
+  19          V00：
+  20          1、输入输出的设置
+  21          2、流水灯程序
+  22          */
+  23          
+  24          #include "compiler_defs.h"
+  25          #include "C8051F340_defs.h"
+  26          #include <stdio.h>
+  27          
+  28          //变量类型标识的宏定义
+  29          #define Uchar unsigned char
+  30          #define Uint unsigned int
+  31          #define uchar unsigned char
+  32          #define uint unsigned int
+  33          #define ulong unsigned long
+  34          
+  35          uint    Timer_Count;    //定时计数器
+  36          uchar   Timer_Count_2;  //定时计数器2
+  37          uchar   Led_State;              //LED显示状态
+  38          
+  39          uchar   Key_value;              //键值
+  40          
+  41          bit     Key1_press_flag;        //Key1按下标志
+  42          bit     Key2_press_flag;        //Key2按下标志
+  43          bit     Key3_press_flag;        //Key3按下标志
+  44          bit     Key4_press_flag;        //Key4按下标志
+  45          
+  46          bit     Key1_back;                      //按键的上一状态
+  47          bit     Key2_back;
+  48          bit     Key3_back;
+  49          bit     Key4_back;
+  50          
+  51          ulong   Temp;
+  52          xdata uchar Uart_Send_Buff[32];
+  53          uchar Uart_Send_Count;
+  54          
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 2   
+
+  55          bdata uchar P4_IN;              //定义位可寻址变量
+  56          
+  57          //接口定义
+  58          /*
+  59          sbit    Led1 = P4^4;
+  60          sbit    Led2 = P4^5;
+  61          sbit    Led3 = P4^6;
+  62          sbit    Led4 = P4^7;
+  63          */
+  64          
+  65          sbit    Key1 = P4_IN^3;
+  66          sbit    Key2 = P4_IN^2;
+  67          sbit    Key3 = P4_IN^1;
+  68          sbit    Key4 = P4_IN^0;
+  69          
+  70          #define XFCN    6               //3             //5
+  71          
+  72          #define LED1_ON P4 |= 0x10
+  73          #define LED2_ON P4 |= 0x20
+  74          #define LED3_ON P4 |= 0x40
+  75          #define LED4_ON P4 |= 0x80
+  76          
+  77          #define LED1_OFF P4 &= ~0x10
+  78          #define LED2_OFF P4 &= ~0x20
+  79          #define LED3_OFF P4 &= ~0x40
+  80          #define LED4_OFF P4 &= ~0x80
+  81          
+  82          #define LED1_INVERT P4 ^= 0x10
+  83          #define LED2_INVERT P4 ^= 0x20
+  84          #define LED3_INVERT P4 ^= 0x40
+  85          #define LED4_INVERT P4 ^= 0x80
+  86          
+  87          sbit    Ad_in   = P1^0;
+  88          
+  89          bit             timer_flag;
+  90          
+  91          //-----------------------------------------------------------------------------
+  92          // Port_Init
+  93          //-----------------------------------------------------------------------------
+  94          // Peripheral specific initialization functions,
+  95          // Called from the Init_Device() function
+  96          void Port_IO_Init()
+  97          {
+  98   1          // P0.0  -  SCK  (SPI0), Push-Pull,  Digital
+  99   1          // P0.1  -  MISO (SPI0), Open-Drain, Digital
+ 100   1          // P0.2  -  Skipped,     Open-Drain, Digital
+ 101   1          // P0.3  -  Skipped,     Open-Drain, Digital
+ 102   1          // P0.4  -  TX0 (UART0), Push-Pull,  Digital
+ 103   1          // P0.5  -  RX0 (UART0), Open-Drain, Digital
+ 104   1          // P0.6  -  MOSI (SPI0), Push-Pull,  Digital
+ 105   1          // P0.7  -  NSS  (SPI0), Push-Pull,  Digital
+ 106   1      
+ 107   1          // P1.0  -  Unassigned,  Open-Drain, Analog
+ 108   1          // P1.1  -  Unassigned,  Open-Drain, Digital
+ 109   1          // P1.2  -  Unassigned,  Open-Drain, Digital
+ 110   1          // P1.3  -  Unassigned,  Push-Pull,  Digital
+ 111   1          // P1.4  -  Unassigned,  Push-Pull,  Digital
+ 112   1          // P1.5  -  Unassigned,  Push-Pull,  Digital
+ 113   1          // P1.6  -  Unassigned,  Push-Pull,  Digital
+ 114   1          // P1.7  -  Unassigned,  Push-Pull,  Digital
+ 115   1      
+ 116   1          // P2.0  -  Unassigned,  Push-Pull,  Digital
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 3   
+
+ 117   1          // P2.1  -  Unassigned,  Push-Pull,  Digital
+ 118   1          // P2.2  -  Unassigned,  Push-Pull,  Digital
+ 119   1          // P2.3  -  Unassigned,  Push-Pull,  Digital
+ 120   1          // P2.4  -  Unassigned,  Push-Pull,  Digital
+ 121   1          // P2.5  -  Unassigned,  Open-Drain, Digital
+ 122   1          // P2.6  -  Unassigned,  Open-Drain, Digital
+ 123   1          // P2.7  -  Unassigned,  Open-Drain, Digital
+ 124   1      
+ 125   1          // P3.0  -  Unassigned,  Push-Pull,  Digital
+ 126   1          // P3.1  -  Unassigned,  Push-Pull,  Digital
+ 127   1          // P3.2  -  Unassigned,  Push-Pull,  Digital
+ 128   1          // P3.3  -  Unassigned,  Push-Pull,  Digital
+ 129   1          // P3.4  -  Unassigned,  Push-Pull,  Digital
+ 130   1          // P3.5  -  Unassigned,  Push-Pull,  Digital
+ 131   1          // P3.6  -  Unassigned,  Push-Pull,  Digital
+ 132   1          // P3.7  -  Unassigned,  Push-Pull,  Digital
+ 133   1      
+ 134   1          P1MDIN    = 0xFE;
+ 135   1          P0MDOUT   = 0xD1;
+ 136   1          P1MDOUT   = 0xF8;
+ 137   1          P2MDOUT   = 0x1F;
+ 138   1          P3MDOUT   = 0xFF;
+ 139   1          P4MDOUT   = 0xF0;
+ 140   1          P0SKIP    = 0x0C;
+ 141   1          XBR0      = 0x03;
+ 142   1          XBR1      = 0x40;
+ 143   1      }
+ 144          
+ 145          /*----------------------------
+ 146          Initial Uart
+ 147          ----------------------------*/
+ 148          void UartInit(void)             //115200bps@12MHz
+ 149          {
+ 150   1              CKCON |=0X08;           //T1使用系统时钟
+ 151   1      //      PCON &= 0x7F;           //波特率不倍速
+ 152   1              SCON0 = 0x10;           //8位数据，可变波特率
+ 153   1      //      AUXR |= 0x40;           //定时器1时钟为Fosc，即1T
+ 154   1      //      AUXR &= 0xFE;           //串口1选择定制器1位波特率发生器
+ 155   1              TMOD &= 0x0F;           //清定时器1模式位
+ 156   1              TMOD |= 0x20;           //设定定时器1为8位自动重装载方式
+ 157   1              TL1 = 0xCC;                     //设定定时器初值
+ 158   1              TH1 = 0xCC;                     //
+ 159   1              ET1 = 0;                        //禁止定时器1中断
+ 160   1              TR1 = 1;                        //启动定时器1
+ 161   1              ES0 = 0;
+ 162   1      }
+ 163          
+ 164          //-----------------------------------------------------------------------------
+ 165          // System_Init
+ 166          //-----------------------------------------------------------------------------
+ 167          // Initialization function for device,
+ 168          // Call Init_Device() from your main program
+ 169          void Init_Device(void)
+ 170          {
+ 171   1          Port_IO_Init();
+ 172   1              OSCICN = (0x80 | 0x03);         //设置内部时钟
+ 173   1      
+ 174   1              //T0,模式设定
+ 175   1              TR0 = 0;                //停止计数
+ 176   1              ET0 = 1;                //允许中断
+ 177   1              PT0 = 1;                //高优先级中断
+ 178   1              TMOD = 0x01;    //#00000,0001,16位定时模式
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 4   
+
+ 179   1      
+ 180   1              TH0 = 0;
+ 181   1              TL0 = 0;
+ 182   1              TR0 = 1;                //开始运行
+ 183   1      
+ 184   1              UartInit();             //Uart0 初始化
+ 185   1              
+ 186   1          EA = 1;                     //开启全局中断允许
+ 187   1      }
+ 188          
+ 189          
+ 190          /********************延时函数************************/
+ 191          //延时y ms
+ 192          void    Delay(uint y)
+ 193          {
+ 194   1              uint    x;
+ 195   1              while (y--)
+ 196   1              {
+ 197   2                      x = 862;
+ 198   2                      while (x--);
+ 199   2              }
+ 200   1      }
+ 201          
+ 202          
+ 203          /********************* 键盘扫描函数************************/
+ 204          void    Key_Scan()
+ 205          {
+ 206   1              P4_IN = P4;
+ 207   1              
+ 208   1              if (!Key1)                      //键扫描1，检测下降沿
+ 209   1              {
+ 210   2                      if(Key1_back)
+ 211   2                      {
+ 212   3                              Key1_press_flag = 1;
+ 213   3                      }
+ 214   2              }
+ 215   1      
+ 216   1              if (!Key2)                      //键扫描2
+ 217   1              {
+ 218   2                      if(Key2_back)
+ 219   2                      {
+ 220   3                              Key2_press_flag = 1;
+ 221   3                      }
+ 222   2              }
+ 223   1      
+ 224   1              if (!Key3)                      //键扫描3
+ 225   1              {
+ 226   2                      if(Key3_back)
+ 227   2                      {
+ 228   3                              Key3_press_flag = 1;
+ 229   3                      }
+ 230   2              }
+ 231   1      
+ 232   1              if (!Key4)                      //键扫描4
+ 233   1              {
+ 234   2                      if(Key4_back)
+ 235   2                      {
+ 236   3                              Key4_press_flag = 1;
+ 237   3                      }
+ 238   2              }
+ 239   1      
+ 240   1              Key1_back = Key1;
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 5   
+
+ 241   1              Key2_back = Key2;
+ 242   1              Key3_back = Key3;
+ 243   1              Key4_back = Key4;
+ 244   1      }
+ 245          
+ 246          /********************* Timer0中断函数************************/
+ 247          void timer0_int (void) interrupt 1
+ 248          {
+ 249   1              TH0 = 0xfc;
+ 250   1              TL0 = 0x18;                     //1ms定时中断
+ 251   1      
+ 252   1              Key_Scan();
+ 253   1      //      Run_treat();
+ 254   1      
+ 255   1              ++Timer_Count;
+ 256   1              if (Timer_Count > 500)
+ 257   1              {
+ 258   2                      Timer_Count = 0;
+ 259   2                      timer_flag = 1;
+ 260   2      //              LED1_INVERT;
+ 261   2              }
+ 262   1      
+ 263   1      }
+ 264          
+ 265          /******************** 按键处理 **************************/
+ 266          void    Key_treat()
+ 267          {
+ 268   1              if (Key1_press_flag)
+ 269   1              {
+ 270   2                      LED1_INVERT;
+ 271   2                      Key1_press_flag = 0;
+ 272   2              }
+ 273   1      
+ 274   1              if (Key2_press_flag)
+ 275   1              {
+ 276   2                      LED2_INVERT;
+ 277   2                      Key2_press_flag = 0;
+ 278   2              }
+ 279   1      
+ 280   1              if (Key3_press_flag)
+ 281   1              {
+ 282   2                      LED3_INVERT;
+ 283   2                      Key3_press_flag = 0;
+ 284   2              }
+ 285   1      
+ 286   1              if (Key4_press_flag)
+ 287   1              {
+ 288   2                      LED4_INVERT;
+ 289   2                      Key4_press_flag = 0;
+ 290   2              }
+ 291   1      
+ 292   1      }
+ 293          
+ 294          /******************** 按键处理 **************************/
+ 295          void Uart_Send()
+ 296          {
+ 297   1                      Uart_Send_Buff[0] = 'V';
+ 298   1                      Uart_Send_Buff[1] = 'o';
+ 299   1                      Uart_Send_Buff[2] = 'l';
+ 300   1                      Uart_Send_Buff[3] = 't';
+ 301   1                      Uart_Send_Buff[4] = 'a';
+ 302   1                      Uart_Send_Buff[5] = 'g';
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 6   
+
+ 303   1                      Uart_Send_Buff[6] = ':';
+ 304   1                      Uart_Send_Buff[7] = (Temp/1000)+0x30;
+ 305   1                      Uart_Send_Buff[8] = ((Temp%1000)/100)+0x30;
+ 306   1                      Uart_Send_Buff[9] = ((Temp%100)/10)+0x30;
+ 307   1                      Uart_Send_Buff[10] = '.';                                       //小数点
+ 308   1                      Uart_Send_Buff[11] = (Temp%10)+0x30;
+ 309   1                      Uart_Send_Buff[12] = 0x0d;
+ 310   1                      Uart_Send_Buff[13] = 0x0a;
+ 311   1                      Uart_Send_Count =14;
+ 312   1      
+ 313   1                      for (Uart_Send_Count=0;Uart_Send_Count<14;Uart_Send_Count++)
+ 314   1                      {
+ 315   2                      SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 316   2                      while(TI0 ==0){}
+ 317   2                      TI0 = 0;
+ 318   2                      }
+ 319   1       }
+ 320          
+ 321          void SendUchar(char Data)
+ 322          {
+ 323   1              Uart_Send_Buff[0] = (Data / 10 % 10) +0x30;
+ 324   1              Uart_Send_Buff[1] = (Data %10) +0x30;
+ 325   1      //      Uart1_tx_len = 2;
+ 326   1              for (Uart_Send_Count=0;Uart_Send_Count<2;Uart_Send_Count++)
+ 327   1              {
+ 328   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 329   2              while(TI0 ==0){}
+ 330   2              TI0 = 0;
+ 331   2              }
+ 332   1      }
+ 333          
+ 334          
+ 335          void SendUint(uint Data)
+ 336          {
+ 337   1              Uart_Send_Buff[0] = (Data / 1000 % 10) +0x30;
+ 338   1              Uart_Send_Buff[1] = (Data / 100 % 10) +0x30;
+ 339   1              Uart_Send_Buff[2] = (Data / 10 % 10) +0x30;
+ 340   1              Uart_Send_Buff[3] = (Data %10) +0x30;
+ 341   1      //      Uart1_tx_len = 4;
+ 342   1              for (Uart_Send_Count=0;Uart_Send_Count<4;Uart_Send_Count++)
+ 343   1              {
+ 344   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 345   2              while(TI0 ==0){}
+ 346   2              TI0 = 0;
+ 347   2              }
+ 348   1      }
+ 349          
+ 350          /*----------------------------
+ 351          Send a string to UART
+ 352          Input: s (address of string)
+ 353          Output:None
+ 354          ----------------------------*/
+ 355          void SendString(char *s)
+ 356          {
+ 357   1              uchar   i=0;
+ 358   1              while (*s)
+ 359   1                      {
+ 360   2                      Uart_Send_Buff[i++] = *s++;
+ 361   2                      }
+ 362   1      //      Uart1_tx_len = i;
+ 363   1              for (Uart_Send_Count=0;Uart_Send_Count<i;Uart_Send_Count++)
+ 364   1              {
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 7   
+
+ 365   2              SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+ 366   2              while(TI0 ==0){}
+ 367   2              TI0 = 0;
+ 368   2              }
+ 369   1      }
+ 370          
+ 371          
+ 372          /********************主函数**************************/
+ 373          void main(void)
+ 374          {
+ 375   1              PCA0MD &= ~0x40;                                // WDTE = 0 (clear watchdog timer
+ 376   1                                                                              // enable)
+ 377   1              Init_Device();
+ 378   1      
+ 379   1              P4 &= 0x0f;
+ 380   1      
+ 381   1              while(1)
+ 382   1              {
+ 383   2                      Key_treat();
+ 384   2      //              Delay(1000);
+ 385   2      
+ 386   2                      if (timer_flag)
+ 387   2                              {
+ 388   3                              Temp++;
+ 389   3                              //Uart_Send();
+ 390   3                              SendString("Voltage:");
+ 391   3                              SendUint(Temp);
+ 392   3                              SendString("\r\n");
+ 393   3      
+ 394   3      //                      printf("P1.1 voltage:");
+ 395   3      
+ 396   3      //                      printf("P1.1 voltage: %ld mV\n",Temp);
+ 397   3                              
+ 398   3                              timer_flag =0;
+ 399   3                              }
+ 400   2      
+ 401   2      /*      if (timer_flag)
+ 402   2                      {
+ 403   2                      timer_flag = 0;
+ 404   2                      Led_State++;
+ 405   2                      Led_State &= 0x03;              //限定数值范围
+ 406   2                      P4 &= 0x0f;                             //熄灭所有灯
+ 407   2                      switch (Led_State)
+ 408   2                              {
+ 409   2                              case 0:
+ 410   2                                      LED1_ON;
+ 411   2                                      break;
+ 412   2                              case 1:
+ 413   2                                      LED2_ON;
+ 414   2                                      break;
+ 415   2                              case 2:
+ 416   2                                      LED3_ON;
+ 417   2                                      break;
+ 418   2                              case 3:
+ 419   2                                      LED4_ON;
+ 420   2                                      break;
+ 421   2                              default:
+ 422   2                                      break;
+ 423   2                              }
+ 424   2                      }
+ 425   2      //              LED1_INVERT;
+ 426   2      */              
+C51 COMPILER V9.52.0.0   ECG20_031                                                         04/13/2019 23:13:26 PAGE 8   
+
+ 427   2              }
+ 428   1      
+ 429   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    779    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =     32    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      9    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

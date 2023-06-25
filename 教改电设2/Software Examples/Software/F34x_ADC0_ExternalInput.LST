@@ -1,0 +1,407 @@
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE F34X_ADC0_EXTERNALINPUT
+OBJECT MODULE PLACED IN F34x_ADC0_ExternalInput.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe F34x_ADC0_ExternalInput.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+*** WARNING C500 IN LINE 1 OF F34x_ADC0_ExternalInput.c: LICENSE ERROR (R207(3): REGISTRY READ ERROR)
+
+   1          //-----------------------------------------------------------------------------
+   2          // F34x_ADC0_ExternalInput.c
+   3          //-----------------------------------------------------------------------------
+   4          // Copyright 2006 Silicon Laboratories, Inc.
+   5          // http://www.silabs.com
+   6          //
+   7          // Program Description:
+   8          // --------------------
+   9          //
+  10          // This example code takes and averages 2048 analog measurements from input
+  11          // P1.1 using ADC0, then prints the results to a terminal window via the UART.
+  12          //
+  13          // The system is clocked by the internal 12MHz oscillator.  Timer 2 triggers
+  14          // a conversion on ADC0 on each overflow.  The completion of this conversion
+  15          // in turn triggers an interrupt service routine (ISR).  The ISR averages 
+  16          // 2048 measurements, then prints the value to the terminal via printf before
+  17          // starting another average cycle.
+  18          //
+  19          // The analog multiplexer selects P1.1 as the positive ADC0 input.  This 
+  20          // port is configured as an analog input in the port initialization routine.
+  21          // The negative ADC0 input is connected via mux to ground, which provides
+  22          // for a single-ended ADC input.
+  23          //
+  24          // A 100kohm potentiometer may be connected as a voltage divider between 
+  25          // VREF and AGND on the terminal strip as shown below:
+  26          //
+  27          // ---------
+  28          //          |
+  29          //          |
+  30          //          |        
+  31          //         o| VREF ----| 
+  32          //         o| GND   ---|<-|
+  33          //         o|             |
+  34          //         o| P1.1--------|        
+  35          //          |
+  36          //----------   
+  37          // C8051F340-TB
+  38          //
+  39          // Terminal output is done via printf, which directs the characters to 
+  40          // UART0.  A UART initialization routine is therefore necessary.
+  41          //
+  42          // ADC Settling Time Requirements, Sampling Rate:
+  43          // ----------------------------------------------
+  44          //
+  45          // The total sample time per input is comprised of an input setting time 
+  46          // (Tsettle), followed by a conversion time (Tconvert): 
+  47          //
+  48          // Tsample  = Tsettle + Tconvert
+  49          //
+  50          // |--------Settling-------|==Conversion==|----Settling--- . . .
+  51          // Timer 2 overflow        ^                          
+  52          // ADC0 ISR                               ^       
+  53          //
+  54          // The ADC input voltage must be allowed adequate time to settle before the 
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 2   
+
+  55          // conversion is made.  This settling depends on the external source
+  56          // impedance, internal mux impedance, and internal capacitance.
+  57          // Settling time is given by:
+  58          //
+  59          //                   | 2^n |
+  60          //    Tsettle =   ln | --- | * Rtotal * Csample
+  61          //                   | SA  |       
+  62          //
+  63          // In this application, assume a 100kohm potentiometer as the voltage divider.
+  64          // The expression evaluates to:
+  65          //
+  66          //                   | 2^10 |
+  67          //    Tsettle =   ln | ---- | * 105e3 * 5e-12 = 4.4uS
+  68          //                   | 0.25 |    
+  69          //
+  70          // In addition, one must allow at least 1.5uS after changing analog mux 
+  71          // inputs or PGA settings.  The settling time in this example, then, is 
+  72          // dictated by the large external source resistance.
+  73          //
+  74          // The conversion is 10 periods of the SAR clock <SAR_CLK>.  At 3 MHz, 
+  75          // this time is 10 * 400nS = 3.3 uS.
+  76          //
+  77          // 
+  78          // Tsample, minimum  = Tsettle + Tconvert
+  79          //                   = 4.4uS + 3.3uS 
+  80          //                   = 7.7 uS
+  81          // 
+  82          // Timer 2 is set to start a conversion every 100uS, which is far longer
+  83          // than the minimum required.
+  84          //
+  85          // F340 Resources:
+  86          // ---------------
+  87          // Timer1: clocks UART
+  88          // Timer2: overflow initiates ADC conversion
+  89          //
+  90          // How To Test:
+  91          // ------------
+  92          // 1) Download code to a 'F340 device on a C8051F340-TB development board
+  93          // 2) Connect serial cable from the transceiver to a PC
+  94          // 3) On the PC, open HyperTerminal (or any other terminal program) and connect
+  95          //    to the COM port at <BAUDRATE> and 8-N-1
+  96          // 4) Connect a variable voltage source (between 0 and Vref) 
+  97          //    to P1.1, or a potentiometer voltage divider as shown above.
+  98          // 5) HyperTerminal will print the voltage measured by the device if
+  99          //    everything is working properly
+ 100          //
+ 101          // FID:            34X000082
+ 102          // Target:         C8051F340
+ 103          // Tool chain:     Keil C51 7.50 / Keil EVAL C51
+ 104          // Command Line:   None
+ 105          //
+ 106          //
+ 107          // Release 1.0
+ 108          //    -Initial Revision (clm)
+ 109          //    -24-Jul-06
+ 110          
+ 111          
+ 112          //-----------------------------------------------------------------------------
+ 113          // Includes
+ 114          //-----------------------------------------------------------------------------
+ 115          
+ 116          #include "c8051F340.h"                 // SFR declarations
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 3   
+
+ 117          #include <stdio.h>
+ 118          
+ 119          //-----------------------------------------------------------------------------
+ 120          // 16-bit SFR Definitions for 'F34x
+ 121          //-----------------------------------------------------------------------------
+ 122          
+ 123          sfr16 TMR2RL   = 0xca;                 // Timer2 reload value 
+ 124          sfr16 TMR2     = 0xcc;                 // Timer2 counter
+ 125          sfr16 ADC0     = 0xbd;                 // ADC0 result
+ 126          
+ 127          //-----------------------------------------------------------------------------
+ 128          // Global CONSTANTS
+ 129          //-----------------------------------------------------------------------------
+ 130          
+ 131          #define SYSCLK       12000000          // SYSCLK frequency in Hz
+ 132          #define BAUDRATE     115200            // Baud rate of UART in bps
+ 133          
+ 134          sbit LED = P2^2;                       // LED='1' means ON
+ 135          
+ 136          //-----------------------------------------------------------------------------
+ 137          // Function PROTOTYPES
+ 138          //-----------------------------------------------------------------------------
+ 139          
+ 140          void SYSCLK_Init (void);
+ 141          void PORT_Init (void);
+ 142          void Timer2_Init(void);
+ 143          void ADC0_Init(void);
+ 144          void UART0_Init (void);
+ 145          
+ 146          //-----------------------------------------------------------------------------
+ 147          // MAIN Routine
+ 148          //-----------------------------------------------------------------------------
+ 149          
+ 150          void main (void) 
+ 151          {
+ 152   1         PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
+ 153   1                                             // enable)
+ 154   1      
+ 155   1         SYSCLK_Init ();                     // Initialize system clock to 
+ 156   1                                             // 24.5MHz
+ 157   1         PORT_Init ();                       // Initialize crossbar and GPIO
+ 158   1         Timer2_Init();                      // Init Timer2 to generate 
+ 159   1                                             // overflows to trigger ADC
+ 160   1         UART0_Init();                       // Initialize UART0 for printf's
+ 161   1         ADC0_Init();                        // Initialize ADC0
+ 162   1      
+ 163   1         EA = 1;                                                               // enable global interrupts
+ 164   1         while (1) {                         // spin forever
+ 165   2         }
+ 166   1      }
+ 167          
+ 168          //-----------------------------------------------------------------------------
+ 169          // Initialization Subroutines
+ 170          //-----------------------------------------------------------------------------
+ 171          
+ 172          //-----------------------------------------------------------------------------
+ 173          // SYSCLK_Init
+ 174          //-----------------------------------------------------------------------------
+ 175          //
+ 176          // Return Value:  None
+ 177          // Parameters:    None
+ 178          //
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 4   
+
+ 179          // This routine initializes the system clock to use the internal 12MHz 
+ 180          // oscillator as its clock source.  Also enables missing clock detector reset.
+ 181          //
+ 182          //-----------------------------------------------------------------------------
+ 183          void SYSCLK_Init (void)
+ 184          {
+ 185   1         OSCICN = 0x83;                      // configure internal oscillator for
+ 186   1                                             // 12MHz / 1
+ 187   1         RSTSRC = 0x04;                      // enable missing clock detector
+ 188   1      }
+ 189          
+ 190          //-----------------------------------------------------------------------------
+ 191          // PORT_Init
+ 192          //-----------------------------------------------------------------------------
+ 193          //
+ 194          // Return Value:  None
+ 195          // Parameters:    None
+ 196          //
+ 197          // Configure the Crossbar and GPIO ports.
+ 198          // P0.4 - UART TX (push-pull)
+ 199          // P0.5 - UART RX 
+ 200          // P1.1 - ADC0 analog input
+ 201          // P2.2 - LED (push-pull)
+ 202          // 
+ 203          //-----------------------------------------------------------------------------
+ 204          void PORT_Init (void)
+ 205          {
+ 206   1          P1MDIN    = 0xFC;
+ 207   1          P0MDOUT   = 0xD1;
+ 208   1          P1MDOUT   = 0xF8;
+ 209   1          P2MDOUT   = 0x1F;
+ 210   1          P3MDOUT   = 0xFF;
+ 211   1          P4MDOUT   = 0xF0;
+ 212   1          P0SKIP    = 0x0C;
+ 213   1          XBR0      = 0x03;
+ 214   1          XBR1      = 0x40;
+ 215   1      /*
+ 216   1         XBR0     = 0x01;                    // Enable UART0
+ 217   1         XBR1     = 0xC0;                    // Enable crossbar and weak pull-ups
+ 218   1         P0MDOUT |= 0x10;                    // Set TX pin to push-pull
+ 219   1         P2MDOUT |= 0x04;                    // enable LED as a push-pull output
+ 220   1         P1MDIN &= ~0x02;                    // set P1.1 as an analog input
+ 221   1      */
+ 222   1      }
+ 223          
+ 224          //-----------------------------------------------------------------------------
+ 225          // Timer2_Init
+ 226          //-----------------------------------------------------------------------------
+ 227          //
+ 228          // Return Value:  None
+ 229          // Parameters:    None
+ 230          //
+ 231          // Configure Timer2 to 16-bit auto-reload and generate an interrupt at 100uS 
+ 232          // intervals.  Timer 2 overflow automatically triggers ADC0 conversion.
+ 233          // 
+ 234          //-----------------------------------------------------------------------------
+ 235          
+ 236          void Timer2_Init (void)
+ 237          {
+ 238   1         TMR2CN  = 0x00;                     // Stop Timer2; Clear TF2;
+ 239   1                                             // use SYSCLK as timebase, 16-bit 
+ 240   1                                             // auto-reload
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 5   
+
+ 241   1         CKCON  |= 0x10;                     // select SYSCLK for timer 2 source
+ 242   1         TMR2RL  = 65535 - (SYSCLK / 10000); // init reload value for 10uS
+ 243   1         TMR2    = 0xffff;                   // set to reload immediately
+ 244   1         TR2     = 1;                        // start Timer2
+ 245   1      }
+ 246          
+ 247          //-----------------------------------------------------------------------------
+ 248          // ADC0_Init
+ 249          //-----------------------------------------------------------------------------
+ 250          //
+ 251          // Return Value:  None
+ 252          // Parameters:    None
+ 253          //
+ 254          // Configures ADC0 to make single-ended analog measurements on pin P1.1
+ 255          //  
+ 256          //-----------------------------------------------------------------------------
+ 257          
+ 258          void ADC0_Init (void)
+ 259          {
+ 260   1         ADC0CN = 0x02;                      // ADC0 disabled, normal tracking, 
+ 261   1                                             // conversion triggered on TMR2 overflow
+ 262   1      
+ 263   1         REF0CN = 0x03;                      // Enable on-chip VREF and buffer
+ 264   1      
+ 265   1         AMX0P = 0x13;                       // ADC0 positive input = P1.1
+ 266   1         AMX0N = 0x1F;                       // ADC0 negative input = GND
+ 267   1                                             // i.e., single ended mode
+ 268   1      
+ 269   1         ADC0CF = ((SYSCLK/3000000)-1)<<3;   // set SAR clock to 3MHz
+ 270   1      
+ 271   1         ADC0CF |= 0x00;                     // right-justify results 
+ 272   1      
+ 273   1         EIE1 |= 0x08;                       // enable ADC0 conversion complete int.
+ 274   1      
+ 275   1         AD0EN = 1;                          // enable ADC0
+ 276   1      }
+ 277          
+ 278          //-----------------------------------------------------------------------------
+ 279          // UART0_Init
+ 280          //-----------------------------------------------------------------------------
+ 281          //
+ 282          // Return Value:  None
+ 283          // Parameters:    None
+ 284          //
+ 285          // Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
+ 286          //
+ 287          //-----------------------------------------------------------------------------
+ 288          
+ 289          void UART0_Init (void)
+ 290          {
+ 291   1         SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+ 292   1                                             //        level of STOP bit is ignored
+ 293   1                                             //        RX enabled
+ 294   1                                             //        ninth bits are zeros
+ 295   1                                             //        clear RI0 and TI0 bits
+ 296   1         if (SYSCLK/BAUDRATE/2/256 < 1) {
+ 297   2            TH1 = -(SYSCLK/BAUDRATE/2);
+ 298   2            CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
+ 299   2         } else if (SYSCLK/BAUDRATE/2/256 < 4) {
+ 300   2            TH1 = -(SYSCLK/BAUDRATE/2/4);
+ 301   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01
+ 302   2            CKCON |=  0x01;
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 6   
+
+ 303   2         } else if (SYSCLK/BAUDRATE/2/256 < 12) {
+ 304   2            TH1 = -(SYSCLK/BAUDRATE/2/12);
+ 305   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+ 306   2         } else if (SYSCLK/BAUDRATE/2/256 < 48) {
+ 307   2            TH1 = -(SYSCLK/BAUDRATE/2/48);
+ 308   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+ 309   2            CKCON |=  0x02;
+ 310   2         } else {
+ 311   2            while (1);                       // Error.  Unsupported baud rate
+ 312   2         }
+ 313   1      
+ 314   1         TL1 = TH1;                          // init Timer1
+ 315   1         TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+ 316   1         TMOD |=  0x20;
+ 317   1         TR1 = 1;                            // START Timer1
+ 318   1         TI0 = 1;                            // Indicate TX0 ready
+ 319   1      }
+ 320          
+ 321          //-----------------------------------------------------------------------------
+ 322          // Interrupt Service Routines
+ 323          //-----------------------------------------------------------------------------
+ 324          
+ 325          //-----------------------------------------------------------------------------
+ 326          // ADC0_ISR
+ 327          //-----------------------------------------------------------------------------
+ 328          // 
+ 329          // This ISR averages 2048 samples then prints the result to the terminal.  The 
+ 330          // ISR is called after each ADC conversion which is triggered by Timer2.
+ 331          //
+ 332          //-----------------------------------------------------------------------------
+ 333          
+ 334          void ADC0_ISR (void) interrupt 10
+ 335          {
+ 336   1      
+ 337   1         static unsigned long accumulator = 0;     // Accumulator for averaging
+ 338   1         static unsigned int measurements = 2048;  // Measurement counter
+ 339   1         unsigned long result=0;
+ 340   1         unsigned long mV;                         // Measured voltage in mV
+ 341   1      
+ 342   1         AD0INT = 0;                               // Clear ADC0 conv. complete flag
+ 343   1      
+ 344   1         accumulator += ADC0;
+ 345   1         measurements--;
+ 346   1      
+ 347   1         if(measurements==0)
+ 348   1         {  
+ 349   2            measurements = 2048;
+ 350   2            result = accumulator / 2048;
+ 351   2            accumulator=0;
+ 352   2      
+ 353   2            // The 10-bit ADC value is averaged across 2048 measurements.  
+ 354   2            // The measured voltage applied to P1.4 is then:
+ 355   2            //
+ 356   2            //                           Vref (mV)
+ 357   2            //   measurement (mV) =   --------------- * result (bits) 
+ 358   2            //                       (2^10)-1 (bits)
+ 359   2      
+ 360   2            mV =  result * 2440 / 1023;   
+ 361   2            printf("P1.1 voltage: %ld mV\n",mV);
+ 362   2         }
+ 363   1      
+ 364   1         LED=~LED;                           // Toggle LED
+C51 COMPILER V9.52.0.0   F34X_ADC0_EXTERNALINPUT                                           04/14/2019 13:02:25 PAGE 7   
+
+ 365   1      }
+ 366          
+ 367          //-----------------------------------------------------------------------------
+ 368          // End Of File
+ 369          //-----------------------------------------------------------------------------
+*** WARNING C294 IN LINE 300 OF F34x_ADC0_ExternalInput.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    321    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

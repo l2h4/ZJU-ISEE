@@ -1,0 +1,332 @@
+/////////////////////////////////////
+//  Generated Initialization File  //
+/////////////////////////////////////
+/*****************************************************************
+版本日志：
+V03:
+1、串行通信，速率：9600bps；8bit数据，1停止位，无奇偶校验；
+2、每秒钟发送一次数据；
+
+V02:
+1、取键值
+2、Key1-4，分别控制Led1-4；
+
+V01：
+1、设置定时器中断
+2、利用定时器实现流水灯
+
+V00：
+1、输入输出的设置
+2、流水灯程序
+*/
+
+#include "compiler_defs.h"
+#include "C8051F340_defs.h"
+
+//变量类型标识的宏定义
+#define Uchar unsigned char
+#define Uint unsigned int
+#define uchar unsigned char
+#define uint unsigned int
+#define ulong unsigned long
+
+uint	Timer_Count;	//定时计数器
+uchar	Timer_Count_2;	//定时计数器2
+uchar	Led_State;		//LED显示状态
+
+uchar	Key_value;		//键值
+
+bit	Key1_press_flag;	//Key1按下标志
+bit	Key2_press_flag;	//Key2按下标志
+bit	Key3_press_flag;	//Key3按下标志
+bit	Key4_press_flag;	//Key4按下标志
+
+bit	Key1_back;			//按键的上一状态
+bit	Key2_back;
+bit	Key3_back;
+bit	Key4_back;
+
+ulong	Temp;
+xdata uchar Uart_Send_Buff[32];
+uchar Uart_Send_Count;
+
+bdata uchar P4_IN;		//定义位可寻址变量
+
+//接口定义
+/*
+sbit	Led1 = P4^4;
+sbit	Led2 = P4^5;
+sbit	Led3 = P4^6;
+sbit	Led4 = P4^7;
+*/
+
+sbit	Key1 = P4_IN^3;
+sbit	Key2 = P4_IN^2;
+sbit	Key3 = P4_IN^1;
+sbit	Key4 = P4_IN^0;
+
+#define	XFCN	6		//3		//5
+
+#define LED1_ON P4 |= 0x10
+#define LED2_ON P4 |= 0x20
+#define LED3_ON P4 |= 0x40
+#define LED4_ON P4 |= 0x80
+
+#define LED1_OFF P4 &= ~0x10
+#define LED2_OFF P4 &= ~0x20
+#define LED3_OFF P4 &= ~0x40
+#define LED4_OFF P4 &= ~0x80
+
+#define LED1_INVERT P4 ^= 0x10
+#define LED2_INVERT P4 ^= 0x20
+#define LED3_INVERT P4 ^= 0x40
+#define LED4_INVERT P4 ^= 0x80
+
+sbit	Ad_in	= P1^0;
+
+bit		timer_flag;
+
+//-----------------------------------------------------------------------------
+// Port_Init
+//-----------------------------------------------------------------------------
+// Peripheral specific initialization functions,
+// Called from the Init_Device() function
+void Port_IO_Init()
+{
+    // P0.0  -  SCK  (SPI0), Push-Pull,  Digital
+    // P0.1  -  MISO (SPI0), Open-Drain, Digital
+    // P0.2  -  Skipped,     Open-Drain, Digital
+    // P0.3  -  Skipped,     Open-Drain, Digital
+    // P0.4  -  TX0 (UART0), Push-Pull,  Digital
+    // P0.5  -  RX0 (UART0), Open-Drain, Digital
+    // P0.6  -  MOSI (SPI0), Push-Pull,  Digital
+    // P0.7  -  NSS  (SPI0), Push-Pull,  Digital
+
+    // P1.0  -  Unassigned,  Open-Drain, Analog
+    // P1.1  -  Unassigned,  Open-Drain, Digital
+    // P1.2  -  Unassigned,  Open-Drain, Digital
+    // P1.3  -  Unassigned,  Push-Pull,  Digital
+    // P1.4  -  Unassigned,  Push-Pull,  Digital
+    // P1.5  -  Unassigned,  Push-Pull,  Digital
+    // P1.6  -  Unassigned,  Push-Pull,  Digital
+    // P1.7  -  Unassigned,  Push-Pull,  Digital
+
+    // P2.0  -  Unassigned,  Push-Pull,  Digital
+    // P2.1  -  Unassigned,  Push-Pull,  Digital
+    // P2.2  -  Unassigned,  Push-Pull,  Digital
+    // P2.3  -  Unassigned,  Push-Pull,  Digital
+    // P2.4  -  Unassigned,  Push-Pull,  Digital
+    // P2.5  -  Unassigned,  Open-Drain, Digital
+    // P2.6  -  Unassigned,  Open-Drain, Digital
+    // P2.7  -  Unassigned,  Open-Drain, Digital
+
+    // P3.0  -  Unassigned,  Push-Pull,  Digital
+    // P3.1  -  Unassigned,  Push-Pull,  Digital
+    // P3.2  -  Unassigned,  Push-Pull,  Digital
+    // P3.3  -  Unassigned,  Push-Pull,  Digital
+    // P3.4  -  Unassigned,  Push-Pull,  Digital
+    // P3.5  -  Unassigned,  Push-Pull,  Digital
+    // P3.6  -  Unassigned,  Push-Pull,  Digital
+    // P3.7  -  Unassigned,  Push-Pull,  Digital
+
+    P1MDIN    = 0xFE;
+    P0MDOUT   = 0xD1;
+    P1MDOUT   = 0xF8;
+    P2MDOUT   = 0x1F;
+    P3MDOUT   = 0xFF;
+    P4MDOUT   = 0xF0;
+    P0SKIP    = 0x0C;
+    XBR0      = 0x03;
+    XBR1      = 0x40;
+}
+
+/*----------------------------
+Initial Uart
+----------------------------*/
+void UartInit(void)		//115200bps@12MHz
+{
+	CKCON |=0X08;		//T1使用系统时钟
+	SCON0 = 0x10;		//8位数据，可变波特率
+	TMOD &= 0x0F;		//清定时器1模式位
+	TMOD |= 0x20;		//设定定时器1为8位自动重装载方式
+	TL1 = 0xCC;			//设定定时器初值
+	TH1 = 0xCC;			//
+	ET1 = 0;			//禁止定时器1中断
+	TR1 = 1;			//启动定时器1
+}
+
+//-----------------------------------------------------------------------------
+// System_Init
+//-----------------------------------------------------------------------------
+// Initialization function for device,
+// Call Init_Device() from your main program
+void Init_Device(void)
+{
+    Port_IO_Init();
+	OSCICN = (0x80 | 0x03);		//设置内部时钟
+
+	//T0,模式设定
+	TR0 = 0;		//停止计数
+	ET0 = 1;		//允许中断
+	PT0 = 1;		//高优先级中断
+	TMOD = 0x01;	//#00000,0001,16位定时模式
+
+	TH0 = 0;
+	TL0 = 0;
+	TR0 = 1;		//开始运行
+
+	UartInit();		//Uart0 初始化
+	
+    EA = 1;			//开启全局中断允许
+}
+
+
+/********************延时函数************************/
+//延时y ms
+void	Delay(uint y)
+{
+	uint	x;
+	while (y--)
+	{
+		x = 862;
+		while (x--);
+	}
+}
+
+
+/********************* 键盘扫描函数************************/
+void	Key_Scan()
+{
+	P4_IN = P4;
+	
+	if (!Key1)			//键扫描1，检测下降沿
+	{
+		if(Key1_back)
+		{
+			Key1_press_flag = 1;
+		}
+	}
+
+	if (!Key2)			//键扫描2
+	{
+		if(Key2_back)
+		{
+			Key2_press_flag = 1;
+		}
+	}
+
+	if (!Key3)			//键扫描3
+	{
+		if(Key3_back)
+		{
+			Key3_press_flag = 1;
+		}
+	}
+
+	if (!Key4)			//键扫描4
+	{
+		if(Key4_back)
+		{
+			Key4_press_flag = 1;
+		}
+	}
+
+	Key1_back = Key1;
+	Key2_back = Key2;
+	Key3_back = Key3;
+	Key4_back = Key4;
+}
+
+/********************* Timer0中断函数************************/
+void timer0_int (void) interrupt 1
+{
+	TH0 = 0xfc;
+	TL0 = 0x18;			//1ms定时中断
+
+	Key_Scan();
+//	Run_treat();
+
+	++Timer_Count;
+	if (Timer_Count > 500)
+	{
+		Timer_Count = 0;
+		timer_flag = 1;
+//		LED1_INVERT;
+	}
+
+}
+
+/******************** 按键处理 **************************/
+void	Key_treat()
+{
+	if (Key1_press_flag)
+	{
+		LED1_INVERT;
+		Key1_press_flag = 0;
+	}
+
+	if (Key2_press_flag)
+	{
+		LED2_INVERT;
+		Key2_press_flag = 0;
+	}
+
+	if (Key3_press_flag)
+	{
+		LED3_INVERT;
+		Key3_press_flag = 0;
+	}
+
+	if (Key4_press_flag)
+	{
+		LED4_INVERT;
+		Key4_press_flag = 0;
+	}
+
+}
+
+/******************** 串行发送 **************************/
+void Uart_Send()
+{	//发送缓冲区写入发送内容
+		Uart_Send_Buff[0] = 'V';					
+		Uart_Send_Buff[1] = 'o';
+		Uart_Send_Buff[2] = 'l';
+		Uart_Send_Buff[3] = 't';
+		Uart_Send_Buff[4] = 'a';
+		Uart_Send_Buff[5] = 'g';
+		Uart_Send_Buff[6] = ':';
+		Uart_Send_Buff[7] = (Temp/1000)+0x30;		//16进制 to 10进制
+		Uart_Send_Buff[8] = ((Temp%1000)/100)+0x30;
+		Uart_Send_Buff[9] = ((Temp%100)/10)+0x30;
+		Uart_Send_Buff[10] = '.';					//小数点
+		Uart_Send_Buff[11] = (Temp%10)+0x30;
+		Uart_Send_Buff[12] = 0x0d;
+		Uart_Send_Buff[13] = 0x0a;
+		Uart_Send_Count =14;
+	//逐个字节发送缓冲区那内容
+		for (Uart_Send_Count=0;Uart_Send_Count<14;Uart_Send_Count++)
+		{
+		SBUF0 = Uart_Send_Buff[Uart_Send_Count];
+		while(TI0 ==0){}
+		TI0 = 0;
+	 }
+ }
+
+/********************主函数**************************/
+void main(void)
+{
+	PCA0MD &= ~0x40;				// WDTE = 0 (clear watchdog timer
+									// enable)
+	Init_Device();
+	P4 &= 0x0f;
+	while(1)
+	{
+		Key_treat();
+		if (timer_flag)
+			{
+			Temp++;
+			Uart_Send();
+			timer_flag =0;
+			}
+	}
+}

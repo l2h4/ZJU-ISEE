@@ -1,0 +1,193 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/04/2019  12:41:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, ECG20_00.obj TO ECG RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  ECG20_00.obj (ECG20_00)
+
+
+LINK MAP OF MODULE:  ECG (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?ECG20_00
+                    000CH     0014H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?ECG20_00
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     003BH     UNIT         ?PR?MAIN?ECG20_00
+            CODE    003EH     001CH     UNIT         ?PR?PORT_IO_INIT?ECG20_00
+            CODE    005AH     001BH     UNIT         ?PR?_DELAY?ECG20_00
+            CODE    0075H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0081H     0007H     UNIT         ?PR?INIT_DEVICE?ECG20_00
+
+
+
+OVERLAY MAP OF MODULE:   ECG (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?ECG20_00
+
+?PR?MAIN?ECG20_00
+  +--> ?PR?INIT_DEVICE?ECG20_00
+  +--> ?PR?_DELAY?ECG20_00
+
+?PR?INIT_DEVICE?ECG20_00
+  +--> ?PR?PORT_IO_INIT?ECG20_00
+
+
+
+SYMBOL TABLE OF MODULE:  ECG (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2019  12:41:20  PAGE 2
+
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0075H         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0078H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0075H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0075H         LINE#         133
+  C:0077H         LINE#         134
+  C:0078H         LINE#         135
+  C:0079H         LINE#         136
+  C:007BH         LINE#         185
+  C:007EH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        ECG20_00
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:0008H         PUBLIC        Timer_Count_2
+  D:00C7H         PUBLIC        P4
+  D:00A4H         PUBLIC        P0MDOUT
+  D:00A5H         PUBLIC        P1MDOUT
+  D:00A6H         PUBLIC        P2MDOUT
+  D:00A7H         PUBLIC        P3MDOUT
+  D:00AEH         PUBLIC        P4MDOUT
+  C:003EH         PUBLIC        Port_IO_Init
+  D:00D9H         PUBLIC        PCA0MD
+  D:00E1H         PUBLIC        XBR0
+  D:00E2H         PUBLIC        XBR1
+  B:0020H.0       PUBLIC        timer_flag
+  C:0003H         PUBLIC        main
+  D:00F2H         PUBLIC        P1MDIN
+  D:00D4H         PUBLIC        P0SKIP
+  D:00B2H         PUBLIC        OSCICN
+  C:0081H         PUBLIC        Init_Device
+  D:0009H         PUBLIC        Timer_Count
+  C:005AH         PUBLIC        _Delay
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2019  12:41:20  PAGE 3
+
+
+  D:000BH         PUBLIC        Led_State
+  -------         PROC          PORT_IO_INIT
+  C:003EH         LINE#         65
+  C:003EH         LINE#         66
+  C:003EH         LINE#         103
+  C:0041H         LINE#         104
+  C:0044H         LINE#         105
+  C:0047H         LINE#         106
+  C:004AH         LINE#         107
+  C:004DH         LINE#         108
+  C:0050H         LINE#         109
+  C:0053H         LINE#         110
+  C:0056H         LINE#         111
+  C:0059H         LINE#         112
+  -------         ENDPROC       PORT_IO_INIT
+  -------         PROC          INIT_DEVICE
+  C:0081H         LINE#         119
+  C:0081H         LINE#         120
+  C:0081H         LINE#         121
+  C:0084H         LINE#         122
+  C:0087H         LINE#         123
+  -------         ENDPROC       INIT_DEVICE
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        y
+  -------         DO            
+  D:0004H         SYMBOL        x
+  -------         ENDDO         
+  C:005AH         LINE#         128
+  C:005AH         LINE#         129
+  C:005AH         LINE#         131
+  C:0064H         LINE#         132
+  C:0064H         LINE#         133
+  C:0068H         LINE#         134
+  C:0074H         LINE#         136
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0003H         LINE#         141
+  C:0003H         LINE#         142
+  C:0003H         LINE#         143
+  C:0006H         LINE#         145
+  C:0009H         LINE#         147
+  C:000CH         LINE#         149
+  C:000CH         LINE#         150
+  C:000CH         LINE#         151
+  C:0013H         LINE#         153
+  C:0015H         LINE#         154
+  C:0018H         LINE#         155
+  C:001BH         LINE#         156
+  C:002AH         LINE#         157
+  C:002AH         LINE#         158
+  C:002AH         LINE#         159
+  C:002DH         LINE#         160
+  C:002FH         LINE#         161
+  C:002FH         LINE#         162
+  C:0032H         LINE#         163
+  C:0034H         LINE#         164
+  C:0034H         LINE#         165
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2019  12:41:20  PAGE 4
+
+
+  C:0037H         LINE#         166
+  C:0039H         LINE#         167
+  C:0039H         LINE#         168
+  C:003CH         LINE#         169
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        ECG20_00
+
+Program Size: data=13.1 xdata=0 code=136
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
