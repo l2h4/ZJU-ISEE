@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"bluetooth_car\startup_stm32f103xb.o"
+"bluetooth_car\movement.o"
+"bluetooth_car\main.o"
+"bluetooth_car\gpio.o"
+"bluetooth_car\tim.o"
+"bluetooth_car\usart.o"
+"bluetooth_car\stm32f1xx_it.o"
+"bluetooth_car\stm32f1xx_hal_msp.o"
+"bluetooth_car\stm32f1xx_hal_gpio_ex.o"
+"bluetooth_car\stm32f1xx_hal_tim.o"
+"bluetooth_car\stm32f1xx_hal_tim_ex.o"
+"bluetooth_car\stm32f1xx_hal.o"
+"bluetooth_car\stm32f1xx_hal_rcc.o"
+"bluetooth_car\stm32f1xx_hal_rcc_ex.o"
+"bluetooth_car\stm32f1xx_hal_gpio.o"
+"bluetooth_car\stm32f1xx_hal_dma.o"
+"bluetooth_car\stm32f1xx_hal_cortex.o"
+"bluetooth_car\stm32f1xx_hal_pwr.o"
+"bluetooth_car\stm32f1xx_hal_flash.o"
+"bluetooth_car\stm32f1xx_hal_flash_ex.o"
+"bluetooth_car\stm32f1xx_hal_exti.o"
+"bluetooth_car\stm32f1xx_hal_uart.o"
+"bluetooth_car\system_stm32f1xx.o"
+--strict --scatter "Bluetooth_Car\Bluetooth_Car.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Bluetooth_Car.map" -o Bluetooth_Car\Bluetooth_Car.axf

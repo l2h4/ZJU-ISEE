@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"advance\startup_stm32f103x6.o"
+"advance\movement.o"
+"advance\main.o"
+"advance\gpio.o"
+"advance\tim.o"
+"advance\usart.o"
+"advance\stm32f1xx_it.o"
+"advance\stm32f1xx_hal_msp.o"
+"advance\stm32f1xx_hal_gpio_ex.o"
+"advance\stm32f1xx_hal_tim.o"
+"advance\stm32f1xx_hal_tim_ex.o"
+"advance\stm32f1xx_hal.o"
+"advance\stm32f1xx_hal_rcc.o"
+"advance\stm32f1xx_hal_rcc_ex.o"
+"advance\stm32f1xx_hal_gpio.o"
+"advance\stm32f1xx_hal_dma.o"
+"advance\stm32f1xx_hal_cortex.o"
+"advance\stm32f1xx_hal_pwr.o"
+"advance\stm32f1xx_hal_flash.o"
+"advance\stm32f1xx_hal_flash_ex.o"
+"advance\stm32f1xx_hal_exti.o"
+"advance\stm32f1xx_hal_uart.o"
+"advance\system_stm32f1xx.o"
+--strict --scatter "Advance\Advance.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Advance.map" -o Advance\Advance.axf
