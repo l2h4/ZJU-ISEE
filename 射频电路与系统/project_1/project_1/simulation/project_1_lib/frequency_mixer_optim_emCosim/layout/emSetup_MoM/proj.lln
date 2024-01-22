@@ -1,0 +1,21 @@
+BEGIN_SUBSTRATE
+8 __BOTTOM
+7 __ExpandLayer__BOTTOM_17
+6 __SubstrateLayer1
+5 __ExpandLayer__SubstrateLayer1_14
+4 __SubstrateLayer2
+3 __ExpandLayer__SubstrateLayer3_11
+2 __SubstrateLayer3
+1 __ExpandLayer__TOP_8
+0 __TOP
+END_SUBSTRATE
+BEGIN_MASK
+8 M2_M3
+7 cond_cond2
+6 silkscreenBottom
+5 cond2
+4 M3
+3 M2
+2 cond
+1 silkscreenTop
+END_MASK

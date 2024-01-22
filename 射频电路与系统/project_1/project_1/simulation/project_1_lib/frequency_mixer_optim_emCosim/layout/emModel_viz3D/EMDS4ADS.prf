@@ -1,0 +1,64 @@
+Begin_Block  Header 
+  
+  Mode  ASCII 
+  File_Name  D:/Desktop/RF/project_1/project_1/simulation/project_1_lib/frequency_mixer_optim_emCosim/layout/emModel_viz3D/EMDS4ADS.prf 
+  Version  3.00 
+  
+End_Block  Header 
+
+Begin_Block  Data 
+  
+  Begin_Preferences 
+  
+  Begin_Material_Block 
+  Material cond     1.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Material __SubstrateLayer3     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Material __SubstrateLayer2     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Material __SubstrateLayer1     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  End_Material_Block 
+  
+  Begin_Color_Block 
+  Object __SubstrateLayer1_1     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Object __SubstrateLayer1_2     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Object __SubstrateLayer2_3     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Object __SubstrateLayer3_4     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Object __SubstrateLayer3_5     1.0000000000000000e+00      0.0000000000000000e+00      1.0000000000000000e+00  
+  Object cond_6     1.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Object cond_7     1.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Object cond_8     1.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Object cond_9     1.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  End_Color_Block 
+  
+  Begin_Visible_Block 
+  Object __SubstrateLayer1_1 1  0  80  
+  Object __SubstrateLayer1_2 1  0  80  
+  Object __SubstrateLayer2_3 1  0  80  
+  Object __SubstrateLayer3_4 1  0  80  
+  Object __SubstrateLayer3_5 1  0  80  
+  Object cond_6 1  1  50  
+  Object cond_7 1  1  50  
+  Object cond_8 1  1  50  
+  Object cond_9 1  1  50  
+  End_Visible_Block 
+  
+  Begin_Plane_Block 
+  Planes 0  
+  End_Plane_Block 
+  
+  Begin_Camera_Block 
+  Position     2.5736481933593750e+03     -2.4119238281250000e+03      2.6211623535156250e+03  
+  Target    -2.0289070129394531e+01      1.8201313781738281e+02      2.7225294113159180e+01  
+  Up    -4.0824830532073975e-01      4.0824821591377258e-01      8.1649655103683472e-01  
+      1.7971326904296875e+03      1.7971326904296875e+03  
+  End_Camera_Block 
+  
+  Begin_Background_Block 
+  Top_Color     0.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Bottom_Color     0.0000000000000000e+00      0.0000000000000000e+00      0.0000000000000000e+00  
+  Shadow 0  
+  End_Background_Block 
+  
+  End_Preferences 
+  
+End_Block  Data 
+

@@ -1,0 +1,31 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+OPTIM Optim1[1] <project_1_lib:3db_coupler_optim:schematic>  optIter=(0->200)
+
+SP Optim1[1].SP1[0] <project_1_lib:3db_coupler_optim:schematic>  optIter=0  freq=(3 GHz->5 GHz)
+
+Iteration/Trial #0:
+  CurrentEF: 1.24412129783048
+  Optimization variables:
+    Lmid1 = 2.71259
+    Lmid2 = 1.40154
+    Wmid1 = 100.001e-03
+    Wmid2 = 100.011e-03
+
+SP Optim1[1].SP1[135] <project_1_lib:3db_coupler_optim:schematic>  optIter=135  freq=(3 GHz->5 GHz)
+
+Iteration/Trial #135:
+  CurrentEF: 1.24412124966788
+  Optimization variables:
+    Lmid1 = 2.712590283284832
+    Lmid2 = 1.401548064889996
+    Wmid1 = 100.0015994984432e-03
+    Wmid2 = 100.0117313360925e-03
+Optim1[1] reached the iteration limit. 
+
+Resource usage:
+  Total stopwatch time     =    22.39 seconds.
+

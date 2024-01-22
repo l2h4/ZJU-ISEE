@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<annotation_files Time="周三 1月 3 17:20:35 2024" Simulator="hpeesofsim" Version="1.0">
+ <File name="annotation_1.xml">
+  <Controller name="Tran1">
+   <P>time: 0.0000000000000000e+00</P>
+  </Controller>
+ </File>
+</annotation_files>

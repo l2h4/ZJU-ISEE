@@ -1,0 +1,11 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+SP SP1[1] <project_1_lib:filter:schematic>   freq=(10 MHz->4 GHz)
+
+
+Resource usage:
+  Total stopwatch time     =     0.26 seconds.
+

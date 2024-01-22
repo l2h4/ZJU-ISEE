@@ -1,0 +1,78 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+1 spare nodes and 1 spare devices are removed.
+The details can be found in file 'D:\Desktop\RF\project_2\project_2_wrk\data\.\bias_data\spare_removal.txt'.
+
+
+OPTIM Optim1[1] <project_2_lib:bias:schematic>  optIter=(0->25)
+
+DC Optim1[1].DC1[0] <project_2_lib:bias:schematic>  optIter=0 
+.
+DC convergence achieved in 43 iterations.
+Iteration/Trial #0:
+  CurrentEF: 0.00213744175607745
+  Optimization variables:
+    R1.R = 991.5170000000001
+    R2.R = 998.14
+
+DC Optim1[1].DC1[2] <project_2_lib:bias:schematic>  optIter=2 
+.
+DC convergence achieved in 41 iterations.
+Iteration/Trial #2:
+  CurrentEF: 0.00151948387011878
+  Optimization variables:
+    R1.R = 784.2643021312945
+    R2.R = 862.6303182410495
+
+DC Optim1[1].DC1[3] <project_2_lib:bias:schematic>  optIter=3 
+.
+DC convergence achieved in 40 iterations.
+Iteration/Trial #3:
+  CurrentEF: 0.00105084031229027
+  Optimization variables:
+    R1.R = 608.7604893297844
+    R2.R = 721.4966069003733
+
+DC Optim1[1].DC1[4] <project_2_lib:bias:schematic>  optIter=4 
+.
+DC convergence achieved in 39 iterations.
+Iteration/Trial #4:
+  CurrentEF: 0.000541584763183894
+  Optimization variables:
+    R1.R = 435.5336022942424
+    R2.R = 568.2874340449032
+
+DC Optim1[1].DC1[5] <project_2_lib:bias:schematic>  optIter=5 
+.
+DC convergence achieved in 38 iterations.
+Iteration/Trial #5:
+  CurrentEF: 0.000258628877723539
+  Optimization variables:
+    R1.R = 206.8923408335646
+    R2.R = 380.9040991128525
+
+DC Optim1[1].DC1[8] <project_2_lib:bias:schematic>  optIter=8 
+.
+DC convergence achieved in 37 iterations.
+Iteration/Trial #8:
+  CurrentEF: 5.63961873210422e-05
+  Optimization variables:
+    R1.R = 485.8183181319259
+    R2.R = 730.2964030708271
+
+DC Optim1[1].DC1[9] <project_2_lib:bias:schematic>  optIter=9 
+.
+DC convergence achieved in 37 iterations.
+Iteration/Trial #9:
+  CurrentEF: 0
+  Optimization variables:
+    R1.R = 466.6263044100153
+    R2.R = 748.7200226885957
+Optim1[1] reached the goals. 
+
+Resource usage:
+  Total stopwatch time     =    10.34 seconds.
+

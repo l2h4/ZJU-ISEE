@@ -1,0 +1,44 @@
+; Top Design: "project_2_lib:transmitter:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="project_2_lib:transmitter:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+Port:IF_source  N__1 0 Num=1 Z=50 Ohm P[1]=dbmtow(IF_pwr) Freq[1]=IF_freq MHz    Noise=yes Pac=polar(dbmtow(0),0) LimitPhaseNoiseToCarrier=no 
+Port:Term2  N__2 0 Num=2 Z=50 Ohm Noise=yes 
+#uselib "sml" , "Amplifier2"
+Amplifier2:AMP1  N__1 N__5 S21=dbpolar(5,180) S11=polar(0,0) S22=polar(0,180) S12=0 GainCompType=0 ReferToInput=0 GainCompSat=5.0 dB GainComp=1.0 dB ClipDataFile=1 
+#uselib "sml" , "Amplifier2"
+Amplifier2:AMP2  N__6 N__7 S21=dbpolar(19,0) S11=polar(0,0) S22=polar(0,180) S12=0 GainCompType=0 ReferToInput=0 GainCompSat=5.0 dB GainComp=1.0 dB ClipDataFile=1 
+#uselib "ckt" , "BPF_Chebyshev"
+BPF_Chebyshev:BPF1  N__9 N__6 Fcenter=1950 MHz BWpass=80 MHz Apass=3 dB Ripple=0.1 dB BWstop=400 MHz Astop=35 dB StopType="open" N=3 IL=1 dB Qu=1E308 Z1=50 Ohm Z2=50 Ohm 
+#uselib "ckt" , "BPF_Chebyshev"
+BPF_Chebyshev:BPF2  N__7 N__2 Fcenter=1950 MHz BWpass=80 MHz Apass=3 dB Ripple=0.1 dB BWstop=400 MHz Astop=35 dB StopType="open" N=5 IL=2 dB Qu=1E308 Z1=50 Ohm Z2=50 Ohm 
+Mixer:MIX1  N__5 N__9 N__12 SideBand=0 ConvGain=dbpolar(-6,0) S11=polar(0,0) S22=polar(0,180) S33=0 GainCompType=0 ReferToInput=0 GainCompSat=5.0 dB GainComp=1.0 dB 
+Port:LO_source  N__12 0 Num=4 Z=50 Ohm P[1]=dbmtow(LO_pwr) Freq[1]=LO_freq MHz    Noise=yes Pac=polar(dbmtow(0),0) LimitPhaseNoiseToCarrier=no 
+
+LO_freq=1960.7
+LO_pwr=13
+IF_freq=10.7
+IF_pwr=1.5
+AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=yes UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=yes DevOpPtLevel=0 \
+OutputPlan="AC1_Output" Freq=10.7 MHz 
+
+OutputPlan:AC1_Output \
+      Type="Output" \
+      UseNodeNestLevel=yes \
+      NodeNestLevel=2 \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2 \
+      UseDeviceCurrentNestLevel=no \
+      DeviceCurrentNestLevel=0 \
+      DeviceCurrentDeviceType="All" \
+      DeviceCurrentSymSyntax=yes \
+      UseCurrentNestLevel=yes \
+      CurrentNestLevel=999 \
+      UseDeviceVoltageNestLevel=no \
+      DeviceVoltageNestLevel=0 \
+      DeviceVoltageDeviceType="All"
+
+aele budget_path = ["IF_source.t1","AMP1.t2","MIX1.t2","BPF1.t2","AMP2.t2","BPF2.t2","Term2.t1"];
+aele BudGain1=bud_gain(,,50.0,,budget_path);

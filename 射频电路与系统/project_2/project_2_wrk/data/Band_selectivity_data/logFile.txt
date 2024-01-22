@@ -1,0 +1,16 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+Pt DC convergence is used.
+Warning detected by hpeesofsim during TRAN analysis `SP1'.
+    Z1 of Chebyshev filter `BPF1.CMP1' is constrained to 36.890531 ohms. 
+             (even order restriction)
+
+
+SP SP1[1] <project_2_lib:Band_selectivity:schematic>   freq=(1 GHz->3 GHz)
+
+
+Resource usage:
+  Total stopwatch time     =     0.29 seconds.
+

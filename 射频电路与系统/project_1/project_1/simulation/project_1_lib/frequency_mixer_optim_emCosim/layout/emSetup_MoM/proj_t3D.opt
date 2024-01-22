@@ -1,0 +1,7 @@
+mesh_convergence_plot OFF;
+save_fields_for nofrequencies;
+mask 2 expandDir 1;
+mask 3 expandDir 1;
+mask 4 expandDir -1;
+mask 5 expandDir -1;
+SPARAM_OUTPUTFORMAT CITIFILE;

@@ -1,0 +1,16 @@
+#Momentum: B.2020.00.283 (*) built: Jul 17 2019 
+#Momentum Date and Time: Fri Jan  5 17:01:24 2024
+
+Overall database status : 1 (file present and valid)
+
+Frequency range : from 0.003790311166 GHz to 10 GHz.
+
+Requested frequency range : from 0.003790311166 GHz to 10 GHz.
+
+Individual status fields : (0 = FALSE, 1 = TRUE)
+ File exists             : 1
+ Substrates match        : 1
+ Frequency-range matches : 1
+
+Corresponding potentialpath : C:\Users\LHSZX/
+Corresponding potentialname : C:\Users\LHSZX\\substrates\0000.sdb

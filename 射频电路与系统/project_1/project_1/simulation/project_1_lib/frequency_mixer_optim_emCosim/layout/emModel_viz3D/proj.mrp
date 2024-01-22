@@ -1,0 +1,12 @@
+Using the minimal snap distance of 0.004 mil
+(4 layout resolution points) for layout healing.
+
+--- WARNING -------------------------------------------------------------------
+
+Layout healing changed the layout. The actual
+highest aggregate snap distance was 0.001 mil.
+Further details have been written to the DRC
+report.
+
+-------------------------------------------------------------------------------
+

@@ -1,0 +1,75 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+Warning detected by hpeesofsim during TRAN analysis `Tran1'.
+    Z1 of Chebyshev filter `BPF1.CMP1' is constrained to 36.890531 ohms. 
+             (even order restriction)
+
+Warning detected by hpeesofsim during TRAN analysis `Tran1'.
+    Linear S_Port `PWR1.CMP1' is non-passive.
+Warning detected by hpeesofsim during TRAN analysis `Tran1'.
+    Linear S_Port `PWR2.CMP1' is non-passive.
+
+COMPONENT : AMP3.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : AMP1.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : AMP2.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : MIX2
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 4.18 MHz.
+
+COMPONENT : MIX1
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 4.18 MHz.
+Pt DC convergence is used.
+
+.
+
+COMPONENT : AMP3.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : AMP1.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : AMP2.SDD3P3
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 33.44 MHz.
+
+COMPONENT : MIX2
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 4.18 MHz.
+
+COMPONENT : MIX1
+    Characterizing to 17.12 GHz 
+
+    Use an adaptive sample spacing of 4.18 MHz.
+
+
+TRAN Tran1[1] <project_2_lib:Zero_IF_receiver:schematic>   time=(0 s->1 us)
+Warning detected by hpeesofsim during TRAN analysis `Tran1'.
+    MaxTimeStep reduced to  2.921e-11 to resolve source bandwidth.
+
+
+Resource usage:
+  Total stopwatch time     =    15.04 seconds.
+

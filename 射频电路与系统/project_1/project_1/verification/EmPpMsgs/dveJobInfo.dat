@@ -1,0 +1,5 @@
+jobName=EmPpMsgs
+jobType=emprep
+designName=project_1_lib:frequency_mixer_optim_emCosim:layout
+ruleFilePath=
+addInfo="EM preprocessor messages displayed as DRC errors"

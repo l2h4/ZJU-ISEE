@@ -1,0 +1,17 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+Pt DC convergence is used.
+
+AC AC1[1] <project_2_lib:transmitter:schematic>   freq=10.7 MHz
+Warning detected by hpeesofsim in FCAC frequency selection during AC analysis `AC1'.
+    A behavioral mixer has SideBand=BOTH.
+    FCAC analysis requires a single sideband so SideBand=LOWER will be used.
+    If results for both sidebands are desired,
+    please consider an HB analysis instead of an FCAC analysis.
+
+
+Resource usage:
+  Total stopwatch time     =     0.33 seconds.
+

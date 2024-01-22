@@ -1,0 +1,67 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+CT Sweep1[1] <project_2_lib:VC:schematic>   Vbias=(1->10)
+
+SP Sweep1[1].SP1[1/19] <project_2_lib:VC:schematic>  Vbias=1  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[2/19] <project_2_lib:VC:schematic>  Vbias=1.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[3/19] <project_2_lib:VC:schematic>  Vbias=2  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[4/19] <project_2_lib:VC:schematic>  Vbias=2.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[5/19] <project_2_lib:VC:schematic>  Vbias=3  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[6/19] <project_2_lib:VC:schematic>  Vbias=3.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[7/19] <project_2_lib:VC:schematic>  Vbias=4  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[8/19] <project_2_lib:VC:schematic>  Vbias=4.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[9/19] <project_2_lib:VC:schematic>  Vbias=5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[10/19] <project_2_lib:VC:schematic>  Vbias=5.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[11/19] <project_2_lib:VC:schematic>  Vbias=6  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[12/19] <project_2_lib:VC:schematic>  Vbias=6.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[13/19] <project_2_lib:VC:schematic>  Vbias=7  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[14/19] <project_2_lib:VC:schematic>  Vbias=7.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[15/19] <project_2_lib:VC:schematic>  Vbias=8  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[16/19] <project_2_lib:VC:schematic>  Vbias=8.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[17/19] <project_2_lib:VC:schematic>  Vbias=9  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[18/19] <project_2_lib:VC:schematic>  Vbias=9.5  freq=1.8 GHz
+
+
+SP Sweep1[1].SP1[19/19] <project_2_lib:VC:schematic>  Vbias=10  freq=1.8 GHz
+
+
+Resource usage:
+  Total stopwatch time     =     0.32 seconds.
+

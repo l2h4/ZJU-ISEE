@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PinPropertiesSettings>
+    <FixedDimensions>0</FixedDimensions>
+    <PinShapeType>0</PinShapeType>
+    <PinSnapType>0</PinSnapType>
+    <Height>1</Height>
+    <Width>1</Width>
+    <Radius>1</Radius>
+    <EdgeLength>1</EdgeLength>
+    <AutoLayerSnapping>1</AutoLayerSnapping>
+    <AutoAngleSnapping>1</AutoAngleSnapping>
+    <DifferentialPort>0</DifferentialPort>
+    <DifferentialPortNegSuffix>_NEG</DifferentialPortNegSuffix>
+    <DifferentialPortPosSuffix>_POS</DifferentialPortPosSuffix>
+</PinPropertiesSettings>

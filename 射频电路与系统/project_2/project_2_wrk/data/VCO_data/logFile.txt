@@ -1,0 +1,16 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+1 spare nodes and 1 spare devices are removed.
+The details can be found in file 'D:\Desktop\RF\project_2\project_2_wrk\data\.\VCO_data\spare_removal.txt'.
+
+
+
+TRAN Tran1[1] <project_2_lib:VCO:schematic>   time=(0 s->30 ns)
+
+
+Resource usage:
+  Total stopwatch time     =     0.35 seconds.
+

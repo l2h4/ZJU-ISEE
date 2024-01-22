@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<port_setup version="1.1">
+  <port_list>
+    <port id="1">
+      <name>C1_P1</name>
+      <plus_pin>C1_P1</plus_pin>
+      <impedance>
+        <real>50</real>
+        <imag>0</imag>
+      </impedance>
+    </port>
+    <port id="2">
+      <name>C2_P1</name>
+      <plus_pin>C2_P1</plus_pin>
+      <impedance>
+        <real>50</real>
+        <imag>0</imag>
+      </impedance>
+    </port>
+    <port id="3">
+      <name>C3_P1</name>
+      <plus_pin>C3_P1</plus_pin>
+      <impedance>
+        <real>50</real>
+        <imag>0</imag>
+      </impedance>
+    </port>
+    <port id="4">
+      <name>DIODE2_P1</name>
+      <plus_pin>DIODE2_P1</plus_pin>
+      <impedance>
+        <real>50</real>
+        <imag>0</imag>
+      </impedance>
+    </port>
+    <port id="5">
+      <name>L3_P1</name>
+      <plus_pin>L3_P1</plus_pin>
+      <impedance>
+        <real>50</real>
+        <imag>0</imag>
+      </impedance>
+    </port>
+  </port_list>
+</port_setup>

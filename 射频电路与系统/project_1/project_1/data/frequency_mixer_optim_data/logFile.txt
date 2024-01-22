@@ -1,0 +1,521 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+HB HB1[1] <project_1_lib:frequency_mixer_optim:schematic>
+Pt DC convergence is used.
+    Number of tones:   1.
+    Number of frequencies:   4.
+    Number of time samples:  8.
+    Number of HB equations (problem size): 329.
+    Auto mode: off.
+    Convergence mode: Auto.
+    Linear solver: Krylov (GS_GMRES).
+    Preconditioner: DCP.
+    The general solver is used for HB Krylov preconditioning.
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	3.30796 mA  	100.0             
+1 	614.547 uA  	100.0	16.3477 mV  	  3	5.477e-02   
+2 	21.9075 uA  	100.0	9.19753 mV  	  4	2.120e-02   
+3 	106.612 nA  	100.0	379.647 uV  	  5	2.169e-03   
+4 	103.253 pA  	100.0	990.186 nV  	  6	6.733e-04   
+5 	14.4847 fA  	100.0	753.157 pV  	  7	1.680e-04   
+An HB truncation error may be present.
+o The HB truncation error is due to using a finite order 
+  (number of harmonics) in the representation of the
+  circuit signals.
+
+Waveform                Trunc error             Tolerance
+---------------------------------------------------------
+DIODE2.a                6.420e-04       >       1.012e-06
+N__10                   6.371e-04       >       1.015e-06
+DIODE1.a                2.031e-04       >       1.182e-06
+N__9                    1.624e-04       >       1.188e-06
+
+o Number of waveforms violating the HB truncation error check:
+        4 out of 4 waveforms.
+o Estimated max HB truncation error: 6.420e-04 @ waveform DIODE2.a .
+o The maximal HB truncation error estimate is greater than the 
+  achieved tolerance of 1.012e-06 for this waveform.
+o A time-domain plot of the N__10 waveform may show the error as 
+  Gibbs ripples.
+o To reduce the error, increase the order (number of harmonics) 
+  and re-simulate.
+
+HB HB1[1] <project_1_lib:frequency_mixer_optim:schematic>   PLO=(1->20)
+    Number of tones:   2.
+    Number of frequencies:   19.
+    Number of time samples:  64.
+    Number of HB equations (HB problem size): 1739.
+    Number of SS/noise equations (SS/noise problem size): 3478.
+    Auto mode: off.
+    Convergence mode: Auto.
+    Linear solver: Krylov (GS_GMRES).
+    Preconditioner: DCP.
+    The general solver is used for HB Krylov preconditioning.
+    PLO=1              0.00% 1/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.12344 mA  	100.0             
+1 	282.054 uA  	100.0	30.8891 mV  	  3	2.047e-02   
+2 	8.50706 uA  	100.0	2.54531 mV  	  4	2.961e-02   
+3 	16.994 nA   	100.0	116.847 uV  	  7	1.883e-03   
+4 	16.818 pA   	100.0	212.442 nV  	  8	8.683e-04   
+5 	13.4411 fA  	100.0	175.106 pV  	  8	6.750e-04   
+
+HB_NOISE HB1[1].HB1[1/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    Given a set of Harmonic Balance large-signal frequencies LSfreq
+    (determined by Freq[], Order[] and MaxOrder) and a noise frequency
+    FreqForNoise, the small-signal frequencies used in a nonlinear noise
+    analysis are SSfreq=LSfreq+FreqForNoise and SSfreq=LSfreq-FreqForNoise.
+    For this circuit, more than one such small-signal frequency differs
+    from InputFreq by less than BandwidthForNoise. This means that the
+    simulator is unable to uniquely determine what small-signal tone
+    should be used for computing the small-signal conversion gains needed
+    for the evaluation of NFssb and NFdsb. The small-signal frequency
+    corresponding to the large-signal frequency with the lowest order will
+    be used. In rare cases, NFssb and NFdsb are inaccurate. To eliminate
+    this warning and the possibility of inaccurate results:
+     o Reduce Order[] or MaxOrder to eliminate a conflicting large-signal
+       frequency
+     o Offset FreqForNoise and InputFreq by a small amount, like 1-2 Hz.
+     o Offset one of the fundamental frequencies by a small amount, like
+       1-2 Hz.
+     o Eliminate any colliding tones in your Harmonic Balance setup,
+       if present.
+
+    Noise Freq=200 MHz  NFssb=13.65dB  NFdsb=5.752dB  Conv Gain=-20.06dB
+
+    Noise Freq=200 MHz  NFssb=13.65dB  NFdsb=5.752dB  Conv Gain=-20.06dB
+    PLO=2              5.26% 2/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	865.876 uA  	100.0             
+1 	1.79049 mA  	100.0	38.2781 mV  	  3	4.097e-02   
+2 	99.974 uA   	100.0	11.545 mV   	  7	3.466e-02   
+3 	753.07 nA   	100.0	1.03957 mV  	 10	4.180e-03   
+4 	780.158 pA  	100.0	6.47814 uV  	 13	8.964e-04   
+5 	421.664 fA  	100.0	10.2605 nV  	 15	6.741e-04   
+
+
+HB_NOISE HB1[1].HB1[2/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=12.07dB  NFdsb=4.255dB  Conv Gain=-16.27dB
+
+    Noise Freq=200 MHz  NFssb=12.07dB  NFdsb=4.255dB  Conv Gain=-16.27dB
+    PLO=3             10.53% 3/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	971.528 uA  	100.0             
+1 	2.99099 mA  	100.0	50.2596 mV  	  4	7.647e-02   
+2 	250.903 uA  	100.0	19.2127 mV  	  9	6.197e-02   
+3 	2.74153 uA  	100.0	2.50924 mV  	 16	6.091e-03   
+4 	2.8412 nA   	100.0	29.0741 uV  	 23	8.905e-04   
+5 	2.67056 pA  	100.0	51.268 nV   	 26	9.373e-04   
+
+
+HB_NOISE HB1[1].HB1[3/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=11.17dB  NFdsb=3.778dB  Conv Gain=-14.23dB
+
+    Noise Freq=200 MHz  NFssb=11.17dB  NFdsb=3.778dB  Conv Gain=-14.23dB
+    PLO=4             15.79% 4/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.09007 mA  	100.0             
+1 	2.91927 mA  	100.0	60.4665 mV  	  5	8.012e-02   
+2 	362.939 uA  	100.0	34.7414 mV  	 12	7.822e-02   
+3 	7.49209 uA  	100.0	3.87865 mV  	 20	1.236e-02   
+4 	9.58174 nA  	100.0	99.312 uV   	 32	7.770e-04   
+5 	11.4272 pA  	100.0	138.915 nV  	 31	9.309e-04   
+
+
+HB_NOISE HB1[1].HB1[4/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=10.3dB  NFdsb=3.537dB  Conv Gain=-12.4dB
+
+    Noise Freq=200 MHz  NFssb=10.3dB  NFdsb=3.537dB  Conv Gain=-12.4dB
+    PLO=5             21.05% 5/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.22308 mA  	100.0             
+1 	3.79459 mA  	100.0	49.884 mV   	  4	8.606e-02   
+2 	617.702 uA  	100.0	56.9713 mV  	 16	8.027e-02   
+3 	21.0573 uA  	100.0	6.33599 mV  	 22	2.031e-02   
+4 	33.7723 nA  	100.0	273.658 uV  	 39	8.490e-04   
+5 	37.4833 pA  	100.0	407.775 nV  	 38	8.802e-04   
+
+
+HB_NOISE HB1[1].HB1[5/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=9.833dB  NFdsb=3.288dB  Conv Gain=-11.36dB
+
+    Noise Freq=200 MHz  NFssb=9.833dB  NFdsb=3.288dB  Conv Gain=-11.36dB
+    PLO=6             26.32% 6/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.37232 mA  	100.0             
+1 	4.16823 mA  	100.0	53.8206 mV  	  3	7.922e-02   
+2 	1.1976 mA   	100.0	72.2369 mV  	 22	7.385e-02   
+3 	99.4117 uA  	100.0	6.29915 mV  	 16	6.810e-02   
+4 	869.135 nA  	100.0	1.43886 mV  	 35	5.902e-03   
+5 	839.526 pA  	100.0	15.4899 uV  	 47	9.772e-04   
+6 	843.171 fA  	100.0	12.8045 nV  	 47	8.762e-04   
+
+
+HB_NOISE HB1[1].HB1[6/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=9.659dB  NFdsb=3.18dB  Conv Gain=-10.92dB
+
+    Noise Freq=200 MHz  NFssb=9.659dB  NFdsb=3.18dB  Conv Gain=-10.92dB
+    PLO=7             31.58% 7/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.53977 mA  	100.0             
+1 	4.69041 mA  	100.0	62.7595 mV  	  3	5.688e-02   
+2 	1.23486 mA  	100.0	87.2448 mV  	 29	5.038e-02   
+3 	88.3924 uA  	100.0	6.37437 mV  	 20	4.948e-02   
+4 	633.265 nA  	100.0	1.24992 mV  	 43	4.345e-03   
+5 	925.043 pA  	100.0	9.2705 uV   	 50	1.366e-03   
+6 	2.26876 pA  	100.0	14.9949 nV  	 50	2.421e-03   
+
+
+HB_NOISE HB1[1].HB1[7/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=9.603dB  NFdsb=3.151dB  Conv Gain=-10.71dB
+
+    Noise Freq=200 MHz  NFssb=9.603dB  NFdsb=3.151dB  Conv Gain=-10.71dB
+    PLO=8             36.84% 8/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.72765 mA  	100.0             
+1 	5.23991 mA  	100.0	72.2416 mV  	  3	4.252e-02   
+2 	1.14568 mA  	100.0	103.271 mV  	 35	4.909e-02   
+3 	61.5247 uA  	100.0	8.02921 mV  	 27	3.950e-02   
+4 	411.352 nA  	100.0	870.289 uV  	 50	3.349e-03   
+5 	2.12469 nA  	100.0	5.54676 uV  	 50	4.057e-03   
+6 	12.5564 pA  	100.0	36.3483 nV  	 50	5.577e-03   
+
+
+HB_NOISE HB1[1].HB1[8/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=9.566dB  NFdsb=3.174dB  Conv Gain=-10.56dB
+
+    Noise Freq=200 MHz  NFssb=9.566dB  NFdsb=3.174dB  Conv Gain=-10.56dB
+    PLO=9             42.11% 9/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	1.93845 mA  	100.0             
+1 	5.95386 mA  	100.0	82.2002 mV  	  3	3.299e-02   
+2 	3.38156 mA  	100.0	112.313 mV  	 40	4.575e-02   
+3 	691.635 uA  	100.0	11.7451 mV  	 20	4.178e-02   
+4 	59.4625 uA  	100.0	5.68948 mV  	 32	3.671e-02   
+5 	627.146 nA  	100.0	639.926 uV  	 48	5.934e-03   
+6 	9.06472 nA  	100.0	12.0398 uV  	 50	1.304e-02   
+7 	118.215 pA  	100.0	228.094 nV  	 50	1.119e-02   
+
+
+HB_NOISE HB1[1].HB1[9/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=9.374dB  NFdsb=3.251dB  Conv Gain=-10.27dB
+
+    Noise Freq=200 MHz  NFssb=9.374dB  NFdsb=3.251dB  Conv Gain=-10.27dB
+    PLO=10            47.37% 10/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	2.17498 mA  	100.0             
+1 	6.65768 mA  	100.0	93.0004 mV  	  3	2.639e-02   
+2 	3.7956 mA   	 50.0	125.374 mV  	 41	4.708e-02   
+3 	735.682 uA  	100.0	63.9555 mV  	 40	4.701e-02   
+4 	48.8938 uA  	100.0	7.28219 mV  	 36	3.101e-02   
+5 	745.395 nA  	100.0	730.424 uV  	 50	1.291e-02   
+6 	13.0696 nA  	100.0	12.0963 uV  	 50	1.428e-02   
+7 	242.204 pA  	100.0	246.598 nV  	 50	2.181e-02   
+
+
+HB_NOISE HB1[1].HB1[10/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    The noise equations were only solved to
+    an accuracy of 1.40962e-06 instead of the requested 1e-06.
+    Try increasing Krylov max iterations and Krylov restart length
+    in order to improve solver's accuracy.
+
+    Noise Freq=200 MHz  NFssb=9.193dB  NFdsb=3.349dB  Conv Gain=-9.978dB
+
+    Noise Freq=200 MHz  NFssb=9.193dB  NFdsb=3.349dB  Conv Gain=-9.978dB
+    PLO=11            52.63% 11/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	2.44037 mA  	100.0             
+1 	7.54678 mA  	100.0	105.048 mV  	  3	2.172e-02   
+2 	4.10321 mA  	 50.0	130.895 mV  	 41	4.969e-02   
+3 	884.883 uA  	100.0	64.0117 mV  	 42	4.789e-02   
+4 	88.0441 uA  	100.0	7.40308 mV  	 34	3.892e-02   
+5 	1.412 uA    	100.0	1.34609 mV  	 50	1.266e-02   
+6 	32.3456 nA  	100.0	23.4909 uV  	 50	2.046e-02   
+7 	784.039 pA  	100.0	657.083 nV  	 50	2.391e-02   
+
+
+HB_NOISE HB1[1].HB1[11/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    The noise equations were only solved to
+    an accuracy of 2.78058e-06 instead of the requested 1e-06.
+    Try increasing Krylov max iterations and Krylov restart length
+    in order to improve solver's accuracy.
+
+    Noise Freq=200 MHz  NFssb=9.01dB  NFdsb=3.433dB  Conv Gain=-9.687dB
+
+    Noise Freq=200 MHz  NFssb=9.01dB  NFdsb=3.433dB  Conv Gain=-9.687dB
+    PLO=12            57.89% 12/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	2.73814 mA  	100.0             
+1 	8.38038 mA  	100.0	118.467 mV  	  3	1.823e-02   
+2 	4.95151 mA  	 50.0	129.574 mV  	 42	4.827e-02   
+3 	1.35158 mA  	100.0	69.298 mV   	 41	4.689e-02   
+4 	136.815 uA  	100.0	11.6975 mV  	 35	4.398e-02   
+5 	3.25199 uA  	100.0	1.95178 mV  	 50	1.494e-02   
+6 	38.1474 nA  	100.0	59.1596 uV  	 50	1.144e-02   
+7 	1.00095 nA  	100.0	1.00824 uV  	 50	2.138e-02   
+
+
+HB_NOISE HB1[1].HB1[12/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    The noise equations were only solved to
+    an accuracy of 1.12187e-06 instead of the requested 1e-06.
+    Try increasing Krylov max iterations and Krylov restart length
+    in order to improve solver's accuracy.
+
+    Noise Freq=200 MHz  NFssb=8.771dB  NFdsb=3.498dB  Conv Gain=-9.441dB
+
+    Noise Freq=200 MHz  NFssb=8.771dB  NFdsb=3.498dB  Conv Gain=-9.441dB
+    PLO=13            63.16% 13/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	3.07224 mA  	100.0             
+1 	9.46257 mA  	100.0	133.445 mV  	  3	1.546e-02   
+2 	5.61825 mA  	 50.0	154.433 mV  	 40	4.927e-02   
+3 	2.14119 mA  	100.0	83.7479 mV  	 40	4.511e-02   
+4 	420.489 uA  	100.0	11.7657 mV  	 29	4.301e-02   
+5 	26.5337 uA  	100.0	3.62736 mV  	 35	3.447e-02   
+6 	565.26 nA   	100.0	385.314 uV  	 50	1.657e-02   
+7 	10.2675 nA  	100.0	9.19754 uV  	 50	1.889e-02   
+8 	220.654 pA  	100.0	125.675 nV  	 50	2.177e-02   
+
+
+HB_NOISE HB1[1].HB1[13/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    The noise equations were only solved to
+    an accuracy of 1.41423e-06 instead of the requested 1e-06.
+    Try increasing Krylov max iterations and Krylov restart length
+    in order to improve solver's accuracy.
+
+    Noise Freq=200 MHz  NFssb=8.575dB  NFdsb=3.525dB  Conv Gain=-9.296dB
+
+    Noise Freq=200 MHz  NFssb=8.575dB  NFdsb=3.525dB  Conv Gain=-9.296dB
+    PLO=14            68.42% 14/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	3.44711 mA  	100.0             
+1 	10.6722 mA  	100.0	150.199 mV  	  3	1.311e-02   
+2 	6.43878 mA  	 50.0	174.178 mV  	 38	4.946e-02   
+3 	2.26251 mA  	100.0	84.6936 mV  	 36	4.742e-02   
+4 	415.362 uA  	100.0	9.22073 mV  	 27	4.646e-02   
+5 	22.9929 uA  	100.0	3.28503 mV  	 36	2.956e-02   
+6 	438.411 nA  	100.0	288.155 uV  	 50	1.675e-02   
+7 	6.70313 nA  	100.0	9.08674 uV  	 50	1.633e-02   
+8 	143.939 pA  	100.0	95.5334 nV  	 50	2.029e-02   
+
+
+HB_NOISE HB1[1].HB1[14/20] <project_1_lib:frequency_mixer_optim:schematic>
+Warning detected by hpeesofsim during spectral noise analysis `HB_NOISE'.
+    The noise equations were only solved to
+    an accuracy of 1.08723e-06 instead of the requested 1e-06.
+    Try increasing Krylov max iterations and Krylov restart length
+    in order to improve solver's accuracy.
+
+    Noise Freq=200 MHz  NFssb=8.226dB  NFdsb=3.517dB  Conv Gain=-9.087dB
+
+    Noise Freq=200 MHz  NFssb=8.226dB  NFdsb=3.517dB  Conv Gain=-9.087dB
+    PLO=15            73.68% 15/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	3.86772 mA  	100.0             
+1 	11.995 mA   	100.0	168.988 mV  	  3	1.114e-02   
+2 	7.46622 mA  	 50.0	161.038 mV  	 34	4.809e-02   
+3 	915.178 uA  	100.0	60.9912 mV  	 31	3.894e-02   
+4 	27.6404 uA  	100.0	8.33214 mV  	 48	1.254e-02   
+5 	475.58 nA   	100.0	287.451 uV  	 50	1.282e-02   
+6 	7.33478 nA  	100.0	9.66393 uV  	 50	1.719e-02   
+7 	132.486 pA  	100.0	134.204 nV  	 50	1.595e-02   
+
+
+HB_NOISE HB1[1].HB1[15/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.961dB  NFdsb=3.525dB  Conv Gain=-8.935dB
+
+    Noise Freq=200 MHz  NFssb=7.961dB  NFdsb=3.525dB  Conv Gain=-8.935dB
+    PLO=16            78.95% 16/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	4.33966 mA  	100.0             
+1 	13.3681 mA  	100.0	190.04 mV   	  3	9.471e-03   
+2 	7.25856 mA  	100.0	130.891 mV  	 31	4.777e-02   
+3 	934.813 uA  	100.0	13.3392 mV  	 17	4.240e-02   
+4 	42.5768 uA  	100.0	6.11697 mV  	 40	1.427e-02   
+5 	307.418 nA  	100.0	264.665 uV  	 50	4.499e-03   
+6 	5.27285 nA  	100.0	5.63657 uV  	 50	1.965e-02   
+7 	87.473 pA   	100.0	73.5579 nV  	 50	1.478e-02   
+
+
+HB_NOISE HB1[1].HB1[16/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.894dB  NFdsb=3.534dB  Conv Gain=-8.913dB
+
+    Noise Freq=200 MHz  NFssb=7.894dB  NFdsb=3.534dB  Conv Gain=-8.913dB
+    PLO=17            84.21% 17/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	4.86918 mA  	100.0             
+1 	14.9115 mA  	100.0	213.605 mV  	  3	8.129e-03   
+2 	4.32144 mA  	100.0	134.65 mV   	 31	4.964e-02   
+3 	387.606 uA  	100.0	16.8526 mV  	 20	4.586e-02   
+4 	7.28291 uA  	100.0	3.53784 mV  	 50	7.198e-03   
+5 	148.747 nA  	100.0	72.7209 uV  	 50	1.427e-02   
+6 	1.46136 nA  	100.0	1.78749 uV  	 50	9.404e-03   
+
+
+HB_NOISE HB1[1].HB1[17/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.798dB  NFdsb=3.593dB  Conv Gain=-8.863dB
+
+    Noise Freq=200 MHz  NFssb=7.798dB  NFdsb=3.593dB  Conv Gain=-8.863dB
+    PLO=18            89.47% 18/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	5.46331 mA  	100.0             
+1 	16.5608 mA  	100.0	240.024 mV  	  3	7.043e-03   
+2 	4.34334 mA  	100.0	136.188 mV  	 32	4.785e-02   
+3 	387.927 uA  	100.0	18.6421 mV  	 24	4.488e-02   
+4 	9.85877 uA  	100.0	4.35992 mV  	 50	9.934e-03   
+5 	89.0071 nA  	100.0	54.7616 uV  	 50	8.973e-03   
+6 	1.67214 nA  	100.0	1.82264 uV  	 50	1.407e-02   
+
+
+HB_NOISE HB1[1].HB1[18/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.747dB  NFdsb=3.641dB  Conv Gain=-8.831dB
+
+    Noise Freq=200 MHz  NFssb=7.747dB  NFdsb=3.641dB  Conv Gain=-8.831dB
+    PLO=19            94.74% 19/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	6.12993 mA  	100.0             
+1 	18.3509 mA  	100.0	269.649 mV  	  3	6.141e-03   
+2 	3.81882 mA  	100.0	147.121 mV  	 33	4.649e-02   
+3 	270.39 uA   	100.0	18.942 mV   	 30	3.885e-02   
+4 	6.48225 uA  	100.0	3.8009 mV   	 50	7.619e-03   
+5 	65.2056 nA  	100.0	27.7583 uV  	 50	1.244e-02   
+6 	1.64863 nA  	100.0	1.4173 uV   	 50	2.014e-02   
+
+
+HB_NOISE HB1[1].HB1[19/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.735dB  NFdsb=3.67dB  Conv Gain=-8.821dB
+
+    Noise Freq=200 MHz  NFssb=7.735dB  NFdsb=3.67dB  Conv Gain=-8.821dB
+    PLO=20           100.00% 20/20
+------------------------------------------------------------------------------
+Newton solver:					Linear solver:
+Iter	KCL residual	Damp %	Sol update	Iters	Residual
+------------------------------------------------------------------------------
+0 	6.8779 mA   	100.0             
+1 	20.3327 mA  	100.0	302.887 mV  	  3	5.378e-03   
+2 	3.43906 mA  	100.0	163.183 mV  	 33	4.849e-02   
+3 	171.426 uA  	100.0	22.2998 mV  	 44	2.421e-02   
+4 	4.10171 uA  	100.0	2.02731 mV  	 50	1.957e-02   
+5 	140.764 nA  	100.0	46.5218 uV  	 50	3.852e-02   
+6 	2.61341 nA  	100.0	1.94114 uV  	 50	1.857e-02   
+
+
+HB_NOISE HB1[1].HB1[20/20] <project_1_lib:frequency_mixer_optim:schematic>
+
+    Noise Freq=200 MHz  NFssb=7.74dB  NFdsb=3.693dB  Conv Gain=-8.818dB
+
+    Noise Freq=200 MHz  NFssb=7.74dB  NFdsb=3.693dB  Conv Gain=-8.818dB
+An HB truncation error may be present.
+o The HB truncation error is due to using a finite order 
+  (number of harmonics) in the representation of the
+  circuit signals.
+
+Waveform                Trunc error             Tolerance
+---------------------------------------------------------
+DIODE2.a                1.835e-03       >       1.320e-06
+N__10                   1.747e-03       >       1.351e-06
+DIODE1.a                1.355e-03       >       1.566e-06
+N__9                    1.328e-03       >       1.900e-06
+
+o Number of waveforms violating the HB truncation error check:
+        4 out of 4 waveforms.
+o Estimated max HB truncation error: 1.835e-03 @ waveform DIODE2.a .
+o The maximal HB truncation error estimate is greater than the 
+  achieved tolerance of 1.320e-06 for this waveform.
+o A time-domain plot of the N__10 waveform may show the error as 
+  Gibbs ripples.
+o To reduce the error, increase the order (number of harmonics) 
+  and re-simulate.
+Warning detected by hpeesofsim during circuit set up.
+    Evaluation failed for ` IP3output=ip3_out(Vif,{-1,1,0},{-1,2,-1},50)':  "IP3output":
+      Function mix() : Invalid Mix vector supplied.
+
+Warning detected by hpeesofsim during circuit set up.
+    Evaluation failed for `PifTone=dBm(mix(Vif,{-1,1,0}))':  "PifTone":
+      Function mix() : Invalid Mix vector supplied.
+
+
+Resource usage:
+  Total stopwatch time     =     1.58 seconds.
+

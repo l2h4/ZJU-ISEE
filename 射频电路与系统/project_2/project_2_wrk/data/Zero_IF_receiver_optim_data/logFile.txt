@@ -1,0 +1,143 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+OPTIM Optim1[1] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=(0->100)
+Pt DC convergence is used.
+Warning detected by hpeesofsim during TRAN analysis `SP1'.
+    Z1 of Chebyshev filter `BPF1.CMP1' is constrained to 36.890531 ohms. 
+             (even order restriction)
+
+
+SP Optim1[1].SP1[0] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=0  freq=(2.1 GHz->2.18 GHz)
+Warning detected by hpeesofsim during SP analysis `SP1'.
+    Linear S_Port `PWR2.CMP1' is non-passive.
+    Please raise the StatusLevel to 5 on the Simulation Controller for
+    more information of amount of passivity violation and frequencies
+    at which passivity is violated on 'Status/Summary' field.
+Warning detected by hpeesofsim during SP analysis `SP1'.
+    Linear S_Port `PWR1.CMP1' is non-passive.
+    Please raise the StatusLevel to 5 on the Simulation Controller for
+    more information of amount of passivity violation and frequencies
+    at which passivity is violated on 'Status/Summary' field.
+
+Iteration/Trial #0:
+  CurrentEF: 0.00125100750212079
+  Optimization variables:
+    G5 = 77.11150000000001
+    NF2 = 3.12063
+    NFM = 11.8547
+
+SP Optim1[1].SP1[2] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=2  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #2:
+  CurrentEF: 0.000600580177033505
+  Optimization variables:
+    G5 = 78.48752330017186
+    NF2 = 9.591489389487791
+    NFM = 11.01994842498068
+
+SP Optim1[1].SP1[3] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=3  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #3:
+  CurrentEF: 0.000407777777791854
+  Optimization variables:
+    G5 = 79.115389609037
+    NF2 = 2.913632696523986
+    NFM = 11.92208646002843
+
+SP Optim1[1].SP1[4] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=4  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #4:
+  CurrentEF: 0.000361302458590031
+  Optimization variables:
+    G5 = 79.30974682059039
+    NF2 = 4.507497880765646
+    NFM = 16.87342071957229
+
+SP Optim1[1].SP1[10] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=10  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #10:
+  CurrentEF: 0.000349313233442472
+  Optimization variables:
+    G5 = 79.36461078410645
+    NF2 = 5.527445055873924
+    NFM = 18.51629027560091
+
+SP Optim1[1].SP1[14] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=14  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #14:
+  CurrentEF: 0.000300754482920012
+  Optimization variables:
+    G5 = 79.61592040011851
+    NF2 = 4.942998874492517
+    NFM = 17.53149856000861
+
+SP Optim1[1].SP1[16] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=16  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #16:
+  CurrentEF: 0.000250535597680489
+  Optimization variables:
+    G5 = 79.96578214974964
+    NF2 = 7.02769473183495
+    NFM = 18.35375456992699
+
+SP Optim1[1].SP1[20] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=20  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #20:
+  CurrentEF: 0.000248936002990585
+  Optimization variables:
+    G5 = 79.97988047825376
+    NF2 = 5.213492415600245
+    NFM = 17.26765404739897
+
+SP Optim1[1].SP1[28] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=28  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #28:
+  CurrentEF: 0.000248078504354204
+  Optimization variables:
+    G5 = 79.98756002503225
+    NF2 = 6.930986282202516
+    NFM = 16.7818955438152
+
+SP Optim1[1].SP1[50] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=50  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #50:
+  CurrentEF: 0.000247992697646994
+  Optimization variables:
+    G5 = 79.98833332682081
+    NF2 = 7.184189878048184
+    NFM = 16.71657336071519
+
+SP Optim1[1].SP1[55] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=55  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #55:
+  CurrentEF: 0.000246933987365148
+  Optimization variables:
+    G5 = 79.99794897210211
+    NF2 = 7.129024962579513
+    NFM = 16.60223787134255
+
+SP Optim1[1].SP1[83] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=83  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #83:
+  CurrentEF: 0.000246873626821636
+  Optimization variables:
+    G5 = 79.99850140790967
+    NF2 = 7.127152436407284
+    NFM = 16.60334695018645
+
+SP Optim1[1].SP1[90] <project_2_lib:Zero_IF_receiver_optim:schematic>  optIter=90  freq=(2.1 GHz->2.18 GHz)
+
+Iteration/Trial #90:
+  CurrentEF: 0.000246752877325018
+  Optimization variables:
+    G5 = 79.99960792801002
+    NF2 = 7.124388056470233
+    NFM = 16.60204467796119
+Optim1[1] reached the iteration limit. 
+
+Resource usage:
+  Total stopwatch time     =   151.53 seconds.
+

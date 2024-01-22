@@ -1,0 +1,11 @@
+
+hpeesofsim (*) 510.shp Jul 22 2019, MINT version 5
+    (64-bit windows built: Mon Jul 22, 2019 22:53:59 +0000)
+
+
+SP SP1[1] <project_1_lib:3dB_coupler:schematic>   freq=(3 GHz->5 GHz)
+
+
+Resource usage:
+  Total stopwatch time     =     0.31 seconds.
+
