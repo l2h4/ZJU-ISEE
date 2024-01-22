@@ -1,0 +1,10 @@
+$begin 'CacheDataVersion'
+	DataVersion=6
+$end 'CacheDataVersion'
+$begin 'VariableValues'
+	width='1000mm'
+	radius='10mm'
+	height='250mm'
+	GND='width'
+	gap='width/4000'
+$end 'VariableValues'

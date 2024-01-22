@@ -1,0 +1,7 @@
+$begin 'ValidationCache'
+	$begin 'OneValidationResult'
+		Variation='dip_length=\'23.880000000000003mm\' dip_radius=\'0.5mm\' gap=\'0.23999999999999999mm\' lambda=\'100mm\' length=\'48mm\' rad_height=\'34mm\' rad_radius=\'25.5mm\''
+		Status=true
+		FileName='VI24CC18748169677313948.tmp'
+	$end 'OneValidationResult'
+$end 'ValidationCache'

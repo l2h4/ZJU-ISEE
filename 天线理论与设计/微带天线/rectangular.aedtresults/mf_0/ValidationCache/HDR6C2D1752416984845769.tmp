@@ -1,0 +1,12 @@
+$begin 'ValidationCache'
+	$begin 'OneValidationResult'
+		Variation='epsilon=\'10.199999999999999\' f=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+		Status=true
+		FileName='VI0188954416984862505.tmp'
+	$end 'OneValidationResult'
+	$begin 'OneValidationResult'
+		Variation='epsilon=\'10.199999999999999\' f=\'10GHz\' h=\'12.699999999999999mm\' L=\'42.549999999999997mm\' lambda=\'300mm\' W=\'63.390000000000001mm\' W0=\'9.6600000000000001mm\' WC=\'9.6600000000000001mm\' WT=\'9.6600000000000001mm\' x0=\'31.695mm\' y0=\'17.129999999999999mm\''
+		Status=true
+		FileName='VI6C2D17524169848457610.tmp'
+	$end 'OneValidationResult'
+$end 'ValidationCache'

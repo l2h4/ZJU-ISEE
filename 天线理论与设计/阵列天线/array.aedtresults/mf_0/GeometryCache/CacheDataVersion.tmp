@@ -1,0 +1,10 @@
+$begin 'CacheDataVersion'
+	DataVersion=-1
+$end 'CacheDataVersion'
+$begin 'VariableValues'
+	lambda='100mm'
+	gap='0.24mm'
+	length='0.48*lambda'
+	dip_length='length/2-gap/2'
+	dip_radius='lambda/200'
+$end 'VariableValues'

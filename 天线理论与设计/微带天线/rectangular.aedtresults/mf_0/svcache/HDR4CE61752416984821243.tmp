@@ -1,0 +1,222 @@
+SimValueCacheVersionID=1
+$begin 'SimValueInfos'
+	NextUniqueID=11
+	MoveBackwards=false
+	$begin 'SimValue'
+		ID=0
+		$begin 'SimValueParams'
+			QuantityName='S(1,1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=1
+		$begin 'SimValueParams'
+			QuantityName='Z(1,1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=2
+		$begin 'SimValueParams'
+			QuantityName='VSWR(1)'
+			ValueState(90, 15, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=3
+		$begin 'SimValueParams'
+			QuantityName='GainTotal'
+			ValueState(90, 15, 0, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=4
+		$begin 'SimValueParams'
+			QuantityName='Y(1,1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=5
+		$begin 'SimValueParams'
+			QuantityName='Gamma(1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=6
+		$begin 'SimValueParams'
+			QuantityName='ActiveY(1:1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=7
+		$begin 'SimValueParams'
+			QuantityName='ActiveZ(1:1)'
+			ValueState(90, 15, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=8
+		$begin 'SimValueParams'
+			QuantityName='Passivity'
+			ValueState(90, 15, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=9
+		$begin 'SimValueParams'
+			QuantityName='GainPhi'
+			ValueState(90, 15, 0, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=10
+		$begin 'SimValueParams'
+			QuantityName='GainTheta'
+			ValueState(90, 15, 0, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+$end 'SimValueInfos'
+$begin 'SimValueCache'
+	$begin 'DesignMap'
+		DesignID=0
+		$begin 'SolutionMap'
+			$begin 'ContextMap'
+				SolutionID=55
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=56
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 5, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=390
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min5502786816984927945.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 3, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=390
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min11289544169848747542.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 1, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=390
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min11289544169848747543.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=60
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=0
+						SimValueContext(3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=390
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min11289544169848747544.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=445
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=446
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 5, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=0
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'9.4882000000000009GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min5502786816984927946.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 3, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=0
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'9.4882000000000009GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min145C9544169848772660.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=3
+						SimValueContext(0, 0, 2, 0, false, false, 1, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=0
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' Freq=\'9.4882000000000009GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min145C9544169848772661.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=449
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=0
+						SimValueContext(3, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=0
+						$begin 'MinorVVMap'
+							MajorVariation='epsilon=\'10.199999999999999\' f=\'10GHz\' h=\'0.127cm\' L=\'0.42549999999999999cm\' lambda=\'3cm\' W=\'0.63390000000000002cm\' W0=\'0.096600000000000005cm\' WC=\'0.96599999999999997cm\' WT=\'0.096600000000000005cm\' x0=\'3.1694999999999998mm\' y0=\'0.17130000000000001cm\''
+							MinorCacheFile='min145C9544169848772662.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+			$end 'ContextMap'
+		$end 'SolutionMap'
+	$end 'DesignMap'
+$end 'SimValueCache'

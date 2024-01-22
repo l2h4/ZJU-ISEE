@@ -1,0 +1,8 @@
+<ValidationInfo>
+  <DesignValid>true</DesignValid>
+  <IgnoreUnclassifiedObjects>false</IgnoreUnclassifiedObjects>
+  <SkipIntersectionChecks>false</SkipIntersectionChecks>
+  <EntityCheckLevel>Strict</EntityCheckLevel>
+  <ValidationLevel>Perform full validations with standard port validations</ValidationLevel>
+  <Messages />
+</ValidationInfo>
