@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Sun Oct 15 19:54:21 2023
+# Process ID: 2432
+# Current directory: D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/behav/xsim/xsim.dir/adder_32bits_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/behav/xsim/xsim.dir/adder_32bits_tb_behav/webtalk/xsim_webtalk.tcl -notrace

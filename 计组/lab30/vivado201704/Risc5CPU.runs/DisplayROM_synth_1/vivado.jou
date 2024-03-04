@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Dec 29 14:53:32 2023
+# Process ID: 7964
+# Current directory: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1
+# Command line: vivado.exe -log DisplayROM.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DisplayROM.tcl
+# Log file: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1/DisplayROM.vds
+# Journal file: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1\vivado.jou
+#-----------------------------------------------------------
+source DisplayROM.tcl -notrace

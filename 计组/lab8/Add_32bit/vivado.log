@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Sun Oct 15 22:06:25 2023
+# Process ID: 14572
+# Current directory: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9556 D:\Desktop\computer_designer\3210105209_lab8\Add_32bit\Add_32bit.xpr
+# Log file: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit/vivado.log
+# Journal file: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Desktop/computer_designer/3210105209_lab8/Add_32bit/Add_32bit.xpr
+INFO: [Project 1-313] Project file moved from 'D:/Desktop/computer_designer/Add_32bit' since last save.
+WARNING: [Project 1-312] File not found as 'D:/Desktop/computer_designer/3210105209_lab8/lab8/lab8/src/adder_4bits_tb.v'; using path 'D:/Desktop/computer_designer/lab8/lab8/src/adder_4bits_tb.v' instead.
+WARNING: [Project 1-312] File not found as 'D:/Desktop/computer_designer/3210105209_lab8/lab8/lab8/src/adder_32bits_tb.v'; using path 'D:/Desktop/computer_designer/lab8/lab8/src/adder_32bits_tb.v' instead.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Vivado2020/Vivado/2020.1/data/ip'.
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Sun Oct 15 22:06:49 2023...

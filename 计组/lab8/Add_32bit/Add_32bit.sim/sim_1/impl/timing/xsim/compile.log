@@ -1,0 +1,7 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/computer_designer/Add_32bit/Add_32bit.sim/sim_1/impl/timing/xsim/adder_4bits_tb_time_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Add_32bit
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/computer_designer/Add_32bit/Add_32bit.srcs/sources_1/new/Add_4bit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Add_4bit
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/computer_designer/lab8/lab8/src/adder_4bits_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module adder_4bits_tb

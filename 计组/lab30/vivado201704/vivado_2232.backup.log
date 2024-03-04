@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Dec 29 15:00:55 2023
+# Process ID: 2232
+# Current directory: D:/Desktop/lab30_Risc5CPU/vivado201704
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent6644 D:\Desktop\lab30_Risc5CPU\vivado201704\Risc5CPU.xpr
+# Log file: D:/Desktop/lab30_Risc5CPU/vivado201704/vivado.log
+# Journal file: D:/Desktop/lab30_Risc5CPU/vivado201704\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Vivado2020/Vivado/2020.1/data/ip'.
+WARNING: [IP_Flow 19-2162] IP 'DCM_PLL' is locked:
+* IP definition 'Clocking Wizard (5.4)' for IP 'DCM_PLL' (customized with software release 2017.4) has a newer major version in the IP Catalog. * The IP Data in the repository is incompatible with the current instance (despite having identical Version and Revision). You will need to upgrade the IP before viewing the customization and generating outputs.
+WARNING: [IP_Flow 19-2162] IP 'DisplayROM' is locked:
+* IP definition 'Distributed Memory Generator (8.0)' for IP 'DisplayROM' (customized with software release 2017.4) has a different revision in the IP Catalog.
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri Dec 29 15:14:53 2023...

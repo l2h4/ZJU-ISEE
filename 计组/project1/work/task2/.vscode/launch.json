@@ -1,0 +1,53 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C程序调试",   // 这个配置的名字
+            "type": "cppdbg",       // 调试器的类型，这里选的是c/c++的调试器， 例如json的调试器类型就是 "node"
+            "request": "launch",    // 调试的模式 launch：启动 "program"中的程序并调试； 
+                                    //           attach: 将"program"中的程序附加到一个正在运行的进程中调试
+            "miDebuggerServerAddress": "127.0.0.1:1234",//GDB连接的地址和端口，task.json中启动的服务
+            "program": "${workspaceFolder}/sm3", //GDB调试的可执行程序名称，里面必须有代码和符号等信息， 编译时要加 -g 选项
+            "args": [], // 要传给"program"的参数
+            "stopAtEntry": true,  //调试时是否停止在程序的入口点处
+            "cwd": "${fileDirname}",    // 调试器的工作目录
+            "externalConsole": false, //调试时是否使用vscode集成的终端
+            "miDebuggerPath": "/opt/riscv/bin/riscv64-unknown-elf-gdb", //gdb调试器的路径
+            "MIMode": "gdb",
+            "preLaunchTask": "Build C and run" //运行GDB之前，先执行tasks.json文件中的"Build and run"任务，即先编译程序，在启动qemu，在通过gdb连接qemu
+        },
+        {
+            "name": "原始汇编程序调试",   // 这个配置的名字
+            "type": "cppdbg",       // 调试器的类型，这里选的是c/c++的调试器， 例如json的调试器类型就是 "node"
+            "request": "launch",    // 调试的模式 launch：启动 "program"中的程序并调试； 
+                                    //           attach: 将"program"中的程序附加到一个正在运行的进程中调试
+            "miDebuggerServerAddress": "127.0.0.1:1234",//GDB连接的地址和端口，task.json中启动的服务
+            "program": "${workspaceFolder}/sm3", //GDB调试的可执行程序名称，里面必须有代码和符号等信息， 编译时要加 -g 选项
+            "args": [], // 要传给"program"的参数
+            "stopAtEntry": true,  //调试时是否停止在程序的入口点处
+            "cwd": "${fileDirname}",    // 调试器的工作目录
+            "externalConsole": false, //调试时是否使用vscode集成的终端
+            "miDebuggerPath": "/opt/riscv/bin/riscv64-unknown-elf-gdb", //gdb调试器的路径
+            "MIMode": "gdb",
+            "preLaunchTask": "Build S and run" //运行GDB之前，先执行tasks.json文件中的"Build and run"任务，即先编译程序，在启动qemu，在通过gdb连接qemu
+        },
+        {
+            "name": "优化汇编调试",   // 这个配置的名字
+            "type": "cppdbg",       // 调试器的类型，这里选的是c/c++的调试器， 例如json的调试器类型就是 "node"
+            "request": "launch",    // 调试的模式 launch：启动 "program"中的程序并调试； 
+                                    //           attach: 将"program"中的程序附加到一个正在运行的进程中调试
+            "miDebuggerServerAddress": "127.0.0.1:1234",//GDB连接的地址和端口，task.json中启动的服务
+            "program": "${workspaceFolder}/sm3", //GDB调试的可执行程序名称，里面必须有代码和符号等信息， 编译时要加 -g 选项
+            "args": [], // 要传给"program"的参数
+            "stopAtEntry": true,  //调试时是否停止在程序的入口点处
+            "cwd": "${fileDirname}",    // 调试器的工作目录
+            "externalConsole": false, //调试时是否使用vscode集成的终端
+            "miDebuggerPath": "/opt/riscv/bin/riscv64-unknown-elf-gdb", //gdb调试器的路径
+            "MIMode": "gdb",
+            "preLaunchTask": "Build Opt and run" //运行GDB之前，先执行tasks.json文件中的"Build and run"任务，即先编译程序，在启动qemu，在通过gdb连接qemu
+        }
+    ]
+}

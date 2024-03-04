@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Sun Oct 15 22:06:25 2023
+# Process ID: 14572
+# Current directory: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9556 D:\Desktop\computer_designer\3210105209_lab8\Add_32bit\Add_32bit.xpr
+# Log file: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit/vivado.log
+# Journal file: D:/Desktop/computer_designer/3210105209_lab8/Add_32bit\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Desktop/computer_designer/3210105209_lab8/Add_32bit/Add_32bit.xpr
+update_compile_order -fileset sources_1

@@ -1,0 +1,70 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // 仅仅相当于在命令行中执行了一个make命令
+            "label": "Build Origin C",       // 任务名
+            "type": "shell",        // 在shell中运行
+            "command": "make build_origin_c",      // 在shell中运行make命令
+            "isBackground": false,  // 不需要后台运行，编译完进程结束
+        },
+        {
+            // 仅仅相当于在命令行中执行了一个make命令
+            "label": "Build Origin asm",       // 任务名
+            "type": "shell",        // 在shell中运行
+            "command": "make build_origin_s",      // 在shell中运行make命令
+            "isBackground": false,  // 不需要后台运行，编译完进程结束
+        },
+        {
+            // 仅仅相当于在命令行中执行了一个make命令
+            "label": "Build Opt",       // 任务名
+            "type": "shell",        // 在shell中运行
+            "command": "make build_opt",      // 在shell中运行make命令
+            "isBackground": false,  // 不需要后台运行，编译完进程结束
+        },
+        {
+            "label": "Run Whisper",  // 任务名
+            "type": "shell",            // 在shell中运行
+            "command": "echo Starting Whisper&/whisper/build-Linux/whisper  ./sm3 --gdb --gdb-tcp-port 1234", // 在shell中要运行的命令
+            "isBackground": true,       // qemu-riscv32 -g 1234 ./*.elf 执行完此命令后，启动了GDB服务，端口是1234，需要等待客户端连接，所以不能杀死这个进程，故这里要选择ture,让其后台运行
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(Starting Whisper)",
+                    "line": 1
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^(Starting Whisper)",
+                    "endsPattern": "^(Starting Whisper)"
+                }
+            }
+        },
+        {
+            "label": "Build C and run",   // 任务名
+            "dependsOrder": "sequence", // 描述依赖其他任务的任务
+            "dependsOn": [
+                "Build Origin C",            // 先运行Build任务
+                "Run Whisper"    // 再 Run Whisper 任务
+            ]
+        },
+        {
+            "label": "Build S and run",   // 任务名
+            "dependsOrder": "sequence", // 描述依赖其他任务的任务
+            "dependsOn": [
+                "Build Origin asm",            // 先运行Build任务
+                "Run Whisper"    // 再 Run Whisper 任务
+            ]
+        },
+        {
+            "label": "Build Opt and run",   // 任务名
+            "dependsOrder": "sequence", // 描述依赖其他任务的任务
+            "dependsOn": [
+                "Build Opt",            // 先运行Build任务
+                "Run Whisper"    // 再 Run Whisper 任务
+            ]
+        }
+    ]
+ }
+ 

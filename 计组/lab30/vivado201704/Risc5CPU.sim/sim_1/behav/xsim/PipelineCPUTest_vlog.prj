@@ -1,0 +1,37 @@
+# compile verilog/system verilog design source files
+verilog dist_mem_gen_v8_0_12  --include "../../../../Risc5CPU.srcs/sources_1/ip/DCM_PLL" \
+"../../../../Risc5CPU.ip_user_files/ipstatic/simulation/dist_mem_gen_v8_0.v" \
+
+verilog xil_defaultlib  --include "../../../../Risc5CPU.srcs/sources_1/ip/DCM_PLL" \
+"../../../../Risc5CPU.srcs/sources_1/ip/DisplayROM/sim/DisplayROM.v" \
+"../../../../Risc5CPU.srcs/sources_1/ip/DataRam/sim/DataRam.v" \
+"../../../../Risc5CPU.srcs/sources_1/ip/DCM_PLL/DCM_PLL_clk_wiz.v" \
+"../../../../Risc5CPU.srcs/sources_1/ip/DCM_PLL/DCM_PLL.v" \
+"../../../../../src/ALU.v" \
+"../../../../../src/Add_32bit.v" \
+"../../../../../src/Add_4bit.v" \
+"../../../../../src/BranchTest.v" \
+"../../../../../src/Decode.v" \
+"../../../../../src/EX.v" \
+"../../../../../src/EXMEM.v" \
+"../../../../../src/ID.v" \
+"../../../../../src/IDEX.v" \
+"../../../../../src/IF.v" \
+"../../../../../src/IFID.v" \
+"../../../../../src/InstructionROM.v" \
+"../../../../../src/MEMWB.v" \
+"../../../../../src/RBWRegisters.v" \
+"../../../../../src/Risc5CPU.v" \
+"../../../../Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/TMDSencode.v" \
+"../../../../Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/button_process_unit.v" \
+"../../../../../src/mux.v" \
+"../../../../../src/registers.v" \
+"../../../../Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/syncGenarator.v" \
+"../../../../Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/vga_data.v" \
+"../../../../Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/PipelineCPUTest.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

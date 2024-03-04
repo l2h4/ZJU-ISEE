@@ -1,0 +1,345 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Dec 29 14:33:29 2023
+# Process ID: 21820
+# Current directory: D:/Desktop/lab30_Risc5CPU/vivado201704
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent13140 D:\Desktop\lab30_Risc5CPU\vivado201704\Risc5CPU.xpr
+# Log file: D:/Desktop/lab30_Risc5CPU/vivado201704/vivado.log
+# Journal file: D:/Desktop/lab30_Risc5CPU/vivado201704\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.xpr
+INFO: [Project 1-313] Project file moved from 'F:/SourceProgram/lab30_Risc5CPU/vivado201704' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Vivado2020/Vivado/2020.1/data/ip'.
+WARNING: [IP_Flow 19-2162] IP 'DCM_PLL' is locked:
+* IP definition 'Clocking Wizard (5.4)' for IP 'DCM_PLL' (customized with software release 2017.4) has a newer major version in the IP Catalog. * The IP Data in the repository is incompatible with the current instance (despite having identical Version and Revision). You will need to upgrade the IP before viewing the customization and generating outputs.
+WARNING: [IP_Flow 19-2162] IP 'DisplayROM' is locked:
+* IP definition 'Distributed Memory Generator (8.0)' for IP 'DisplayROM' (customized with software release 2017.4) has a different revision in the IP Catalog.
+INFO: [Project 1-230] Project 'Risc5CPU.xpr' upgraded for this version of Vivado.
+open_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:05 . Memory (MB): peak = 1218.844 ; gain = 0.000
+report_ip_status -name ip_status 
+update_compile_order -fileset sources_1
+add_files -norecurse {D:/Desktop/lab30_Risc5CPU/src/Add_32bit.v D:/Desktop/lab30_Risc5CPU/src/MEMWB.v D:/Desktop/lab30_Risc5CPU/src/InstructionROM.v D:/Desktop/lab30_Risc5CPU/src/BranchTest.v D:/Desktop/lab30_Risc5CPU/src/ALU.v D:/Desktop/lab30_Risc5CPU/src/EXMEM.v D:/Desktop/lab30_Risc5CPU/src/ID.v D:/Desktop/lab30_Risc5CPU/src/Add_4bit.v D:/Desktop/lab30_Risc5CPU/src/Decode.v D:/Desktop/lab30_Risc5CPU/src/IFID.v D:/Desktop/lab30_Risc5CPU/src/RBWRegisters.v D:/Desktop/lab30_Risc5CPU/src/IDEX.v D:/Desktop/lab30_Risc5CPU/src/IF.v D:/Desktop/lab30_Risc5CPU/src/Add_8bit.v D:/Desktop/lab30_Risc5CPU/src/registers.v D:/Desktop/lab30_Risc5CPU/src/Risc5CPU.v D:/Desktop/lab30_Risc5CPU/src/mux.v D:/Desktop/lab30_Risc5CPU/src/EX.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+create_ip -name dist_mem_gen -vendor xilinx.com -library ip -version 8.0 -module_name DataRam -dir d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip
+set_property -dict [list CONFIG.data_width {32} CONFIG.Component_Name {DataRam}] [get_ips DataRam]
+WARNING: [Vivado 12-3523] Attempt to change 'Component_Name' from 'DataRam' to 'DataRam' is not allowed and is ignored.
+generate_target {instantiation_template} [get_files d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/DataRam.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'DataRam'...
+update_compile_order -fileset sources_1
+generate_target all [get_files  d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/DataRam.xci]
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'DataRam'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'DataRam'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'DataRam'...
+catch { config_ip_cache -export [get_ips -all DataRam] }
+export_ip_user_files -of_objects [get_files d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/DataRam.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/DataRam.xci]
+launch_runs DataRam_synth_1 -jobs 16
+[Fri Dec 29 14:39:29 2023] Launched DataRam_synth_1...
+Run output will be captured here: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DataRam_synth_1/runme.log
+export_simulation -of_objects [get_files d:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/DataRam.xci] -directory D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.ip_user_files/sim_scripts -ip_user_files_dir D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.ip_user_files -ipstatic_source_dir D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.ip_user_files/ipstatic -lib_map_path [list {modelsim=D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.cache/compile_simlib/modelsim} {questa=D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.cache/compile_simlib/questa} {riviera=D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.cache/compile_simlib/riviera} {activehdl=D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Desktop/lab30_Risc5CPU/src/Add_8bit.v] -no_script -reset -force -quiet
+remove_files  D:/Desktop/lab30_Risc5CPU/src/Add_8bit.v
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'D:/Vivado2020/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-20] The project contains locked or custom IPs. The pre-compiled version of these IPs will not be referenced and the sources from these IP libraries will be compiled locally.
+INFO: [SIM-utils-54] Inspecting design source files for 'PipelineCPUTest' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/DisplayROM.mif'
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/digital.coe'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj PipelineCPUTest_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.ip_user_files/ipstatic/simulation/dist_mem_gen_v8_0.v" into library dist_mem_gen_v8_0_12
+INFO: [VRFC 10-311] analyzing module dist_mem_gen_v8_0_13
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DisplayROM/sim/DisplayROM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DisplayROM
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DataRam/sim/DataRam.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DataRam
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DCM_PLL/DCM_PLL_clk_wiz.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DCM_PLL_clk_wiz
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DCM_PLL/DCM_PLL.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module DCM_PLL
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/Add_32bit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Add_middle
+INFO: [VRFC 10-311] analyzing module Add_32bit
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/Add_4bit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Add_4bit
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/BranchTest.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module BranchTest
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/Decode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Decode
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/EX.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module EX
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/EXMEM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module EXMEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/ID.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ID
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/IDEX.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IDEX
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/IF.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IF
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/IFID.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IFID
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/InstructionROM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module InstructionROM
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/MEMWB.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MEMWB
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/RBWRegisters.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module RBWRegisters
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/Risc5CPU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Risc5CPU
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/TMDSencode.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module TMDSencode
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/button_process_unit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module button_process_unit
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/mux.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/registers.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module registers
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/syncGenarator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module syncGenarator
+INFO: [VRFC 10-2458] undeclared symbol EndFrame, assumed default net type wire [D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/syncGenarator.v:36]
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/vga_data.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module vga_data
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/imports/PipelineCPU.srcs/PipelineCPUTest.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module PipelineCPUTest
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xelab -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_12 -L xil_defaultlib -L dist_mem_gen_v8_0_13 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot PipelineCPUTest_behav xil_defaultlib.PipelineCPUTest xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: D:/Vivado2020/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_12 -L xil_defaultlib -L dist_mem_gen_v8_0_13 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot PipelineCPUTest_behav xil_defaultlib.PipelineCPUTest xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+ERROR: [VRFC 10-2063] Module <dist_mem_gen_v8_0_12> not found while processing module instance <inst> [D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DisplayROM/sim/DisplayROM.v:66]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:02 ; elapsed = 00:00:06 . Memory (MB): peak = 1218.844 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property top Risc5CPU [current_fileset]
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse {D:/Desktop/lab30_Risc5CPU/src/Risc5CPU_tb.v D:/Desktop/lab30_Risc5CPU/src/Decode_tb.v D:/Desktop/lab30_Risc5CPU/src/ALU_tb.v D:/Desktop/lab30_Risc5CPU/src/IF_tb.v}
+update_compile_order -fileset sim_1
+set_property top Risc5CPU_tb_v [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+update_compile_order -fileset sim_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'D:/Vivado2020/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-20] The project contains locked or custom IPs. The pre-compiled version of these IPs will not be referenced and the sources from these IP libraries will be compiled locally.
+INFO: [SIM-utils-54] Inspecting design source files for 'Risc5CPU_tb_v' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/DisplayROM.mif'
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/digital.coe'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj Risc5CPU_tb_v_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Desktop/lab30_Risc5CPU/src/Risc5CPU_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Risc5CPU_tb_v
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xelab -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_13 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot Risc5CPU_tb_v_behav xil_defaultlib.Risc5CPU_tb_v xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: D:/Vivado2020/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_13 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot Risc5CPU_tb_v_behav xil_defaultlib.Risc5CPU_tb_v xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/IF.v:35]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/BranchTest.v:42]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ID.v:84]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ALU.v:36]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ALU.v:37]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.Add_4bit
+Compiling module xil_defaultlib.Add_middle
+Compiling module xil_defaultlib.Add_32bit
+Compiling module xil_defaultlib.InstructionROM
+Compiling module xil_defaultlib.IF
+Compiling module xil_defaultlib.IFID
+Compiling module xil_defaultlib.RBWRegisters
+Compiling module xil_defaultlib.registers
+Compiling module xil_defaultlib.Decode
+Compiling module xil_defaultlib.BranchTest
+Compiling module xil_defaultlib.ID
+Compiling module xil_defaultlib.IDEX
+Compiling module xil_defaultlib.mux
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.EX
+Compiling module xil_defaultlib.EXMEM
+Compiling module dist_mem_gen_v8_0_13.dist_mem_gen_v8_0_13(C_FAMILY="a...
+Compiling module xil_defaultlib.DataRam
+Compiling module xil_defaultlib.MEMWB
+Compiling module xil_defaultlib.Risc5CPU
+Compiling module xil_defaultlib.glbl
+Compiling module xil_defaultlib.Risc5CPU_tb_v
+Built simulation snapshot Risc5CPU_tb_v_behav
+
+****** Webtalk v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/xsim.dir/Risc5CPU_tb_v_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Fri Dec 29 14:48:12 2023...
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:07 . Memory (MB): peak = 1218.844 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '7' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "Risc5CPU_tb_v_behav -key {Behavioral:sim_1:Functional:Risc5CPU_tb_v} -tclbatch {Risc5CPU_tb_v.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.1
+Time resolution is 1 ps
+source Risc5CPU_tb_v.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+WARNING: This core is supplied with a behavioral model. To model cycle-accurate behavior you must run timing simulation.
+WARNING in Risc5CPU_tb_v.uut.DataRAM_1.inst at time               250000 ns: 
+Reading from out-of-range address. Max address in Risc5CPU_tb_v.uut.DataRAM_1.inst is          63
+WARNING in Risc5CPU_tb_v.uut.DataRAM_1.inst at time               550000 ns: 
+Reading from out-of-range address. Max address in Risc5CPU_tb_v.uut.DataRAM_1.inst is          63
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'Risc5CPU_tb_v_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1218.844 ; gain = 0.000
+set_property -name {xsim.simulate.runtime} -value {2000ns} -objects [get_filesets sim_1]
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5698] Checking validity of IPs in the design for the 'XSim' simulator...
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [Vivado 12-4795] Using compiled simulation libraries for IPs
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [USF-XSim-7] Finding pre-compiled libraries...
+INFO: [USF-XSim-11] File 'D:/Vivado2020/Vivado/2020.1/data/xsim/xsim.ini' copied to run dir:'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-20] The project contains locked or custom IPs. The pre-compiled version of these IPs will not be referenced and the sources from these IP libraries will be compiled locally.
+INFO: [SIM-utils-54] Inspecting design source files for 'Risc5CPU_tb_v' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/DisplayROM.mif'
+INFO: [SIM-utils-43] Exported 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/digital.coe'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj Risc5CPU_tb_v_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+"xelab -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_13 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot Risc5CPU_tb_v_behav xil_defaultlib.Risc5CPU_tb_v xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: D:/Vivado2020/Vivado/2020.1/bin/unwrapped/win64.o/xelab.exe -wto a9bf92a40bd04395b8aca491821f3e7f --incr --debug typical --relax --mt 2 -L dist_mem_gen_v8_0_13 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot Risc5CPU_tb_v_behav xil_defaultlib.Risc5CPU_tb_v xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/IF.v:35]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/BranchTest.v:42]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ID.v:84]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ALU.v:36]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'ci' [D:/Desktop/lab30_Risc5CPU/src/ALU.v:37]
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "Risc5CPU_tb_v_behav -key {Behavioral:sim_1:Functional:Risc5CPU_tb_v} -tclbatch {Risc5CPU_tb_v.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.1
+Time resolution is 1 ps
+source Risc5CPU_tb_v.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 2000ns
+WARNING: This core is supplied with a behavioral model. To model cycle-accurate behavior you must run timing simulation.
+WARNING in Risc5CPU_tb_v.uut.DataRAM_1.inst at time               250000 ns: 
+Reading from out-of-range address. Max address in Risc5CPU_tb_v.uut.DataRAM_1.inst is          63
+WARNING in Risc5CPU_tb_v.uut.DataRAM_1.inst at time               550000 ns: 
+Reading from out-of-range address. Max address in Risc5CPU_tb_v.uut.DataRAM_1.inst is          63
+WARNING in Risc5CPU_tb_v.uut.DataRAM_1.inst at time              1150000 ns: 
+Reading from out-of-range address. Max address in Risc5CPU_tb_v.uut.DataRAM_1.inst is          63
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'Risc5CPU_tb_v_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 2000ns
+launch_simulation: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1218.844 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_runs synth_1 -jobs 16
+[Fri Dec 29 14:51:08 2023] Launched synth_1...
+Run output will be captured here: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 16
+[Fri Dec 29 14:52:17 2023] Launched impl_1...
+Run output will be captured here: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/impl_1/runme.log
+set_property top PipelineCPUTest [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_1
+reset_run DisplayROM_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [Project 1-577] IP run DisplayROM_synth_1 is available but is out of date. Since the IP is locked, the synthesis checkpoint cannot be updated. The out-of-date checkpoint will be used and it may result in incorrect behavior.
+Please select 'Report IP Status' from the 'Tools/Report' menu or run the Tcl command 'report_ip_status' for more information.
+WARNING: [Runs 36-337] The following IPs are either missing output products or output products are not up-to-date for Synthesis target. Since these IPs are locked, no update to the output products can be done. 
+Please select 'Report IP Status' from the 'Tools/Report' menu or run Tcl command 'report_ip_status' for more information.
+D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DisplayROM/DisplayROM.xci
+
+WARNING: [Project 1-576] IP 'D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.srcs/sources_1/ip/DisplayROM/DisplayROM.xci' in run DisplayROM_synth_1 is locked, no out-of-context (OOC) run will be launched. The run may not be able to complete.
+Please select 'Report IP Status' from 'Tools/Report' or run the Tcl command 'report_ip_status' for more information.
+[Fri Dec 29 14:53:29 2023] Launched DisplayROM_synth_1, synth_1...
+Run output will be captured here:
+DisplayROM_synth_1: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/DisplayROM_synth_1/runme.log
+synth_1: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/synth_1/runme.log
+[Fri Dec 29 14:53:30 2023] Launched impl_1...
+Run output will be captured here: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.runs/impl_1/runme.log
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri Dec 29 14:58:12 2023...

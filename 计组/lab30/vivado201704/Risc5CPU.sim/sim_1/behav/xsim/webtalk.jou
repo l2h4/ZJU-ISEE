@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Dec 29 14:48:58 2023
+# Process ID: 18760
+# Current directory: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/xsim.dir/Risc5CPU_tb_v_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source D:/Desktop/lab30_Risc5CPU/vivado201704/Risc5CPU.sim/sim_1/behav/xsim/xsim.dir/Risc5CPU_tb_v_behav/webtalk/xsim_webtalk.tcl -notrace

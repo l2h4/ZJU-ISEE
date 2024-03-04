@@ -1,0 +1,12 @@
+
+{ 
+    crc :  9755688672062030226  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto e13f725fda844f1db673f433d1aee5d0 --incr --debug typical --relax --mt 2 --maxdelay -L xil_defaultlib -L simprims_ver -L secureip --snapshot adder_4bits_tb_time_impl -transport_int_delays -pulse_r 0 -pulse_int_r 0 -pulse_e 0 -pulse_int_e 0 xil_defaultlib.adder_4bits_tb xil_defaultlib.glbl" , 
+    buildDate : "May 27 2020" , 
+    buildTime : "20:09:33" , 
+    linkCmd : "D:\\Vivado2020\\Vivado\\2020.1\\data\\..\\tps\\mingw\\6.2.0\\win64.o\\nt\\bin\\gcc.exe -Wa,-W  -O -Wl,--stack,104857600 -o \"xsim.dir/adder_4bits_tb_time_impl/xsimk.exe\"   \"xsim.dir/adder_4bits_tb_time_impl/obj/xsim_0.win64.obj\" \"xsim.dir/adder_4bits_tb_time_impl/obj/xsim_1.win64.obj\" -L\"D:\\Vivado2020\\Vivado\\2020.1\\lib\\win64.o\" -lrdi_simulator_kernel   -lrdi_simbridge_kernel" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 
